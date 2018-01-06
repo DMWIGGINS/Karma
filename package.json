@@ -1,0 +1,32 @@
+{
+  "name": "karma",
+  "version": "1.0.0",
+  "description": "group app to ask for and give help for tasks",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DMWIGGINS/Karma.git"
+  },
+  "keywords": [
+    "karma",
+    "help",
+    "tasks"
+  ],
+  "author": "Doreen Wiggins, Lauren Moore, Helen Pitt, Katie DeAngelis, Janet Cushing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DMWIGGINS/Karma/issues"
+  },
+  "homepage": "https://github.com/DMWIGGINS/Karma#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "flatpickr": "^4.2.3",
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.29.0"
+  }
+}
