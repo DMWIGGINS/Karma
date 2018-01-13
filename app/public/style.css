@@ -1,0 +1,88 @@
+.container {
+    width:100%;
+    margin:0px;
+}
+
+#landing {
+    height: 400px;
+    width: 100%;
+    margin-left: 0px;
+    margin-right:0px;
+    padding-top:10%;
+    padding-bottom:10%;
+    margin-bottom:0px;
+    background: url(bluredpeople.png);
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    left: 0;
+    right: 0;
+    display: block;
+}
+
+#info {
+    position: relative;
+    padding: 50px;
+    margin:0px;
+    background-color:  #9C27B0;
+}
+
+.nav-wrapper {
+    background-color: #F57C00;
+}
+
+a.brand-logo.right {
+    color: #42A5F5;
+}
+
+h1 {
+    color: #42A5F5;
+    font-family: 'Sedgwick Ave Display';
+    font-size:5rem;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+h3 {
+    color: #fff;
+    font-family: 'Oswald';
+    font-size:2rem;
+}
+
+.material-icons {
+    color: #F57C00;
+}
+
+.btn {
+    background-color: #9C27B0;
+}
+
+.btn:hover {
+    background-color: #9C27B0;
+}
+
+/* #button {
+    margin-top:50px;
+} */
+
+.page-footer {
+    background-color: #42A5F5;
+    color: white;
+    padding: 50px;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+     
+
+
+     
+     
