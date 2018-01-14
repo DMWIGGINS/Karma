@@ -35,4 +35,9 @@ window.addEventListener("load", function () {
 
 
 
+
 });
+
+function facebookLogInCallback(response) {
+    console.log("I'm in the log in callback function.", response)
+}
