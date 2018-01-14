@@ -26,7 +26,7 @@ window.addEventListener("load", function () {
 
     FB.getLoginStatus(function (response) {
         // TODO: This is where on initial load it's going to tell you the status of the current user.
-        statusChangeCallback(response);
+        // statusChangeCallback(response);
     });
 
 
