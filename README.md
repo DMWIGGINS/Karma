@@ -17,7 +17,6 @@ npm install
 
 nodemon server.js or node server.js
 
-![functionaldiag](Karma/app/public/assets/images/karma_functional_diagram.png)
-
+![functionaldiag](https://github.com/DMWIGGINS/Karma/app/public/assets/images/karma_functional_diagram.png)
 
 
