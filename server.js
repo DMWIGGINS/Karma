@@ -6,6 +6,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var connection = require("./config/connection");
+var path = require("path");
 
 // ==============================================================================
 // EXPRESS CONFIGURATION
@@ -13,7 +14,7 @@ var connection = require("./config/connection");
 // ==============================================================================
 var app = express();
 app.use(express.static("./app/public"));
-app.use(express.static("./app/views"));
+// app.use(express.static("./app/views"));
 
 var method = methodOverride();
 
@@ -28,9 +29,11 @@ app.use(bodyParser.json());
 
 var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({
-  defaultLayout: "main"
+  defaultLayout: "main",
+  layoutsDir   : path.join(__dirname, "app/views/layouts")
 }));
 app.set("view engine", "handlebars");
+app.set('views', path.join(__dirname, "app/views"));
 
 var db = require("./models");
 
@@ -43,7 +46,7 @@ var db = require("./models");
 // require("./controllers/burgers_controllers")(app);
 var routes = require("./app/controller/karma_controller.js");
 
-// app.use("/", routes);
+app.use("/", routes);
 
 // =============================================================================
 // LISTENER
