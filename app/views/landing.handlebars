@@ -1,6 +1,6 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo right">Karma</a>
+        <h1 class="brand-logo right">Karma</h1>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
             <li>
                 <a href="/about">About</a>
@@ -21,38 +21,30 @@
 <main>
     <div class="container">
         <div class="row center" id="landing">
-            <div class="fb-login-button" 
-                data-max-rows="1" 
-                data-size="large" 
-                data-button-type="continue_with" 
-                data-show-faces="false"
-                data-auto-logout-link="true" 
-                data-use-continue-as="true"
-                onlogin="facebookLogInCallback">
-            </div>
             <h1>Karma</h1>
-            <div class="col s12 center" id="button">
-                <a id="start" class="btn">
-                    <i class="material-icons right">favorite</i>Get Started</a>
+            <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false"
+                data-auto-logout-link="true" data-use-continue-as="true" onlogin="facebookLogInCallback">
             </div>
         </div>
 
 
         <div class="row center" id="info">
-            <div class="col s3 center">
+            {{!-- <div class="col s1 center"></div> --}}
+            <div class="col s4 center">
                 <i class="large material-icons">thumb_up</i>
-                <h3>Connect with your friends</h3>
+                <h3>Connect with <br>your friends</h3>
             </div>
-            <div class="col s1 center"></div>
-            <div class="col s3 center">
+            {{!-- <div class="col s1 center"></div> --}}
+            <div class="col s4 center">
                 <i class="large material-icons">mood_bad</i>
-                <h3>Reach out when in need of a favor</h3>
+                <h3>Reach out when <br>in need of a favor</h3>
             </div>
-            <div class="col s1 center"></div>
-            <div class="col s3 center">
+            {{!-- <div class="col s1 center"></div> --}}
+            <div class="col s4 center">
                 <i class="large material-icons">mood</i>
-                <h3>Help others out when you’re free!</h3>
+                <h3>Help others out <br>when you’re free!</h3>
             </div>
+            {{!-- <div class="col s1 center"></div> --}}
         </div>
     </div>
 </main>
