@@ -4,7 +4,14 @@
 
 module.exports = function (sequelize, DataTypes) {
     var Favor = sequelize.define("Favor", {
-        favor_description: {
+        favor_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1,255],  
+            }
+        },
+        favor_desc: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -26,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
             //     len: [1] 
             // }
         },
-        favor_karma_koin_price: {
+        favor_price: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
