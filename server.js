@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var connection = require("./config/connection");
 var path = require("path");
-
+const flatpickr = require("flatpickr");
 // ==============================================================================
 // EXPRESS CONFIGURATION
 // This sets up the basic properties for our express server
@@ -15,6 +15,7 @@ var path = require("path");
 var app = express();
 app.use(express.static("./app/public"));
 // app.use(express.static("./app/views"));
+
 
 var method = methodOverride();
 
