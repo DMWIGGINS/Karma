@@ -3,7 +3,7 @@
 // =============================================================
 
 module.exports = function (sequelize, DataTypes) {
-    var Group = sequelize.define("group", {
+    var Group = sequelize.define("Group", {
         group_name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -19,5 +19,12 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
+    Group.associate = function(models) {
+        // Associating Group with Users
+        // When a Group is deleted, also delete any associated Users
+        Group.hasMany(models.User, {
+          onDelete: "cascade"
+        });
+      };
     return Group;
 };

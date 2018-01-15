@@ -1,5 +1,6 @@
 /***********************************************
  * Connection to the database
+//  * we dont need this for sequelize so i am renaming it
  ***********************************************/
 
 var mysql = require("mysql");
