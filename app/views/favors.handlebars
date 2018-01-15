@@ -7,8 +7,10 @@
     <ul>
         <lh id="favor">{{#each activeFavor}}
             <li class="activeFavors">
+                <p class="label"> {{this.id}} </p>
                 <p class="label"> {{this.favor_name}} </p>
                 <p class="label"> {{this.favor_price}} </p>
+                 <button id="updateBtn" data-id="{{this.id}}" class="submitBtn" type="submit">I'll do this one</button>
             </li>
         </lh>
         {{/each}}
@@ -17,8 +19,6 @@
 
 
 {{!-- submit button --}}
-
-
 <div class="newFavors">
     <form class="create-form">
         <div class="form-group">
@@ -29,3 +29,8 @@
         <button id="submitBtn" class="submitBtn" type="submit">Submit</button>
 
     </form>
+
+
+       
+
+ 
