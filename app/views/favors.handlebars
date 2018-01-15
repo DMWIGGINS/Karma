@@ -1,0 +1,31 @@
+<h1>Favors</h1>
+{{!-- just setting up a test page to move database data out here --}}
+<!-- Pass in data from server.js -->
+<hr>
+
+<section>
+    <ul>
+        <lh id="favor">{{#each activeFavor}}
+            <li class="activeFavors">
+                <p class="label"> {{this.favor_name}} </p>
+                <p class="label"> {{this.favor_price}} </p>
+            </li>
+        </lh>
+        {{/each}}
+    </ul>
+</section>
+
+
+{{!-- submit button --}}
+
+
+<div class="newFavors">
+    <form class="create-form">
+        <div class="form-group">
+            <input type="text" id="newFavorName" name="newFavorName" class="textarea_msg" placeholder="Enter Favor Name here">
+            <input type="text" id="newFavorDesc" name="newFavorDesc" class="textarea_msg" placeholder="Enter Favor Description here">
+            <input type="text" id="newFavorPrice" name="newFavorPrice" class="textarea_msg" placeholder="Enter Number of Karma Koins offered">
+        </div>
+        <button id="submitBtn" class="submitBtn" type="submit">Submit</button>
+
+    </form>
