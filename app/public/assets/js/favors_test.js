@@ -2,7 +2,7 @@
 // Functions
 //=================================================
 function addFavor() {
-var favorAskerId = 1;
+    var favorAskerId = 1;
     var newFavor = {
         favor_name: $("#newFavorName").val().trim(),
         favor_desc: $("#newFavorDesc").val().trim(),
@@ -11,7 +11,7 @@ var favorAskerId = 1;
     };
     console.log("newFavor: " + JSON.stringify(newFavor));
     // Send the POST request.
-    $.ajax("/api/favors", {
+    $.ajax("/api/favor/new", {
         type: "POST",
         data: newFavor
     }).then(
@@ -22,7 +22,27 @@ var favorAskerId = 1;
         });
 }
 
-
+function updateFavor(favorId) {
+    console.log("im in updateFavor");
+    console.log("favorId " + favorId);
+    var favorCompleterId = 2;
+    var dataObject = {
+        id: favorId,
+        favor_completer_id: favorCompleterId,
+        favor_status: "pending"
+    }
+    console.log("dataObject: " + dataObject);
+    // Send the POST request.
+    $.ajax("/api/favor/" + favorId, {
+        type: "PUT",
+        data: dataObject
+    }).then(
+        function () {
+            console.log("updated a status");
+            // Reload the page to get the updated list
+            location.reload();
+        });
+}
 
 
 //=================================================
@@ -31,7 +51,7 @@ var favorAskerId = 1;
 $(document).ready(function () {
 
 
-       // ========================================================================
+    // ========================================================================
     // When the submit button is clicked, a new row is added to the database
     // ========================================================================
     $(document).on('click', '#submitBtn', function (event) {
@@ -39,6 +59,18 @@ $(document).ready(function () {
         event.preventDefault();
         console.log("i clicked submit");
         addFavor();
+    });
+
+    // ========================================================================
+    // When the update button is clicked, update the row in the database
+    // ========================================================================
+    $(document).on('click', '#updateBtn', function (event) {
+        // Make sure to preventDefault on a submit event.
+        event.preventDefault();
+        console.log("i clicked update");
+        var favorId = $(this).data("id");
+        console.log("favorId " + favorId);
+        updateFavor(favorId);
     });
 
 
