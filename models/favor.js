@@ -3,7 +3,7 @@
 // =============================================================
 
 module.exports = function (sequelize, DataTypes) {
-    var Favor = sequelize.define("favor", {
+    var Favor = sequelize.define("Favor", {
         favor_description: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -31,5 +31,14 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         }
     });
+    Favor.associate = function(models) {
+        // We're saying that a Favor should belong to a Group
+        // A Favor can't be created without a Group due to the foreign key constraint
+        Favor.belongsTo(models.Group, {
+          foreignKey: {
+            allowNull: true
+          }
+        });
+      };
     return Favor;
 };

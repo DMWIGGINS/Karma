@@ -1,1 +1,16 @@
 <h1>Favors</h1>
+{{!-- just setting up a test page to move database data out here --}}
+<!-- Pass in data from server.js -->
+<hr>
+
+<section>
+    <ul>
+        <lh id="favor">{{#each activeFavor}}
+            <li class="activeFavors">
+                <p class="label"> {{this.favor_description}} </p>
+                <p class="label"> {{this.favor_karma_koin_price}} </p>
+            </li>
+        </lh>
+        {{/each}}
+    </ul>
+</section>

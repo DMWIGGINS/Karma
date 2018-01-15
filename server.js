@@ -5,7 +5,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
-var connection = require("./config/connection");
+// var connection = require("./config/connection");
 var path = require("path");
 
 // ==============================================================================
