@@ -13,7 +13,8 @@ function getFavors(req, res) {
             where: {
                 GroupId: group_id,
                 favor_status: 'active'
-            }
+            },
+            order: ['createdAt']
         }).then(function (data, err) {
                 if (err) {
                     // If an error occurred, send a generic server failure
@@ -30,6 +31,7 @@ function getFavors(req, res) {
                     var favorObject = [];
                     for (let i = 0; i < data.length; i++) {
                         favorObject = {
+                            id: data[i].id,
                             favor_name: data[i].favor_name,
                             favor_price: data[i].favor_price
                         }
@@ -73,6 +75,37 @@ function getFavors(req, res) {
         }
 
 
+        function updateFavor(req, res){
+            console.log("Im in UpdateFavor now on the server side");
+            console.log(req.params);
+            console.log(req.body);
+            console.log("going to do the update now");
+            db.Favor.update({
+                favor_completer_id: req.body.favor_completer_id,
+                favor_status: req.body.favor_status
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            }).then(function (data, err) {
+                console.log("data: ");
+                console.log(data);
+                console.log("err: ");
+                console.log(err);
+                if (err) {
+                    // If an error occurred, send a generic server failure
+                    console.log(err);
+                    return res.status(500).end();
+                } else if (data.changedRows == 0) {
+                    console.log(data);
+                    // If no rows were changed, then the ID must not exist, so 404
+                    console.log("favor row did not get updated");
+                    return res.status(404).end();
+                } else {
+                    res.status(200).end();
+                }
+            });
+        }
 
             // Create all our routes and set up logic within those routes where required.
             router.get("/", function (req, res) {
@@ -87,9 +120,14 @@ function getFavors(req, res) {
                 getFavors(req, res);
             });
 
-            router.post("/api/favors", function (req, res) {
+            router.post("/api/favor/new", function (req, res) {
                 console.log("im in api/favors about to create a favor");
                 createNewFavor(req, res);
+            });
+
+            router.put("/api/favor/:id", function (req, res) {
+                console.log("im updating the favor now");
+                updateFavor(req, res);
             });
 
             router.get("/signedin", function (req, res) {
@@ -99,6 +137,7 @@ function getFavors(req, res) {
             router.get("/profile", function (req, res) {
                 res.render("profile");
             });
+
 
             // Export routes for server.js to use.
             module.exports = router;

@@ -1,10 +1,25 @@
 <h1>Favors</h1>
+<<<<<<< HEAD
 <nav>
     <div class="nav-wrapper">
         <h1 class="brand-logo right">Karma</h1>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
             <li>
                 <a href="/about">About</a>
+=======
+{{!-- just setting up a test page to move database data out here --}}
+<!-- Pass in data from server.js -->
+<hr>
+
+<section>
+    <ul>
+        <lh id="favor">{{#each activeFavor}}
+            <li class="activeFavors">
+                <p class="label"> {{this.id}} </p>
+                <p class="label"> {{this.favor_name}} </p>
+                <p class="label"> {{this.favor_price}} </p>
+                 <button id="updateBtn" data-id="{{this.id}}" class="submitBtn" type="submit">I'll do this one</button>
+>>>>>>> c3660940956a2f8f99d30b879c0da50f4cb65652
             </li>
             <li>
                 <a href="/favors">Favors</a>
@@ -19,6 +34,7 @@
     </div>
 </nav>
 
+<<<<<<< HEAD
 <main>
     <div class="container">
         <div class="row" id="active-favors">
@@ -86,9 +102,19 @@
                 </div>
             </div>
             <div class="col s1"></div>
+=======
+{{!-- submit button --}}
+<div class="newFavors">
+    <form class="create-form">
+        <div class="form-group">
+            <input type="text" id="newFavorName" name="newFavorName" class="textarea_msg" placeholder="Enter Favor Name here">
+            <input type="text" id="newFavorDesc" name="newFavorDesc" class="textarea_msg" placeholder="Enter Favor Description here">
+            <input type="text" id="newFavorPrice" name="newFavorPrice" class="textarea_msg" placeholder="Enter Number of Karma Koins offered">
+>>>>>>> c3660940956a2f8f99d30b879c0da50f4cb65652
         </div>
     </div>
 
+<<<<<<< HEAD
     </div>
 </main>
 <footer class="page-footer">
@@ -124,3 +150,7 @@
         </div>
     </div>
 </footer>
+=======
+    </form>
+
+>>>>>>> c3660940956a2f8f99d30b879c0da50f4cb65652
