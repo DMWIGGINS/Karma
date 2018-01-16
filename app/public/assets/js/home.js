@@ -39,5 +39,13 @@ window.addEventListener("load", function () {
 });
 
 function facebookLogInCallback(response) {
-    console.log("I'm in the log in callback function.", response)
+    console.log("I'm in the log in callback function.", response);
+    // Check if the login was good
+    if (response.status == "connected") {
+        // Need to ask for the individual fields
+        FB.api("/me?fields=name,picture,email", function(response) {
+            console.log(response);
+            // TODO: Next need to call the server to tell it the user info
+        });
+    }
 }
