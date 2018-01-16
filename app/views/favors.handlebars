@@ -1,32 +1,127 @@
 <h1>Favors</h1>
-{{!-- just setting up a test page to move database data out here --}}
-<!-- Pass in data from server.js -->
-<hr>
-
-<section>
-    <ul>
-        <lh id="favor">{{#each activeFavor}}
-            <li class="activeFavors">
-                <p class="label"> {{this.id}} </p>
-                <p class="label"> {{this.favor_name}} </p>
-                <p class="label"> {{this.favor_price}} </p>
-                 <button id="updateBtn" data-id="{{this.id}}" class="submitBtn" type="submit">I'll do this one</button>
+<nav>
+    <div class="nav-wrapper">
+        <h1 class="brand-logo right">Karma</h1>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li>
+                <a href="/about">About</a>
             </li>
-        </lh>
-        {{/each}}
-    </ul>
-</section>
+            <li>
+                <a href="/favors">Favors</a>
+            </li>
+            <li>
+                <a href="/profile">Profile</a>
+            </li>
+            <li>
+                <a href="/signedin">Sign In</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-
-{{!-- submit button --}}
-<div class="newFavors">
-    <form class="create-form">
-        <div class="form-group">
-            <input type="text" id="newFavorName" name="newFavorName" class="textarea_msg" placeholder="Enter Favor Name here">
-            <input type="text" id="newFavorDesc" name="newFavorDesc" class="textarea_msg" placeholder="Enter Favor Description here">
-            <input type="text" id="newFavorPrice" name="newFavorPrice" class="textarea_msg" placeholder="Enter Number of Karma Koins offered">
+<main>
+    <h1>Test</h1>
+    <div class="container">
+        <div class="row" id="active-favors">
+            <div class="col s5">
+                <img src="assets/images/goodvibes.jpg" width="90%">
+            </div>
+            <div class="col s6">
+                <h3>Active Favors</h3>
+                <div class="row" id="search"></div>
+                <form>
+                    <div class="input-field">
+                        <i class="material-icons prefix">search</i>
+                        <input id="search" required placeholder="Search for an Active Favor">
+                        <label for="icon_prefix">Search</label>
+                    </div>
+                </form>
+                <ul>
+                    <lh id="favor">{{#each activeFavor}}
+                        <li class="activeFavors">
+                            <p class="label"> {{this.favor_name}} </p>
+                            <p class="label"> {{this.favor_price}} </p>
+                        </li>
+                    </lh>
+                    {{/each}}
+                </ul>
+            </div>
         </div>
-        <button id="submitBtn" class="submitBtn" type="submit">Submit</button>
+        <div class="col s1"></div>
+        <div class="row" id="ask-favors">
+            <div class="col s1"></div>
+            <div class="col s10">
+                <h3 style="color:#42A5F5">Ask a Favor!</h3>
+                <hr>
+            </div>
+            <div class="col s1"></div>
+        </div>
 
-    </form>
+        <div class="row" id="favors-form-row">
+            <div class="col s1"></div>
+            <div class="col s5">
+                <p>Suppose you needed a hand with something.
+                    <br>Maybe you have a closet that needs to be sorted through and you can't get motivated to do it. Perhaps
+                    you need a friend to watch your kid for an hour so you can run some errands.
+                    <br>Going away on vacation?...Who is going to feed your cat? </br>
+                    <strong>Karma to the rescue!</strong> Karma is an app where a group of friends can ask for and give help. Each
+                    group member will be assigned Karma Koins when they join. They will have the option to ask for assistance
+                    by entering the task they need help with, the date, and how many Karma Koins it "pays". They can also
+                    see the list of tasks that others need done and can select which ones they will help with. You can only
+                    ask for help if you have Karma Koins to offer so no one gets to always ask for help and never help others.
+                    <br> Examples of information that can be accessed...history of tasks completed, history of help requested,
+                    Karma Koins remaining, members of your group.</p>
 
+            </div>
+            <div class="col s1"></div>
+            <div class="col s4">
+                <div class="newFavors">
+                    <form class="create-form">
+                        <div class="form-group">
+                            <input type="text" id="newFavorName" name="newFavorName" class="textarea_msg" placeholder="Enter Favor Name here">
+                            <input type="text" id="newFavorDesc" name="newFavorDesc" class="textarea_msg" placeholder="Enter Favor Description here">
+                            <input type="text" id="newFavorPrice" name="newFavorPrice" class="textarea_msg" placeholder="Enter Number of Karma Koins offered">
+                        </div>
+                        <button id="submitBtn" class="submitBtn" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col s1"></div>
+        </div>
+    </div>
+
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5>Footer Content</h5>
+                <p>You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5>Links</h5>
+                <ul>
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
