@@ -51,7 +51,11 @@ h3 {
     font-size:2rem;
 }
 
-.material-icons {
+h2, h4, h5, h6, p, li, a {
+    font-family: 'Oswald';
+}
+
+i.large.material-icons {
     color: #F57C00;
 }
 
@@ -67,6 +71,14 @@ h3 {
     background-color: #9C27B0;
 }
 
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 3px solid #42A5F5 !important;
+    box-shadow: none;
+}
+
+label.label-icon {
+    color: #42A5F5;
+}
 /* #button {
     margin-top:50px;
 } */

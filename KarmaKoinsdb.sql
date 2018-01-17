@@ -8,7 +8,7 @@ CREATE TABLE KarmaGroup(
   group_leader INT default 0,
   PRIMARY KEY (group_id)
 );
-CREATE TABLE KamraPeople(
+CREATE TABLE KarmaPeople(
   user_id INT NOT NULL AUTO_INCREMENT,
   username_name VARCHAR(100) NOT NULL,
   user_email VARCHAR(45) NOT NULL,
