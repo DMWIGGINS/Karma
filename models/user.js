@@ -13,9 +13,16 @@ module.exports = function (sequelize, DataTypes) {
         },
         user_email: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 isEmail: true,
+            }
+        },
+        profile_pic_link: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                len: [1,500],  
             }
         },
         // group_id: {
