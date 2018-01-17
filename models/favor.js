@@ -15,8 +15,16 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1,255],  
+                len: [1,1000],  
             }
+        },
+        favor_date: {
+            type: DataTypes.DATEONLY,
+            allowNull: true
+        },
+        favor_time: {
+            type: DataTypes.TIME,
+            allowNull: true,
         },
         favor_asker_id: {
             type: DataTypes.INTEGER,
