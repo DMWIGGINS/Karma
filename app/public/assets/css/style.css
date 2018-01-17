@@ -23,11 +23,17 @@
     display: block;
 }
 
-#info {
+#point-one, #point-two, #point-three {
     position: relative;
-    padding: 50px;
+    padding: 0px;
     margin:0px;
     background-color:  #9C27B0;
+}
+
+#orange {
+    background-color:  #F57C00;
+    height: 100%;
+    margin: 0px;
 }
 
 .nav-wrapper {
@@ -48,14 +54,14 @@ h1 {
 h3 {
     color: #fff;
     font-family: 'Oswald';
-    font-size:2rem;
+    font-size:1.5rem;
 }
 
 h2, h4, h5, h6, p, li, a {
     font-family: 'Oswald';
 }
 
-i.large.material-icons {
+i.medium.material-icons {
     color: #F57C00;
 }
 
