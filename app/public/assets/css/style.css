@@ -25,7 +25,7 @@
 
 #point-one, #point-two, #point-three {
     position: relative;
-    padding: 0px;
+    padding-top:0px;
     margin:0px;
     background-color:  #9C27B0;
 }
@@ -34,6 +34,7 @@
     background-color:  #F57C00;
     height: 100%;
     margin: 0px;
+    padding: 0px;
 }
 
 .nav-wrapper {
@@ -63,6 +64,7 @@ h2, h4, h5, h6, p, li, a {
 
 i.medium.material-icons {
     color: #F57C00;
+    padding-top: 10%;
 }
 
 .btn {
