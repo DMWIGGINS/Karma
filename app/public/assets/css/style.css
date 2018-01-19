@@ -87,6 +87,40 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 label.label-icon {
     color: #42A5F5;
 }
+
+#profile {
+    background-color: #9C27B0;
+    text-align:center;
+    color: #ffffff;
+    margin: 0px;
+}
+
+#profile-favors {
+    background: url(../images/profilebackground.png);
+    background-repeat: no-repeat;
+    background-size: 1920px 650px;
+    background-position: center;
+    margin: 0px;
+    padding: 50px;
+}
+
+#asked-completed, #asked-pending {
+    background-color: #42A5F5;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+#returned-completed, #returned-pending {
+    background-color: #F57C00;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+img {
+    padding: none;
+    margin: none;
+    border:none;
+}
 /* #button {
     margin-top:50px;
 } */
