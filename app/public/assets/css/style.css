@@ -1,7 +1,7 @@
 .container {
     width:100% !important;
     max-width: 1920px !important;
-    margin:0px;
+    margin:0px !important;
 }
 
 #landing {
@@ -97,9 +97,10 @@ label.label-icon {
 
 #profile-favors {
     background: url(../images/profilebackground.png);
+    background-attachment: fixed;
+    background-position: top;
     background-repeat: no-repeat;
-    background-size: 1920px 650px;
-    background-position: center;
+    background-size: cover;
     margin: 0px;
     padding: 50px;
 }
@@ -121,14 +122,26 @@ img {
     margin: none;
     border:none;
 }
-/* #button {
-    margin-top:50px;
-} */
+
+.form-group {
+    padding-top:20px;
+}
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn {
+    border-radius: 8px;
+    background-color: #9C27B0;
+    margin:20px;
+}
 
 .page-footer {
     background-color: #42A5F5;
     color: white;
-    padding: 50px;
+    padding: 20px;
 }
 
 body {
