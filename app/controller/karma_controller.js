@@ -1,7 +1,7 @@
 var express = require("express");
 var db = require("../../models");
 var router = express.Router();
-var ssn ;
+var ssn;
 
 
 // Using this variable to track whether the current user is connected via Facebook
@@ -55,6 +55,36 @@ function getFavors(req, res) {
     });
 }
 
+function getFavorsDetail(req, res) {
+    db.Favor.FindOne({
+        where: {
+            id: req.params.id
+        },
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data) {
+            console.log("data" + JSON.stringify(data));
+            console.log("data is returned");
+            var favorObject = {
+                id: data.id,
+                favor_name: data.favor_name,
+                favor_description: data.favor_description,
+                favor_price: data.favor_price,
+                favor_datetime: data.favor_datetime
+            }
+            res.render("favorsdetail");
+        } else {
+            // no rows returned 
+            console.log("no rows returned");
+            res.render("favorsdetail");
+        }
+    });
+}
+
 function createNewFavor(req, res) {
     console.log("IM IN CREATE NEW FAVOR");
     var group_id = 1;
@@ -81,7 +111,6 @@ function createNewFavor(req, res) {
     getFavors(res);
 }
 
-
 function updateFavor(req, res) {
     console.log("Im in UpdateFavor now on the server side");
     console.log(req.params);
@@ -100,35 +129,41 @@ function updateFavor(req, res) {
 
 // Default route for the landing page
 router.get("/", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     res.render("landing");
 });
 
 // Route for the about section
 router.get("/about", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     res.render("about");
 });
 
 // Route for the favors page
 router.get("/favors", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     getFavors(req, res);
 });
 
+// / Route for the favors detail page
+router.get("/favorsdetail/:id", function (req, res) {
+    ssn = req.session;
+    getFavorsDetail(req, res);
+});
+
 router.post("/api/favor/new", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     createNewFavor(req, res);
 });
 
 router.put("/api/favor/:id", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     updateFavor(req, res);
 });
 
 // Route for the profile page
 router.get("/profile", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     res.render("profile", {
         // Passing the current user from the server to the client (for handlebars model)
         user: ssn.currentUser
@@ -137,7 +172,7 @@ router.get("/profile", function (req, res) {
 
 // Route that creates new users
 router.post("/api/user/create", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
     createNewUser(req, res)
 });
