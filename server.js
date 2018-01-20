@@ -3,6 +3,7 @@
 // Series of npm packages that we will use to give our server useful functionality
 // ==============================================================================
 var express = require("express");
+var session = require('express-session');
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 // var connection = require("./config/connection");
@@ -14,8 +15,8 @@ const flatpickr = require("flatpickr");
 // ==============================================================================
 var app = express();
 app.use(express.static("./app/public"));
-// app.use(express.static("./app/views"));
 
+app.use(session({secret:'XASDASDA'}));
 
 var method = methodOverride();
 
