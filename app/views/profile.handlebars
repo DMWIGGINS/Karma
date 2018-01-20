@@ -1,1 +1,103 @@
 <h1>Profile</h1>
+<nav>
+    <div class="nav-wrapper">
+        <h1 class="brand-logo right">Karma</h1>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li>
+                <a href="/about">About</a>
+            </li>
+            <li>
+                <a href="/favors">Favors</a>
+            </li>
+            <li>
+                <a href="/profile">Profile</a>
+            </li>
+            <li>
+                <a href="/signedin">Sign In</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <div class="row" id="active-favors">
+            <div class="col s5">
+                <img id="profilepicture" src="assets/images/goodvibes.jpg" width="90%">
+            </div>
+            <div class="col s6">
+                <div class="row"></div>
+                <form>
+                    <div class="usernameclass"></div>
+                    <h3 id="username">Karma Friend: </h3>
+                    <div class="koinsclass"></div>
+                    <h3 id="koins">Koins: </h3>
+                    <div class="favorsaskedclass"></div>
+                    <h3 id="favorsasked">Favors Asked:</h3>
+                </form>
+                <ul>
+                    <lh id="favor">{{#each activeFavor}}
+                        <li class="activeFavors">
+                            <p class="label"> {{this.favor_name}} </p>
+                            <p class="label"> {{this.favor_price}} </p>
+                        </li>
+                    </lh>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col s1"></div>
+        <div class="row" id="ask-favors">
+            <div class="col s1"></div>
+            <div class="col s10">
+                <h3 style="color:#42A5F5">Recently Asked</h3>
+                <hr>
+            </div>
+            <div class="col s1"></div>
+        </div>
+        <div class="row" id="ask-favors">
+            <div class="col s1"></div>
+            <div class="col s10">
+                <h3 style="color:#42A5F5">Recently Completed</h3>
+                <hr>
+            </div>
+            <div class="col s1"></div>
+        </div>
+
+    </div>
+
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5>Footer Content</h5>
+                <p>You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5>Links</h5>
+                <ul>
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
