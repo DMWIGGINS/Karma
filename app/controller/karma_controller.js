@@ -62,6 +62,7 @@ function createNewFavor(req, res) {
             favor_status: "active",
             favor_price: req.body.favor_price,
             GroupId: group_id
+            
         })
         .then(function (data, err) {
             if (err) {
