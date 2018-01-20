@@ -53,15 +53,17 @@ function getFavors(req, res) {
 }
 //getting the user pending asked and given favors for the profile page.
 function getProfilePendingFavors(req, res, ssn) {
+    console.log("here it comes");
     var askedPendingFavors = [];
     var givenPendingFavors = [];
+    console.log(ssn);
     db.Favor.findAll({
         where: {
-            $or:{
-            favor_status: 'active',
-            favor_status: 'pending'
-        }
-            // favor_asker_id=ssn
+            // favor_asker_id: ssn,
+            $or: {
+                favor_status: 'active',
+                favor_status: 'pending'
+            },
         },
         order: ['createdAt']
     }).then(function (data, err) {
@@ -100,7 +102,8 @@ function getProfilePendingFavors(req, res, ssn) {
 
             }
             res.render("profile", {
-                askedPendingFavors: askedPendingFavors, givenPendingFavors:givenPendingFavors
+                askedPendingFavors: askedPendingFavors,
+                givenPendingFavors: givenPendingFavors
             });
         } else {
             // no rows returned 
@@ -252,10 +255,11 @@ router.put("/api/favor/:id", function (req, res) {
 // Route for the profile page
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    res.render("profile", {
-        // Passing the current user from the server to the client (for handlebars model)
-        user: ssn.currentUser
-    });
+    getProfilePendingFavors(req,res,ssn)
+    // res.render("profile", {
+    //     // Passing the current user from the server to the client (for handlebars model)
+    //     user: ssn.currentUser
+    // });
 });
 
 // Route that creates new users
