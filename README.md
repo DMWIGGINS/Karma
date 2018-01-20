@@ -38,17 +38,16 @@ current_timestamp, current_timestamp);
 
 
 insert into Users 
-(user_name, user_email, profile_pic_link, user_karma_koins,createdAt, updatedAt, GroupId) 
+(user_name, user_email, profile_pic_link, user_karma_koins,createdAt, updatedAt, fb_user_id, GroupId) 
 values ("Test User1", "TestUser1@gmail.com", 
 'https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/20992971_863919577094100_2869333698020713514_n.jpg?oh=a395c5a818832b77dd754b2cc4ece0e0&oe=5AE9A32A(4 kB)',
-100, current_timestamp, current_timestamp,1);
+100, current_timestamp, current_timestamp,'fbuserid',1);
 
 insert into Users 
-(user_name, user_email, profile_pic_link, user_karma_koins, createdAt, updatedAt, GroupId) 
+(user_name, user_email, profile_pic_link, user_karma_koins, createdAt, updatedAt, fb_user_id, GroupId) 
 values ("Test User2", "TestUser2@gmail.com", 
 'https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/20992971_863919577094100_2869333698020713514_n.jpg?oh=a395c5a818832b77dd754b2cc4ece0e0&oe=5AE9A32A(4 kB)',
-100, current_timestamp, current_timestamp,1);
-
+100, current_timestamp, current_timestamp,'fbuserid',1);
 
 
 insert into Favors
@@ -62,7 +61,6 @@ values ( "walk my cat", "walk my kitty",current_timestamp,  2, 1,"complete",15,c
 insert into Favors
 (favor_name, favor_desc, favor_datetime,  favor_asker_id, favor_completer_id, favor_status, favor_price, createdAt, updatedAt, GroupId)
 values ( "Eat ice cream with me", "I want some company", current_timestamp,  2, null,"active",12,current_timestamp, current_timestamp, 1);
-
 
 select * from Groups;
 select * from Users;
