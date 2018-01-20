@@ -103,13 +103,16 @@ function getProfilePendingFavors(req, res, ssn) {
             }
             res.render("profile", {
                 askedPendingFavors: askedPendingFavors,
-                givenPendingFavors: givenPendingFavors
+                givenPendingFavors: givenPendingFavors,
+                user: ssn.currentUser
             });
         } else {
             // no rows returned 
             console.log("no rows returned");
-            res.render("favors", {
-                activeFavor: []
+            res.render("profile", {
+                askedPendingFavors: [],
+                givenPendingFavors: [],
+                user: ssn.currentUser
             });
         }
     });
