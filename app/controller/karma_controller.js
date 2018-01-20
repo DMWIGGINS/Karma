@@ -54,6 +54,7 @@ function getFavors(req, res) {
 //getting the user pending asked and given favors for the profile page.
 function getProfilePendingFavors(req, res, ssn) {
     console.log("here it comes");
+    console.log(req);
     var askedPendingFavors = [];
     var givenPendingFavors = [];
     console.log(ssn);
@@ -299,7 +300,7 @@ router.put("/api/favor/:id", function (req, res) {
 // Route for the profile page
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    getProfilePendingFavors(req,res,ssn)
+    getProfilePendingFavors(req,res)
     // res.render("profile", {
     //     // Passing the current user from the server to the client (for handlebars model)
     //     user: ssn.currentUser
