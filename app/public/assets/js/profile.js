@@ -1,10 +1,12 @@
+//Pipe to map the Database items to the handlebars.
+
 // The Functions to get asked and given
 
 function MostRecentFavorRequest() {
-    var favorAskerId = 1;
+    var ProfileId = "";
     var MostRecentFavorAsk = {
         favor_KarmaPrice: $("#mostrecentaskfavorprice").val().trim(),
-        favor_asker_id: favorAskerId,
+        user_id: ProfileId,
         mostRecent_FavorRequest: $("#mostrecentaskedfavor").val().trim(),
     };
     console.log("totalProfile: " + JSON.stringify(MostRecentFavorAsk));
@@ -23,7 +25,7 @@ function MostRecentFavorRequest() {
 function MostRecentFavorGiven() {
     var MostRecentFavorGiven = {
         favor_KarmaPrice: $("#mostrecentfavorprice").val().trim(),
-        favor_asker_id: favorAskerId,
+        user_id: ProfileId,
         mostRecent_FavorRequest: $("#mostrecentaskedfavor").val().trim(),
     };
     console.log("totalProfile: " + JSON.stringify(MostRecentFavorGiven));
