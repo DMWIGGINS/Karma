@@ -28,6 +28,10 @@ module.exports = function (sequelize, DataTypes) {
         user_karma_koins: {
             type: DataTypes.INTEGER,
             allowNull: true
+        },
+        fb_user_id: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
     User.associate = function(models) {
