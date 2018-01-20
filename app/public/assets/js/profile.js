@@ -12,7 +12,7 @@ function MostRecentFavorRequest() {
     console.log("totalProfile: " + JSON.stringify(MostRecentFavorAsk));
     // Send the POST request.
     $.ajax("/api/favor/mostRecentAsked", {
-        type: "POST",
+        type: "GET",
         data: MostRecentFavorAsk
     }).then(
         function () {
@@ -31,7 +31,7 @@ function MostRecentFavorGiven() {
     console.log("totalProfile: " + JSON.stringify(MostRecentFavorGiven));
     // Send the POST request.
     $.ajax("/api/favor/mostRecentGiven", {
-        type: "POST",
+        type: "GET",
         data: MostRecentFavorGiven
     }).then(
         function () {
@@ -41,6 +41,8 @@ function MostRecentFavorGiven() {
         });
 }
 
+//Couple of snags that we should think about. We should walk through how to pass in the favors based on the FB ID,
+//that way it will map to where we want it to go. When you add a favor, I'm sure it takes the user ID but how do we flag it?
 
 
 
