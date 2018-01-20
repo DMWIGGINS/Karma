@@ -51,6 +51,66 @@ function getFavors(req, res) {
         }
     });
 }
+//getting the user pending asked and given favors for the profile page.
+function getProfilePendingFavors(req, res, ssn) {
+    var askedPendingFavors = [];
+    var givenPendingFavors = [];
+    db.Favor.findAll({
+        where: {
+            $or:{
+            favor_status: 'active',
+            favor_status: 'pending'
+        }
+            // favor_asker_id=ssn
+        },
+        order: ['createdAt']
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data[0]) {
+            console.log("about to dump favors");
+            console.log("data" + JSON.stringify(data));
+            console.log("name " + data[0].favor_name);
+            console.log("koins " + data[0].favor_price);
+            console.log("data is returned");
+            console.log("data length " + data.length);
+            var askedFavorObject = [];
+            var givenFavorObject = [];
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].favor_asker_id == ssn) {
+                    askedFavorObject = {
+                        id: data[i].id,
+                        favor_name: data[i].favor_name,
+                        favor_price: data[i].favor_price,
+                        favor_status: data[i].favor_status
+                    }
+                    askedPendingFavors.push(askedFavorObject)
+                } else {
+                    givenFavorObject = {
+                        id: data[i].id,
+                        favor_name: data[i].favor_name,
+                        favor_price: data[i].favor_price,
+                        favor_status: data[i].favor_status
+                    }
+                    givenPendingFavors.push(givenFavorObject);
+                }
+
+            }
+            res.render("profile", {
+                askedPendingFavors: askedPendingFavors, givenPendingFavors:givenPendingFavors
+            });
+        } else {
+            // no rows returned 
+            console.log("no rows returned");
+            res.render("favors", {
+                activeFavor: []
+            });
+        }
+    });
+}
 
 function getFavorsDetail(req, res) {
     db.Favor.FindOne({
