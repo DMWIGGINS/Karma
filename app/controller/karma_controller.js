@@ -32,11 +32,12 @@ function getFavors(req, res) {
                 favorObject = {
                     id: data[i].id,
                     favor_name: data[i].favor_name,
-                    favor_price: data[i].favor_price
+                    favor_price: data[i].favor_price,
+                    favor_datetime: data[i].favor_datetime
                 }
                 activeFavors.push(favorObject);
             }
-
+        
             res.render("favors", {
 
                 activeFavor: activeFavors
@@ -83,6 +84,7 @@ function updateFavor(req, res) {
     console.log(req.params);
     console.log(req.body);
     console.log("going to do the update now");
+    
     db.Favor.update({
         favor_completer_id: req.body.favor_completer_id,
         favor_status: req.body.favor_status
@@ -92,6 +94,7 @@ function updateFavor(req, res) {
         }
     });
 }
+
 
 
 // Create all our routes and set up logic within those routes where required.
