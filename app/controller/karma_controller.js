@@ -1,9 +1,6 @@
 var express = require("express");
-
 var router = express.Router();
-
 var db = require("../../models");
-
 var currentUser = null;
 
 // favor_karma_koin_price

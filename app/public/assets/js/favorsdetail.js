@@ -1,11 +1,11 @@
 //=================================================
 // Functions
 //=================================================
-updateFavorToPending(){
+function updateFavorToPending(){
 
 }
 
-updateFavorToCompleted(){
+function updateFavorToCompleted(){
     
 }
 

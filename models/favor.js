@@ -18,14 +18,14 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1,1000],  
             }
         },
-        favor_date: {
-            type: DataTypes.DATEONLY,
+        favor_datetime: {
+            type: DataTypes.DATE,
             allowNull: true
         },
-        favor_time: {
-            type: DataTypes.TIME,
-            allowNull: true,
-        },
+        // favor_time: {
+        //     type: DataTypes.TIME,
+        //     allowNull: true,
+        // },
         favor_asker_id: {
             type: DataTypes.INTEGER,
             allowNull: false
