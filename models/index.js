@@ -34,5 +34,3 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
-
-$(".button-collapse").sideNav();
