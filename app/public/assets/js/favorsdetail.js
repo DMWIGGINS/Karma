@@ -1,7 +1,7 @@
 //=================================================
 // Functions
 //================================================
-function pendingFavor() {
+function updatePendingFavor() {
     console.log("im in updateFavor");
     console.log("favorId " + favorId);
     var favorCompleterId = 2;
@@ -23,10 +23,19 @@ function pendingFavor() {
         });
 }
 
-function completedFavor() {
+function updateKarmaKoins () {
+    console.log("I'm in updateKoins");
+    var favorAdderId = 1;
+    user_karmakoins = user_karmakoins-favor_price;
+    
+
+}
+
+function updateCompletedFavor() {
     console.log("im in updateFavor");
     console.log("favorId " + favorId);
     var favorCompleterId = 2;
+    updateKarmaKoins();
     var dataObject = {
         id: favorId,
         favor_completer_id: favorCompleterId,
@@ -60,7 +69,7 @@ $(document).ready(function () {
         console.log("i changed to pending");
         var favorId = $(this).data("id");
         console.log("favorId " + favorId);
-        pendingFavor(favorId);
+        updatePendingFavor(favorId);
     });
 
 // ============================================================================================
@@ -72,7 +81,8 @@ $(document).ready(function () {
         console.log("i changed to complete");
         var favorId = $(this).data("id");
         console.log("favorId " + favorId);
-        completedFavor(favorId);
+
+        updateCompletedFavor(favorId);
     });
 
 
