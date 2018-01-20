@@ -1,5 +1,5 @@
 //Pipe to map the Database items to the handlebars.
-
+//Helen you need logic in here to tell it to use the username to grab those connected items from the other tables.
 // The Functions to get asked and given
 
 function MostRecentFavorRequest() {
