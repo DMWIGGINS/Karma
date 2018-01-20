@@ -1,7 +1,8 @@
 var express = require("express");
 var db = require("../../models");
 var router = express.Router();
-var ssn;
+var ssn = {};
+ssn.currentUser = null;
 
 
 // Using this variable to track whether the current user is connected via Facebook
@@ -52,11 +53,9 @@ function getFavors(req, res) {
     });
 }
 //getting the user pending asked and given favors for the profile page.
-function getProfilePendingFavors(req, res, ssn) {
-    console.log("here it comes");
+function getProfilePendingFavors(req, res) {
     var askedPendingFavors = [];
     var givenPendingFavors = [];
-    console.log(ssn);
     db.Favor.findAll({
         where: {
             // favor_asker_id: ssn,
@@ -67,12 +66,7 @@ function getProfilePendingFavors(req, res, ssn) {
         },
         order: ['createdAt']
     }).then(function (data, err) {
-        if (err) {
-            // If an error occurred, send a generic server failure
-            console.log("an error occurred");
-            console.log(err);
-            res.status(500).end();
-        } else if (data[0]) {
+        if (data[0]) {
             console.log("about to dump favors");
             console.log("data" + JSON.stringify(data));
             console.log("name " + data[0].favor_name);
@@ -119,11 +113,14 @@ function getProfilePendingFavors(req, res, ssn) {
 }
 
 function getFavorsDetail(req, res) {
-    db.Favor.FindOne({
+    console.log("id " + req.params.id);
+    db.Favor.findAll({
         where: {
             id: req.params.id
         },
     }).then(function (data, err) {
+        console.log(data);
+        console.log(err);
         if (err) {
             // If an error occurred, send a generic server failure
             console.log("an error occurred");
@@ -133,17 +130,23 @@ function getFavorsDetail(req, res) {
             console.log("data" + JSON.stringify(data));
             console.log("data is returned");
             var favorObject = {
-                id: data.id,
-                favor_name: data.favor_name,
-                favor_description: data.favor_description,
-                favor_price: data.favor_price,
-                favor_datetime: data.favor_datetime
+                id: data[0].id,
+                favor_name: data[0].favor_name,
+                favor_desc: data[0].favor_desc,
+                favor_price: data[0].favor_price,
+                favor_datetime: data[0].favor_datetime
             }
-            res.render("favorsdetail");
+            console.log(favorObject);
+            res.render("favorsdetail",
+                favorObject
+
+            );
         } else {
             // no rows returned 
             console.log("no rows returned");
-            res.render("favorsdetail");
+            res.render("favorsdetail", {
+                favorObject
+            });
         }
     });
 }
@@ -203,7 +206,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
         where: {
 
             $or: {
-                id: favorAskedId,
+                id: favorAskerId,
                 id: favorCompleterId
             }
         }
@@ -293,11 +296,7 @@ router.put("/api/favor/:id", function (req, res) {
 // Route for the profile page
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    getProfilePendingFavors(req,res,ssn)
-    // res.render("profile", {
-    //     // Passing the current user from the server to the client (for handlebars model)
-    //     user: ssn.currentUser
-    // });
+    getProfilePendingFavors(req, res)
 });
 
 // Route that creates new users
@@ -320,10 +319,6 @@ function createNewUser(req, res) {
         if (data[0]) {
             ssn.currentUser = data[0];
             res.status(200).end();
-            // FIXME: This isn't working... It should redirect the user to the profile page if their user exists in the db.
-            // res.render("profile", {
-            //     user: currentUser
-            // });
         } else {
             // If no rows are returned take the body data from the client, create a new user, and send it to the db
             ssn.currentUser = db.User.create({
@@ -339,10 +334,6 @@ function createNewUser(req, res) {
                         res.status(500).end();
                     } else {
                         res.status(200).end();
-                        // FIXME: This isn't working... It should redirect the user to the profile page if their user exists in the db.
-                        // res.render("profile", {
-                        //     user: currentUser
-                        // });
                     }
                 });
         }
