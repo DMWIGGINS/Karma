@@ -29,6 +29,7 @@
     "express-handlebars": "^3.0.0",
     "flatpickr": "^4.2.3",
     "fs": "0.0.1-security",
+    "http": "0.0.0",
     "method-override": "^2.3.10",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.1",
