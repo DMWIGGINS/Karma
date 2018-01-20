@@ -20,88 +20,87 @@
 </nav>
 
 <main>
-    <div class="container" id="profile">
-        <div class="row" id="profile-info">
-            <div class="col s12">
-                <img src="{{user.profile_pic_link}}" width="10%">
+    <div class="container">
+        <div class="row" id="active-favors">
+            <div class="col s5">
+                <img id="profilepicture" src="assets/images/goodvibes.jpg" width="90%">
             </div>
-            <div class="col s12">
-                <h2>{{user.user_name}}</h2>
-                <h3>Location, ST</h3>
-            </div>
-            <div class="col s12">
-                <h4>Karma Points: POINTS</h4>
-                <h4>Total Favors Asked: NUMBER</h4>
-                <h4>Total Favors Returned: NUMBER</h4>
+            <div class="col s6">
+                <div class="row"></div>
+                <form>
+                    <div class="usernameclass"></div>
+                    <h3 id="username">Karma Friend: </h3>
+                    <div class="koinsclass"></div>
+                    <h3 id="koins">Koins: </h3>
+                    <div class="favorsaskedclass"></div>
+                    <h3 id="favorsasked">Favors Asked:</h3>
+                </form>
+                <ul>
+                    <lh id="favor">{{#each activeFavor}}
+                        <li class="activeFavors">
+                            <p class="label"> {{this.favor_name}} </p>
+                            <p class="label"> {{this.favor_price}} </p>
+                        </li>
+                    </lh>
+                    {{/each}}
+                </ul>
             </div>
         </div>
+        <div class="col s1"></div>
+        <div class="row" id="ask-favors">
+            <div class="col s1"></div>
+            <div class="col s10">
+                <h3 style="color:#42A5F5">Recently Asked</h3>
+                <hr>
+            </div>
+            <div class="col s1"></div>
+        </div>
+        <div class="row" id="ask-favors">
+            <div class="col s1"></div>
+            <div class="col s10">
+                <h3 style="color:#42A5F5">Recently Completed</h3>
+                <hr>
+            </div>
+            <div class="col s1"></div>
+        </div>
+
     </div>
-    <div class="container" id="profile-favors">
-        <div class="row">
-            <div class="col s1"></div>
-            <div class="col s4" id="asked-completed">
-                <h4>Favors Asked Completed</h4>
-                <ul>
-                    <li>*Cough* I’m sick, run to the store for meds and food for me?
-                        <em>15 Koins</em>
-                    </li>
-                    </br>
-                    <li>NO! My meeting is running hella late, can you take my dog for a walk?
-                        <em>25 Koins</em>
-                    </li>
-                </ul>
-            </div>
-            <div class="col s2"></div>
-            <div class="col s4" id="asked-pending">
-                <h4>Favors Asked Pending</h4>
-                <ul>
-                    <li>*Cough* I’m sick, run to the store for meds and food for me?
-                        <em>15 Koins</em>
-                    </li>
-                    </br>
-                    <li>NO! My meeting is running hella late, can you take my dog for a walk?
-                        <em>25 Koins</em>
-                    </li>
-                </ul>
-            </div>
-            <div class="col s1"></div>
-        </div>
-        <div class="row">
-            <div class="col s1"></div>
-            <div class="col s4" id="returned-completed">
-                <h4>Favors Returned Completed</h4>
-                <ul>
-                    <li>*Cough* I’m sick, run to the store for meds and food for me?
-                        <em>15 Koins</em>
-                    </li>
-                    </br>
-                    <li>NO! My meeting is running hella late, can you take my dog for a walk?
-                        <em>25 Koins</em>
-                    </li>
-                </ul>
-            </div>
-            <div class="col s2"></div>
-            <div class="col s4" id="returned-pending">
-                <h4>Favors Returned Pending</h4>
-                <ul>
-                    <li>*Cough* I’m sick, run to the store for meds and food for me?
-                        <em>15 Koins</em>
-                    </li>
-                    </br>
-                    <li>NO! My meeting is running hella late, can you take my dog for a walk?
-                        <em>25 Koins</em>
-                    </li>
-                </ul>
-            </div>
-            <div class="col s1"></div>
-        </div>
+
     </div>
 </main>
 <footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5>Footer Content</h5>
+                <p>You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5>Links</h5>
+                <ul>
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
         <div class="container">
-            <div class="row valign-wrapper">
-            <div class="left-align col s6">© 2018 Copyright</div>
-            <div class="right-align col s6"><img src="assets/images/thechickslogo.png" width="30%"></div>
+            © 2014 Copyright Text
+            <a class="right" href="#!">More Links</a>
         </div>
-        </div>
+    </div>
+=======
+
+
 </footer>
