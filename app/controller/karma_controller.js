@@ -52,6 +52,36 @@ function getFavors(req, res) {
     });
 }
 
+function getFavorsDetail(req, res) {
+    db.Favor.FindOne({
+        where: {
+            id: req.params.id
+        },
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data) {
+            console.log("data" + JSON.stringify(data));
+            console.log("data is returned");
+            var favorObject = {
+                id: data.id,
+                favor_name: data.favor_name,
+                favor_description: data.favor_description,
+                favor_price: data.favor_price,
+                favor_datetime: data.favor_datetime
+            }
+            res.render("favorsdetail");
+        } else {
+            // no rows returned 
+            console.log("no rows returned");
+            res.render("favorsdetail");
+        }
+    });
+}
+
 function createNewFavor(req, res) {
     console.log("IM IN CREATE NEW FAVOR");
     var group_id = 1;
@@ -76,7 +106,6 @@ function createNewFavor(req, res) {
         });
     getFavors(res);
 }
-
 
 function updateFavor(req, res) {
     console.log("Im in UpdateFavor now on the server side");
@@ -177,6 +206,12 @@ router.get("/about", function (req, res) {
 router.get("/favors", function (req, res) {
     ssn = req.session;
     getFavors(req, res);
+});
+
+// / Route for the favors detail page
+router.get("/favorsdetail/:id", function (req, res) {
+    ssn = req.session;
+    getFavorsDetail(req, res);
 });
 
 router.post("/api/favor/new", function (req, res) {
