@@ -25,18 +25,6 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1,500],  
             }
         },
-        // group_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },
-        // favors_asked_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: true
-        // },
-        // favors_completed_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: true
-        // },
         user_karma_koins: {
             type: DataTypes.INTEGER,
             allowNull: true
@@ -53,7 +41,6 @@ module.exports = function (sequelize, DataTypes) {
           onDelete: "cascade"
         });
       };
-    // TODO: Should we get rid of this because group funcgtionality isn't MVP
     //   User.associate = function(models) {
     //     // We're saying that a User should belong to an Group
     //     // A User can't be created without a Group due to the foreign key constraint

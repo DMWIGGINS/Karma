@@ -1,0 +1,81 @@
+<h1>Favor 1</h1>
+<nav>
+    <div class="nav-wrapper">
+        <h1 class="brand-logo right">Karma</h1>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li>
+                <a href="/about">About</a>
+            </li>
+            <li>
+                <a href="/favors">Favors</a>
+            </li>
+            <li>
+                <a href="/profile">Profile</a>
+            </li>
+            <li>
+                <a href="/signedin">Sign In</a>
+            </li>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <div class="row" id="favors-detail">
+            <div class="col s5">
+                <img src="assets/images/goodvibes.jpg" width="90%">
+            </div>
+            <div class="col s6">
+                <h3>The Favor</h3>
+                <ul>
+                    <lh id="favor-detail">
+                        <li class="Favor">
+                            <p class="label"> {{this.favor_name}} </p>
+                            <p class="label"> {{this.favor_desc}} </p>
+                            <p class="label"> {{this.favor_price}} </p>
+                            <button id="pendingBtn" class="btn" type="submit" name="action">I'll do this
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <button id="completedBtn" class="btn" type="submit" name="action">This favor is completed
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </li>
+                    </lh>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5>Footer Content</h5>
+                <p>You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5>Links</h5>
+                <ul>
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
