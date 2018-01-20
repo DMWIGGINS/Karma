@@ -7,10 +7,11 @@
 #landing {
     height: 400px;
     width: 100%;
+    text-align: center;
     margin-left: 0px;
     margin-right: 0px;
-    padding-top: 10%;
-    padding-bottom: 10%;
+    padding-top: 20%;
+    padding-bottom: 45%;
     margin-bottom: 0px;
     background: url(../images/bluredpeople.png);
     background-attachment: fixed;

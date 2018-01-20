@@ -1,5 +1,6 @@
 // =============================================================
 // Groups table 
+//not being used
 // =============================================================
 
 module.exports = function (sequelize, DataTypes) {
@@ -19,12 +20,12 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
-    Group.associate = function(models) {
+    // Group.associate = function(models) {
         // Associating Group with Users
         // When a Group is deleted, also delete any associated Users
-        Group.hasMany(models.User, {
-          onDelete: "cascade"
-        });
-      };
+    //     Group.hasMany(models.User, {
+    //       onDelete: "cascade"
+    //     });
+    //   };
     return Group;
 };

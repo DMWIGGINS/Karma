@@ -32,11 +32,11 @@ module.exports = function (sequelize, DataTypes) {
         fb_user_id: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        GroupId: {
-            type: DataTypes.INTEGER,
-            allowNull: true
         }
+        // GroupId: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: true
+        // }
     });
     // User.associate = function (models) {
     //     // Associating User with Favors

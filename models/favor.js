@@ -25,10 +25,6 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1,50],  
             }
         },
-        // favor_time: {
-        //     type: DataTypes.TIME,
-        //     allowNull: true,
-        // },
         favor_asker_id: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -40,9 +36,6 @@ module.exports = function (sequelize, DataTypes) {
         favor_status: {
             type: DataTypes.STRING,
             allowNull: false
-            // validate: {
-            //     len: [1] 
-            // }
         },
         favor_price: {
             type: DataTypes.INTEGER,
