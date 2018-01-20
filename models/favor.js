@@ -19,8 +19,11 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         favor_datetime: {
-            type: DataTypes.DATE,
-            allowNull: true
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                len: [1,50],  
+            }
         },
         // favor_time: {
         //     type: DataTypes.TIME,
