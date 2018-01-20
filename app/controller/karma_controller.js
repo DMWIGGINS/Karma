@@ -42,7 +42,7 @@ function getFavors(req, res) {
                 }
                 activeFavors.push(favorObject);
             }
-        
+
             res.render("favors", {
 
                 activeFavor: activeFavors
@@ -89,7 +89,7 @@ function updateFavor(req, res) {
     console.log(req.params);
     console.log(req.body);
     console.log("going to do the update now");
-    
+
     db.Favor.update({
         favor_completer_id: req.body.favor_completer_id,
         favor_status: req.body.favor_status
@@ -97,14 +97,82 @@ function updateFavor(req, res) {
         where: {
             id: req.params.id
         }
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data[0]) {
+            console.log("favor is updated");
+            res.status(200).end();
+        }
     });
 }
 
 
+function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
+    db.User.findAll({
+        where: {
+
+            $or: {
+                id: favorAskedId,
+                id: favorCompleterId
+            }
+        }
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+            var updateKoins = '';
+            var dbObject = {};
+        } else if (data[0]) {
+            for (i = 0; i < data.length; i++) {
+                if (data[i] == favorAskerId) {
+                    updateKoins = data[i].user_karma_koins - parseInt(favorPrice);
+                    dbObject.push({
+                        user_karma_koins: updateKoins
+                    }, {
+                        where: {
+                            id: favorAskerId
+                        }
+                    });
+                } else {
+                    updateKoins = data[i].user_karma_koins = parseInt(favorPrice);
+                    dbObject.push({
+                        user_karma_koins: updateKoins
+                    }, {
+                        where: {
+                            id: favorCompleterId
+                        }
+                    });
+                }
+
+            }
+            console.log("dbObject = " + JSON.stringify(dbObject));
+            db.User.update({
+                dbObject
+            }).then(function (data, err) {
+                if (err) {
+                    // If an error occurred, send a generic server failure
+                    console.log("an error occurred");
+                    console.log(err);
+                    res.status(500).end();
+                } else if (data[0]) {
+                    console.log("favor is updated");
+                    res.status(200).end();
+                }
+            });
+        }
+    });
+}
+
 // Create all our routes and set up logic within those routes where required.
 // Default route for the landing page
 router.get("/", function (req, res) {
-        res.render("landing");
+    res.render("landing");
 });
 
 // Route for the about section
