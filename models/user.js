@@ -44,7 +44,8 @@ module.exports = function (sequelize, DataTypes) {
         User.hasMany(models.Favor, {
             onDelete: "cascade"
         });
-    };
+      };
+    // TODO: Should we get rid of this if group functionality isn't MVP?
     //   User.associate = function(models) {
     //     // We're saying that a User should belong to an Group
     //     // A User can't be created without a Group due to the foreign key constraint
