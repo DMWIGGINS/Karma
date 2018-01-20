@@ -1,17 +1,17 @@
 .container {
-    width:100% !important;
+    width: 100% !important;
     max-width: 1920px !important;
-    margin:0px !important;
+    margin: 0px !important;
 }
 
 #landing {
     height: 400px;
     width: 100%;
     margin-left: 0px;
-    margin-right:0px;
-    padding-top:10%;
-    padding-bottom:10%;
-    margin-bottom:0px;
+    margin-right: 0px;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    margin-bottom: 0px;
     background: url(../images/bluredpeople.png);
     background-attachment: fixed;
     background-position: top;
@@ -23,15 +23,17 @@
     display: block;
 }
 
-#point-one, #point-two, #point-three {
+#point-one,
+#point-two,
+#point-three {
     position: relative;
-    padding-top:0px;
-    margin:0px;
-    background-color:  #9C27B0;
+    padding-top: 0px;
+    margin: 0px;
+    background-color: #9C27B0;
 }
 
 #orange {
-    background-color:  #F57C00;
+    background-color: #F57C00;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -48,17 +50,23 @@ a.brand-logo.right {
 h1 {
     color: #42A5F5;
     font-family: 'Sedgwick Ave Display';
-    font-size:5rem;
+    font-size: 5rem;
     text-shadow: 2px 2px 4px #000000;
 }
 
 h3 {
     color: #fff;
     font-family: 'Oswald';
-    font-size:1.5rem;
+    font-size: 1.5rem;
 }
 
-h2, h4, h5, h6, p, li, a {
+h2,
+h4,
+h5,
+h6,
+p,
+li,
+a {
     font-family: 'Oswald';
 }
 
@@ -79,7 +87,19 @@ i.medium.material-icons {
     background-color: #9C27B0;
 }
 
-input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
     border-bottom: 3px solid #42A5F5 !important;
     box-shadow: none;
 }
@@ -90,7 +110,7 @@ label.label-icon {
 
 #profile {
     background-color: #9C27B0;
-    text-align:center;
+    text-align: center;
     color: #ffffff;
     margin: 0px;
 }
@@ -105,13 +125,15 @@ label.label-icon {
     padding: 50px;
 }
 
-#asked-completed, #asked-pending {
+#asked-completed,
+#asked-pending {
     background-color: #42A5F5;
     padding-bottom: 20px;
     padding-top: 20px;
 }
 
-#returned-completed, #returned-pending {
+#returned-completed,
+#returned-pending {
     background-color: #F57C00;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -120,14 +142,26 @@ label.label-icon {
 img {
     padding: none;
     margin: none;
-    border:none;
+    border: none;
 }
 
 .form-group {
-    padding-top:20px;
+    padding-top: 20px;
 }
 
-input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+input:not([type]),
+input[type=text]:not(.browser-default),
+input[type=password]:not(.browser-default),
+input[type=email]:not(.browser-default),
+input[type=url]:not(.browser-default),
+input[type=time]:not(.browser-default),
+input[type=date]:not(.browser-default),
+input[type=datetime]:not(.browser-default),
+input[type=datetime-local]:not(.browser-default),
+input[type=tel]:not(.browser-default),
+input[type=number]:not(.browser-default),
+input[type=search]:not(.browser-default),
+textarea.materialize-textarea {
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -135,7 +169,7 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
 .btn {
     border-radius: 8px;
     background-color: #9C27B0;
-    margin:20px;
+    margin: 20px;
 }
 
 .page-footer {
@@ -148,13 +182,18 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+}
 
-  main {
+main {
     flex: 1 0 auto;
-  }
-     
+}
 
+#calendarSection {
+    padding-top: 0;
+}
 
-     
-     
+.flatpickr-time input.flatpickr-hour,
+.flatpickr-time input.flatpickr-minute {
+    padding-top: 0;
+}
+
