@@ -4,6 +4,8 @@ var router = express.Router();
 
 var db = require("../../models");
 
+var currentUser = null;
+
 // favor_karma_koin_price
 // favor_description
 function getFavors(req, res) {
@@ -130,12 +132,6 @@ router.put("/api/favor/:id", function (req, res) {
     updateFavor(req, res);
 });
 
-router.put("/api/favor/:id", function (req, res) {
-    console.log("im updating the favor now");
-    updateFavor(req, res);
-});
-
-
 router.get("/signedin", function (req, res) {
     res.render("signedin");
 });
@@ -143,6 +139,52 @@ router.get("/signedin", function (req, res) {
 router.get("/profile", function (req, res) {
     res.render("profile");
 });
+
+router.post("/api/user/create", function (req, res) {
+    createNewUser(req, res)
+});
+
+function createNewUser(req, res) {
+    // Find all database entries
+    db.User.findAll({
+        //Where the FB ID client matches a FB ID in the database
+        where: {
+            fb_user_id: req.body.fb_user_id
+        }
+    }).then(function (data, err) {
+        // TODO: Throwing error when table doesn't exist
+        // if (err) {
+        //     res.status(500).end();
+        // } 
+        // If a row is returned, that user alraedy exists in the db
+        if (data[0]) {
+            currentUser = data[0];
+            res.status(200).end();
+            // res.render("profile", {
+            // });
+        } else {
+            // If no rows are returned create a new user and send it to the db
+            currentUser = db.User.create({
+                    user_name: req.body.user_name,
+                    user_email: req.body.user_email,
+                    profile_pic_link: req.body.fb_user_pic,
+                    fb_user_id: req.body.fb_user_id,
+                    user_karma_koins: 50
+                })
+                .then(function (data, err) {
+                    if (err) {
+                        // If an error occurred, send a generic server failure
+                        res.status(500).end();
+                    } else {
+                        res.status(200).end();
+                    }
+                });
+            // res.render("profile", {
+            // });
+        }
+    });
+
+}
 
 
 // Export routes for server.js to use.

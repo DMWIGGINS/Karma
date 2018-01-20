@@ -40,6 +40,10 @@ module.exports = function (sequelize, DataTypes) {
         user_karma_koins: {
             type: DataTypes.INTEGER,
             allowNull: true
+        },
+        fb_user_id: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
     User.associate = function(models) {
@@ -49,14 +53,15 @@ module.exports = function (sequelize, DataTypes) {
           onDelete: "cascade"
         });
       };
-      User.associate = function(models) {
-        // We're saying that a User should belong to an Group
-        // A User can't be created without a Group due to the foreign key constraint
-        User.belongsTo(models.Group, {
-          foreignKey: {
-            allowNull: true
-          }
-        });
-      };
+    // TODO: Should we get rid of this because group funcgtionality isn't MVP
+    //   User.associate = function(models) {
+    //     // We're saying that a User should belong to an Group
+    //     // A User can't be created without a Group due to the foreign key constraint
+    //     User.belongsTo(models.Group, {
+    //       foreignKey: {
+    //         allowNull: true
+    //       }
+    //     });
+    //   };
     return User;
 };
