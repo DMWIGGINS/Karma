@@ -1,8 +1,7 @@
 var express = require("express");
-
 var router = express.Router();
-
 var db = require("../../models");
+var currentUser = null;
 
 // favor_karma_koin_price
 // favor_description
@@ -37,7 +36,9 @@ function getFavors(req, res) {
                 }
                 activeFavors.push(favorObject);
             }
-            res.render("Favors", {
+
+            res.render("favors", {
+
                 activeFavor: activeFavors
             });
         } else {
@@ -60,6 +61,7 @@ function createNewFavor(req, res) {
             favor_status: "active",
             favor_price: req.body.favor_price,
             GroupId: group_id
+
         })
         .then(function (data, err) {
             if (err) {
@@ -86,24 +88,6 @@ function updateFavor(req, res) {
     }, {
         where: {
             id: req.params.id
-        }
-    }).then(function (data, err) {
-        console.log("data: ");
-        console.log(data);
-        console.log("err: ");
-        console.log(err);
-        if (err) {
-            // If an error occurred, send a generic server failure
-            console.log(err);
-            return res.status(500).end();
-        } else if (data.changedRows == 0) {
-            console.log(data);
-            // If no rows were changed, then the ID must not exist, so 404
-            console.log("favor row did not get updated");
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
     });
 }
 
@@ -135,8 +119,63 @@ router.get("/signedin", function (req, res) {
 });
 
 router.get("/profile", function (req, res) {
+  
     res.render("profile");
 });
+=======
+    res.render("profile", {
+        user: currentUser
+    });
+});
+
+router.post("/api/user/create", function (req, res) {
+    createNewUser(req, res)
+});
+
+function createNewUser(req, res) {
+    // Find all database entries
+    db.User.findAll({
+        //Where the FB ID client matches a FB ID in the database
+        where: {
+            fb_user_id: req.body.fb_user_id
+        }
+    }).then(function (data, err) {
+        // TODO: Throwing error when table doesn't exist
+        // if (err) {
+        //     res.status(500).end();
+        // } 
+        // If a row is returned, that user alraedy exists in the db
+        if (data[0]) {
+            currentUser = data[0];
+            // res.status(200).end();
+            res.render("profile", {
+                user: currentUser
+            });
+        } else {
+            // If no rows are returned create a new user and send it to the db
+            currentUser = db.User.create({
+                    user_name: req.body.user_name,
+                    user_email: req.body.user_email,
+                    profile_pic_link: req.body.fb_user_pic,
+                    fb_user_id: req.body.fb_user_id,
+                    user_karma_koins: 50
+                })
+                .then(function (data, err) {
+                    if (err) {
+                        // If an error occurred, send a generic server failure
+                        res.status(500).end();
+                    } else {
+                        res.status(200).end();
+                    }
+                });
+            res.render("profile", {
+                user: currentUser
+            });
+        }
+    });
+
+}
+
 
 
 // Export routes for server.js to use.
