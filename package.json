@@ -27,6 +27,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
     "flatpickr": "^4.2.3",
     "fs": "0.0.1-security",
     "http": "0.0.0",

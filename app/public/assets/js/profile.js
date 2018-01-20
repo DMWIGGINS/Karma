@@ -1,19 +1,19 @@
 //Pipe to map the Database items to the handlebars.
 //Helen you need logic in here to tell it to use the username to grab those connected items from the other tables.
 // The Functions to get asked and given
-
-function MostRecentFavorRequest() {
+//favor_askerid
+function getPendingFavorRequests() {
     var ProfileId = "";
-    var MostRecentFavorAsk = {
-        favor_KarmaPrice: $("#mostrecentaskfavorprice").val().trim(),
+    var allPendingFavorsAsked = {
+        favor_KarmaPrice: $("#pendingFavorAskedPrice").val().trim(),
         user_id: ProfileId,
-        mostRecent_FavorRequest: $("#mostrecentaskedfavor").val().trim(),
+        pendingRecent_FavorRequest: $("#pendingFavorAsk").val().trim(),
     };
-    console.log("totalProfile: " + JSON.stringify(MostRecentFavorAsk));
-    // Send the POST request.
+    console.log("totalProfile: " + JSON.stringify(getPendingFavorRequests));
+    // Send the GET request.
     $.ajax("/api/favor/mostRecentAsked", {
         type: "GET",
-        data: MostRecentFavorAsk
+        data: getPendingFavorRequests
     }).then(
         function () {
             console.log("this posted to the correct items on the profile page");
@@ -21,12 +21,14 @@ function MostRecentFavorRequest() {
             location.reload();
         });
 }
-
-function MostRecentFavorGiven() {
-    var MostRecentFavorGiven = {
-        favor_KarmaPrice: $("#mostrecentfavorprice").val().trim(),
+//where they are they said that they will complete, but it's still pending.
+//favor_completerid
+function getPendingRecentFavorGiven() {
+    var ProfileId = "";
+    var allPendingFavorAssigned = {
+        favor_KarmaPrice: $("#pendingFavorGiveprice").val().trim(),
         user_id: ProfileId,
-        mostRecent_FavorRequest: $("#mostrecentaskedfavor").val().trim(),
+        mostRecent_FavorRequest: $("#pendingFavorGive").val().trim(),
     };
     console.log("totalProfile: " + JSON.stringify(MostRecentFavorGiven));
     // Send the POST request.
