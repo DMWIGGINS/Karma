@@ -210,7 +210,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
         where: {
 
             $or: {
-                id: favorAskedId,
+                id: favorAskerId,
                 id: favorCompleterId
             }
         }
