@@ -10,18 +10,6 @@ window.fbAsyncInit = function () {
     FB.AppEvents.logPageView();
 };
 
-// Self-invoked function that injects the Facebook script tag into the header of any html page that the home.js script tag lives in
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-        return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
 window.addEventListener("load", function () {
 
     // Allows us to determine if a user is logged in to Facebook and has authenticated our app.
@@ -58,7 +46,6 @@ function facebookLogInCallback(response) {
             }).then(
                 function () {
                     // Redirect the webpage to the profile page if we've successfully created a user
-                    // FIXME: Since I can't figure out how to redirect on the server temporarily redirecting on the client. HELPME.
                     window.location.href = window.location.origin + "/profile"
                 }
             );
