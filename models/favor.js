@@ -25,10 +25,6 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1,50],  
             }
         },
-        // favor_time: {
-        //     type: DataTypes.TIME,
-        //     allowNull: true,
-        // },
         favor_asker_id: {
             type: DataTypes.INTEGER,
             allowNull: false
@@ -40,23 +36,20 @@ module.exports = function (sequelize, DataTypes) {
         favor_status: {
             type: DataTypes.STRING,
             allowNull: false
-            // validate: {
-            //     len: [1] 
-            // }
         },
         favor_price: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
     });
-    Favor.associate = function(models) {
-        // We're saying that a Favor should belong to a Group
-        // A Favor can't be created without a Group due to the foreign key constraint
-        Favor.belongsTo(models.Group, {
-          foreignKey: {
-            allowNull: true
-          }
-        });
-      };
+    // Favor.associate = function(models) {
+    //     // We're saying that a Favor should belong to a Group
+    //     // A Favor can't be created without a Group due to the foreign key constraint
+    //     Favor.belongsTo(models.Group, {
+    //       foreignKey: {
+    //         allowNull: true
+    //       }
+    //     });
+    //   };
     return Favor;
 };

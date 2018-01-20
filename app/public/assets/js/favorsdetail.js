@@ -23,13 +23,7 @@ function updatePendingFavor() {
         });
 }
 
-function updateKarmaKoins () {
-    console.log("I'm in updateKoins");
-    var favorAdderId = 1;
-    user_karmakoins = user_karmakoins-favor_price;
-    
 
-}
 
 function updateCompletedFavor() {
     console.log("im in updateFavor");

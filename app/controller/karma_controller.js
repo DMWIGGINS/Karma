@@ -1,7 +1,7 @@
 var express = require("express");
 var db = require("../../models");
 var router = express.Router();
-var ssn ;
+var ssn;
 
 
 // Using this variable to track whether the current user is connected via Facebook
@@ -14,7 +14,6 @@ function getFavors(req, res) {
     var activeFavors = [];
     db.Favor.findAll({
         where: {
-            // GroupId: group_id,
             favor_status: 'active'
         },
         order: ['createdAt']
@@ -40,9 +39,7 @@ function getFavors(req, res) {
                 }
                 activeFavors.push(favorObject);
             }
-
             res.render("favors", {
-
                 activeFavor: activeFavors
             });
         } else {
@@ -51,6 +48,99 @@ function getFavors(req, res) {
             res.render("favors", {
                 activeFavor: []
             });
+        }
+    });
+}
+//getting the user pending asked and given favors for the profile page.
+function getProfilePendingFavors(req, res, ssn) {
+    console.log("here it comes");
+    var askedPendingFavors = [];
+    var givenPendingFavors = [];
+    console.log(ssn);
+    db.Favor.findAll({
+        where: {
+            // favor_asker_id: ssn,
+            $or: {
+                favor_status: 'active',
+                favor_status: 'pending'
+            },
+        },
+        order: ['createdAt']
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data[0]) {
+            console.log("about to dump favors");
+            console.log("data" + JSON.stringify(data));
+            console.log("name " + data[0].favor_name);
+            console.log("koins " + data[0].favor_price);
+            console.log("data is returned");
+            console.log("data length " + data.length);
+            var askedFavorObject = [];
+            var givenFavorObject = [];
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].favor_asker_id == ssn) {
+                    askedFavorObject = {
+                        id: data[i].id,
+                        favor_name: data[i].favor_name,
+                        favor_price: data[i].favor_price,
+                        favor_status: data[i].favor_status
+                    }
+                    askedPendingFavors.push(askedFavorObject)
+                } else {
+                    givenFavorObject = {
+                        id: data[i].id,
+                        favor_name: data[i].favor_name,
+                        favor_price: data[i].favor_price,
+                        favor_status: data[i].favor_status
+                    }
+                    givenPendingFavors.push(givenFavorObject);
+                }
+
+            }
+            res.render("profile", {
+                askedPendingFavors: askedPendingFavors,
+                givenPendingFavors: givenPendingFavors
+            });
+        } else {
+            // no rows returned 
+            console.log("no rows returned");
+            res.render("favors", {
+                activeFavor: []
+            });
+        }
+    });
+}
+
+function getFavorsDetail(req, res) {
+    db.Favor.FindOne({
+        where: {
+            id: req.params.id
+        },
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data) {
+            console.log("data" + JSON.stringify(data));
+            console.log("data is returned");
+            var favorObject = {
+                id: data.id,
+                favor_name: data.favor_name,
+                favor_description: data.favor_description,
+                favor_price: data.favor_price,
+                favor_datetime: data.favor_datetime
+            }
+            res.render("favorsdetail");
+        } else {
+            // no rows returned 
+            console.log("no rows returned");
+            res.render("favorsdetail");
         }
     });
 }
@@ -64,23 +154,21 @@ function createNewFavor(req, res) {
             favor_asker_id: req.body.favor_asker_id,
             favor_status: "active",
             favor_price: req.body.favor_price,
-            favor_datetime: req.body.favor_datetime,
-            // GroupId: group_id
+            favor_datetime: req.body.favor_datetime
 
         })
         .then(function (data, err) {
-            if (err) {
+            if (data) {
+                console.log(data);
+                res.status(200).end();
+            } else if (err) {
                 // If an error occurred, send a generic server failure
                 console.log(err);
                 res.status(500).end();
-            } else {
-                console.log(data);
-                res.status(200).end();
             }
         });
     getFavors(res);
 }
-
 
 function updateFavor(req, res) {
     console.log("Im in UpdateFavor now on the server side");
@@ -94,50 +182,124 @@ function updateFavor(req, res) {
         where: {
             id: req.params.id
         }
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data[0]) {
+            console.log("favor is updated");
+            res.status(200).end();
+        }
     });
 }
 
+function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
+    db.User.findAll({
+        where: {
+
+            $or: {
+                id: favorAskedId,
+                id: favorCompleterId
+            }
+        }
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+            var updateKoins = '';
+            var dbObject = {};
+        } else if (data[0]) {
+            for (i = 0; i < data.length; i++) {
+                if (data[i] == favorAskerId) {
+                    updateKoins = data[i].user_karma_koins - parseInt(favorPrice);
+                    dbObject.push({
+                        user_karma_koins: updateKoins
+                    }, {
+                        where: {
+                            id: favorAskerId
+                        }
+                    });
+                } else {
+                    updateKoins = data[i].user_karma_koins = parseInt(favorPrice);
+                    dbObject.push({
+                        user_karma_koins: updateKoins
+                    }, {
+                        where: {
+                            id: favorCompleterId
+                        }
+                    });
+                }
+
+            }
+            console.log("dbObject = " + JSON.stringify(dbObject));
+            db.User.update({
+                dbObject
+            }).then(function (data, err) {
+                if (err) {
+                    // If an error occurred, send a generic server failure
+                    console.log("an error occurred");
+                    console.log(err);
+                    res.status(500).end();
+                } else if (data[0]) {
+                    console.log("favor is updated");
+                    res.status(200).end();
+                }
+            });
+        }
+    });
+}
 
 // Default route for the landing page
 router.get("/", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     res.render("landing");
 });
 
 // Route for the about section
 router.get("/about", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     res.render("about");
 });
 
 // Route for the favors page
 router.get("/favors", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     getFavors(req, res);
 });
 
+// / Route for the favors detail page
+router.get("/favorsdetail/:id", function (req, res) {
+    ssn = req.session;
+    getFavorsDetail(req, res);
+});
+
 router.post("/api/favor/new", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     createNewFavor(req, res);
 });
 
 router.put("/api/favor/:id", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     updateFavor(req, res);
 });
 
 // Route for the profile page
 router.get("/profile", function (req, res) {
-    ssn=req.session;
-    res.render("profile", {
-        // Passing the current user from the server to the client (for handlebars model)
-        user: ssn.currentUser
-    });
+    ssn = req.session;
+    getProfilePendingFavors(req,res,ssn)
+    // res.render("profile", {
+    //     // Passing the current user from the server to the client (for handlebars model)
+    //     user: ssn.currentUser
+    // });
 });
 
 // Route that creates new users
 router.post("/api/user/create", function (req, res) {
-    ssn=req.session;
+    ssn = req.session;
     // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
     createNewUser(req, res)
 });
