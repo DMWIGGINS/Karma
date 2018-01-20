@@ -60,6 +60,7 @@ function createNewFavor(req, res) {
             favor_asker_id: req.body.favor_asker_id,
             favor_status: "active",
             favor_price: req.body.favor_price,
+            favor_datetime: req.body.favor_datetime,
             GroupId: group_id
 
         })
@@ -88,8 +89,10 @@ function updateFavor(req, res) {
     }, {
         where: {
             id: req.params.id
+        }
     });
 }
+
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function (req, res) {
@@ -119,13 +122,13 @@ router.get("/signedin", function (req, res) {
 });
 
 router.get("/profile", function (req, res) {
-  
+
     res.render("profile");
 });
-=======
-    res.render("profile", {
-        user: currentUser
-    });
+
+res.render("profile", {
+user: currentUser
+});
 });
 
 router.post("/api/user/create", function (req, res) {
