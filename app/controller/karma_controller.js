@@ -116,11 +116,14 @@ function getProfilePendingFavors(req, res, ssn) {
 }
 
 function getFavorsDetail(req, res) {
-    db.Favor.FindOne({
+    console.log("id " + req.params.id);
+    db.Favor.findAll({
         where: {
             id: req.params.id
         },
     }).then(function (data, err) {
+        console.log(data);
+        console.log(err);
         if (err) {
             // If an error occurred, send a generic server failure
             console.log("an error occurred");
@@ -130,17 +133,23 @@ function getFavorsDetail(req, res) {
             console.log("data" + JSON.stringify(data));
             console.log("data is returned");
             var favorObject = {
-                id: data.id,
-                favor_name: data.favor_name,
-                favor_description: data.favor_description,
-                favor_price: data.favor_price,
-                favor_datetime: data.favor_datetime
+                id: data[0].id,
+                favor_name: data[0].favor_name,
+                favor_desc: data[0].favor_desc,
+                favor_price: data[0].favor_price,
+                favor_datetime: data[0].favor_datetime
             }
-            res.render("favorsdetail");
+            console.log(favorObject);
+            res.render("favorsdetail",
+                favorObject
+
+            );
         } else {
             // no rows returned 
             console.log("no rows returned");
-            res.render("favorsdetail");
+            res.render("favorsdetail", {
+                favorObject
+            });
         }
     });
 }
@@ -254,7 +263,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
 }
 
 // Default route for the landing page
-router.get("/", function (req, res) {
+router.get("/landing", function (req, res) {
     ssn = req.session;
     res.render("landing");
 });
