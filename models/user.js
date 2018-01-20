@@ -53,7 +53,7 @@ module.exports = function (sequelize, DataTypes) {
           onDelete: "cascade"
         });
       };
-    // TODO: Should we get rid of this because group funcgtionality isn't MVP
+    // TODO: Should we get rid of this if group functionality isn't MVP?
     //   User.associate = function(models) {
     //     // We're saying that a User should belong to an Group
     //     // A User can't be created without a Group due to the foreign key constraint

@@ -10,7 +10,7 @@ window.fbAsyncInit = function () {
     FB.AppEvents.logPageView();
 };
 
-// Self-invoked function that injects Facebook script tag into the header of the html page
+// Self-invoked function that injects the Facebook script tag into the header of any html page that the home.js script tag lives in
 (function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) {
@@ -24,22 +24,26 @@ window.fbAsyncInit = function () {
 
 window.addEventListener("load", function () {
 
+    // Allows us to determine if a user is logged in to Facebook and has authenticated our app.
     FB.getLoginStatus(function (response) {
-        // TODO: This is where on initial load it's going to tell you the status of the current user.
-        // statusChangeCallback(response);
+        // Take the response (which is the state of the user) and pass it to the log in call back.
+        facebookLogInCallback(response);
     });
 
 });
 
-function facebookLogInCallback(response) {
-    console.log("I'm in the log in callback function.", response);
-    // Check if the login was good
-    if (response.status == "connected") {
-        // Need to ask for the individual fields
-        FB.api("/me?fields=name,picture,email", function (response) {
-            console.log(response);
-            // TODO: Next need to call the server to tell it the user info
 
+// This function handles what to do with the user state response from Facebook
+// Note: This is also used as the call back from the log in button on the landing page
+function facebookLogInCallback(response) {
+    // If Facebook returns that the user is connected (if it's the first auth then the user approves permission for app to grab user info)
+    if (response.status == "connected") {
+        // Make a call to the FB API and grab the users name, picture, email, and location.
+        //TODO: Add user location.
+        FB.api("/me?fields=name,picture,email", function (response) {
+
+            // Take the response from FB and make it a new user object that includes name, email, picture, and ID.
+            // TODO: Add user location.
             var newUser = {
                 user_name: response.name,
                 user_email: response.email,
@@ -47,14 +51,15 @@ function facebookLogInCallback(response) {
                 fb_user_id: response.id
             };
 
-            // Send the POST request.
+            // Then take the new user object and post it to the server to make a new user.
             $.ajax("/api/user/create", {
                 type: "POST",
                 data: newUser
             }).then(
                 function () {
-                    // Reload the page to get the updated list
-                    // location.reload();
+                    // Redirect the webpage to the profile page if we've successfully created a user
+                    // FIXME: Since I can't figure out how to redirect on the server temporarily redirecting on the client. HELPME.
+                    window.location.href = window.location.origin + "/profile"
                 }
             );
         });

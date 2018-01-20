@@ -1,9 +1,11 @@
 var express = require("express");
 
-var router = express.Router();
-
 var db = require("../../models");
 
+var router = express.Router();
+
+// Using this variable to track whether the current user is connected via Facebook
+// TODO: We're going to have to re-work this because we'll run into issues when multiple users are connected.
 var currentUser = null;
 
 // favor_karma_koin_price
@@ -109,15 +111,17 @@ function updateFavor(req, res) {
     });
 }
 
-// Create all our routes and set up logic within those routes where required.
+// Default route for the landing page
 router.get("/", function (req, res) {
-    res.render("landing");
+        res.render("landing");
 });
 
+// Route for the about section
 router.get("/about", function (req, res) {
     res.render("about");
 });
 
+// Route for the favors page
 router.get("/favors", function (req, res) {
     getFavors(req, res);
 });
@@ -132,41 +136,48 @@ router.put("/api/favor/:id", function (req, res) {
     updateFavor(req, res);
 });
 
+// FIXME: Do we need this route anymore? Do we need a signed in page? Or are we going to use profile instead?
 router.get("/signedin", function (req, res) {
     res.render("signedin");
 });
 
+// Route for the profile page
 router.get("/profile", function (req, res) {
     res.render("profile", {
+        // Passing the current user from the server to the client (for handlebars model)
         user: currentUser
     });
 });
 
+// Route that creates new users
 router.post("/api/user/create", function (req, res) {
+    // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
     createNewUser(req, res)
 });
 
+// Function that creates new users
 function createNewUser(req, res) {
-    // Find all database entries
+    // First, see if the current connected user exists in our DB.
     db.User.findAll({
-        //Where the FB ID client matches a FB ID in the database
+        // Take the fb user id of the currently connected user and see if it matches a fb user id in our db.
         where: {
             fb_user_id: req.body.fb_user_id
         }
     }).then(function (data, err) {
-        // TODO: Throwing error when table doesn't exist
+        // FIXME: When the user table doesn't initially exist, and the first user connects, an error is being thrown because there is no table.
         // if (err) {
         //     res.status(500).end();
         // } 
-        // If a row is returned, that user alraedy exists in the db
+        // If a row is returned, that fb user id alraedy exists in the db
         if (data[0]) {
             currentUser = data[0];
-            // res.status(200).end();
-            res.render("profile", {
-                user: currentUser
-            });
+            res.status(200).end();
+            // FIXME: This isn't working... It should redirect the user to the profile page if their user exists in the db.
+            // res.render("profile", {
+            //     user: currentUser
+            // });
         } else {
-            // If no rows are returned create a new user and send it to the db
+            // If no rows are returned take the body data from the client, create a new user, and send it to the db
             currentUser = db.User.create({
                     user_name: req.body.user_name,
                     user_email: req.body.user_email,
@@ -180,11 +191,12 @@ function createNewUser(req, res) {
                         res.status(500).end();
                     } else {
                         res.status(200).end();
+                        // FIXME: This isn't working... It should redirect the user to the profile page if their user exists in the db.
+                        // res.render("profile", {
+                        //     user: currentUser
+                        // });
                     }
                 });
-            res.render("profile", {
-                user: currentUser
-            });
         }
     });
 
