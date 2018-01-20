@@ -1,12 +1,11 @@
 var express = require("express");
-
 var db = require("../../models");
-
 var router = express.Router();
+var ssn;
+
 
 // Using this variable to track whether the current user is connected via Facebook
-// TODO: We're going to have to re-work this because we'll run into issues when multiple users are connected.
-var currentUser = null;
+
 
 // favor_karma_koin_price
 // favor_description
@@ -15,7 +14,6 @@ function getFavors(req, res) {
     var activeFavors = [];
     db.Favor.findAll({
         where: {
-            GroupId: group_id,
             favor_status: 'active'
         },
         order: ['createdAt']
@@ -37,14 +35,11 @@ function getFavors(req, res) {
                 favorObject = {
                     id: data[i].id,
                     favor_name: data[i].favor_name,
-                    favor_price: data[i].favor_price,
-                    favor_datetime: data[i].favor_datetime
+                    favor_price: data[i].favor_price
                 }
                 activeFavors.push(favorObject);
             }
-
             res.render("favors", {
-
                 activeFavor: activeFavors
             });
         } else {
@@ -66,18 +61,17 @@ function createNewFavor(req, res) {
             favor_asker_id: req.body.favor_asker_id,
             favor_status: "active",
             favor_price: req.body.favor_price,
-            favor_datetime: req.body.favor_datetime,
-            GroupId: group_id
+            favor_datetime: req.body.favor_datetime
 
         })
         .then(function (data, err) {
-            if (err) {
+            if (data) {
+                console.log(data);
+                res.status(200).end();
+            } else if (err) {
                 // If an error occurred, send a generic server failure
                 console.log(err);
                 res.status(500).end();
-            } else {
-                console.log(data);
-                res.status(200).end();
             }
         });
     getFavors(res);
@@ -89,7 +83,6 @@ function updateFavor(req, res) {
     console.log(req.params);
     console.log(req.body);
     console.log("going to do the update now");
-
     db.Favor.update({
         favor_completer_id: req.body.favor_completer_id,
         favor_status: req.body.favor_status
@@ -109,7 +102,6 @@ function updateFavor(req, res) {
         }
     });
 }
-
 
 function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
     db.User.findAll({
@@ -169,47 +161,46 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
     });
 }
 
-// Create all our routes and set up logic within those routes where required.
 // Default route for the landing page
 router.get("/", function (req, res) {
+    ssn = req.session;
     res.render("landing");
 });
 
 // Route for the about section
 router.get("/about", function (req, res) {
+    ssn = req.session;
     res.render("about");
 });
 
 // Route for the favors page
 router.get("/favors", function (req, res) {
+    ssn = req.session;
     getFavors(req, res);
 });
 
 router.post("/api/favor/new", function (req, res) {
-    console.log("im in api/favors about to create a favor");
+    ssn = req.session;
     createNewFavor(req, res);
 });
 
 router.put("/api/favor/:id", function (req, res) {
-    console.log("im updating the favor now");
+    ssn = req.session;
     updateFavor(req, res);
-});
-
-// FIXME: Do we need this route anymore? Do we need a signed in page? Or are we going to use profile instead?
-router.get("/signedin", function (req, res) {
-    res.render("signedin");
 });
 
 // Route for the profile page
 router.get("/profile", function (req, res) {
+    ssn = req.session;
     res.render("profile", {
         // Passing the current user from the server to the client (for handlebars model)
-        user: currentUser
+        user: ssn.currentUser
     });
 });
 
 // Route that creates new users
 router.post("/api/user/create", function (req, res) {
+    ssn = req.session;
     // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
     createNewUser(req, res)
 });
@@ -229,7 +220,7 @@ function createNewUser(req, res) {
         // } 
         // If a row is returned, that fb user id alraedy exists in the db
         if (data[0]) {
-            currentUser = data[0];
+            ssn.currentUser = data[0];
             res.status(200).end();
             // FIXME: This isn't working... It should redirect the user to the profile page if their user exists in the db.
             // res.render("profile", {
@@ -237,7 +228,7 @@ function createNewUser(req, res) {
             // });
         } else {
             // If no rows are returned take the body data from the client, create a new user, and send it to the db
-            currentUser = db.User.create({
+            ssn.currentUser = db.User.create({
                     user_name: req.body.user_name,
                     user_email: req.body.user_email,
                     profile_pic_link: req.body.fb_user_pic,

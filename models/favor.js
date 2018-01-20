@@ -49,14 +49,14 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         }
     });
-    Favor.associate = function(models) {
-        // We're saying that a Favor should belong to a Group
-        // A Favor can't be created without a Group due to the foreign key constraint
-        Favor.belongsTo(models.Group, {
-          foreignKey: {
-            allowNull: true
-          }
-        });
-      };
+    // Favor.associate = function(models) {
+    //     // We're saying that a Favor should belong to a Group
+    //     // A Favor can't be created without a Group due to the foreign key constraint
+    //     Favor.belongsTo(models.Group, {
+    //       foreignKey: {
+    //         allowNull: true
+    //       }
+    //     });
+    //   };
     return Favor;
 };
