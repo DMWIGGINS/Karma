@@ -1,7 +1,7 @@
 .container {
     width:100% !important;
     max-width: 1920px !important;
-    margin:0px;
+    margin:0px !important;
 }
 
 #landing {
@@ -87,14 +87,61 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 label.label-icon {
     color: #42A5F5;
 }
-/* #button {
-    margin-top:50px;
-} */
+
+#profile {
+    background-color: #9C27B0;
+    text-align:center;
+    color: #ffffff;
+    margin: 0px;
+}
+
+#profile-favors {
+    background: url(../images/profilebackground.png);
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+    padding: 50px;
+}
+
+#asked-completed, #asked-pending {
+    background-color: #42A5F5;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+#returned-completed, #returned-pending {
+    background-color: #F57C00;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+img {
+    padding: none;
+    margin: none;
+    border:none;
+}
+
+.form-group {
+    padding-top:20px;
+}
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn {
+    border-radius: 8px;
+    background-color: #9C27B0;
+    margin:20px;
+}
 
 .page-footer {
     background-color: #42A5F5;
     color: white;
-    padding: 50px;
+    padding: 20px;
 }
 
 body {
