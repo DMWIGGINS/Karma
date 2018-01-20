@@ -137,7 +137,9 @@ router.get("/signedin", function (req, res) {
 });
 
 router.get("/profile", function (req, res) {
-    res.render("profile");
+    res.render("profile", {
+        user: currentUser
+    });
 });
 
 router.post("/api/user/create", function (req, res) {
@@ -159,9 +161,10 @@ function createNewUser(req, res) {
         // If a row is returned, that user alraedy exists in the db
         if (data[0]) {
             currentUser = data[0];
-            res.status(200).end();
-            // res.render("profile", {
-            // });
+            // res.status(200).end();
+            res.render("profile", {
+                user: currentUser
+            });
         } else {
             // If no rows are returned create a new user and send it to the db
             currentUser = db.User.create({
@@ -179,8 +182,9 @@ function createNewUser(req, res) {
                         res.status(200).end();
                     }
                 });
-            // res.render("profile", {
-            // });
+            res.render("profile", {
+                user: currentUser
+            });
         }
     });
 
