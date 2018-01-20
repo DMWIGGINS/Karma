@@ -10,11 +10,11 @@ var ssn ;
 // favor_karma_koin_price
 // favor_description
 function getFavors(req, res) {
-    var group_id = 1;
+    // var group_id = 1;
     var activeFavors = [];
     db.Favor.findAll({
         where: {
-            GroupId: group_id,
+            // GroupId: group_id,
             favor_status: 'active'
         },
         order: ['createdAt']
@@ -57,7 +57,7 @@ function getFavors(req, res) {
 
 function createNewFavor(req, res) {
     console.log("IM IN CREATE NEW FAVOR");
-    var group_id = 1;
+    // var group_id = 1;
     db.Favor.create({
             favor_name: req.body.favor_name,
             favor_desc: req.body.favor_desc,
@@ -65,7 +65,7 @@ function createNewFavor(req, res) {
             favor_status: "active",
             favor_price: req.body.favor_price,
             favor_datetime: req.body.favor_datetime,
-            GroupId: group_id
+            // GroupId: group_id
 
         })
         .then(function (data, err) {
@@ -151,10 +151,6 @@ function createNewUser(req, res) {
             fb_user_id: req.body.fb_user_id
         }
     }).then(function (data, err) {
-        // FIXME: When the user table doesn't initially exist, and the first user connects, an error is being thrown because there is no table.
-        // if (err) {
-        //     res.status(500).end();
-        // } 
         // If a row is returned, that fb user id alraedy exists in the db
         if (data[0]) {
             ssn.currentUser = data[0];
