@@ -10,7 +10,7 @@ var ssn;
 // favor_karma_koin_price
 // favor_description
 function getFavors(req, res) {
-    var group_id = 1;
+    // var group_id = 1;
     var activeFavors = [];
     db.Favor.findAll({
         where: {
@@ -51,10 +51,113 @@ function getFavors(req, res) {
         }
     });
 }
+//getting the user pending asked and given favors for the profile page.
+function getProfilePendingFavors(req, res, ssn) {
+    console.log("here it comes");
+    console.log(req);
+    var askedPendingFavors = [];
+    var givenPendingFavors = [];
+    console.log(ssn);
+    db.Favor.findAll({
+        where: {
+            // favor_asker_id: ssn,
+            $or: {
+                favor_status: 'active',
+                favor_status: 'pending'
+            },
+        },
+        order: ['createdAt']
+    }).then(function (data, err) {
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data[0]) {
+            console.log("about to dump favors");
+            console.log("data" + JSON.stringify(data));
+            console.log("name " + data[0].favor_name);
+            console.log("koins " + data[0].favor_price);
+            console.log("data is returned");
+            console.log("data length " + data.length);
+            var askedFavorObject = [];
+            var givenFavorObject = [];
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].favor_asker_id == ssn) {
+                    askedFavorObject = {
+                        id: data[i].id,
+                        favor_name: data[i].favor_name,
+                        favor_price: data[i].favor_price,
+                        favor_status: data[i].favor_status
+                    }
+                    askedPendingFavors.push(askedFavorObject)
+                } else {
+                    givenFavorObject = {
+                        id: data[i].id,
+                        favor_name: data[i].favor_name,
+                        favor_price: data[i].favor_price,
+                        favor_status: data[i].favor_status
+                    }
+                    givenPendingFavors.push(givenFavorObject);
+                }
+
+            }
+            res.render("profile", {
+                askedPendingFavors: askedPendingFavors,
+                givenPendingFavors: givenPendingFavors
+            });
+        } else {
+            // no rows returned 
+            console.log("no rows returned");
+            res.render("favors", {
+                activeFavor: []
+            });
+        }
+    });
+}
+
+function getFavorsDetail(req, res) {
+    console.log("id " + req.params.id);
+    db.Favor.findAll({
+        where: {
+            id: req.params.id
+        },
+    }).then(function (data, err) {
+        console.log(data);
+        console.log(err);
+        if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+        } else if (data) {
+            console.log("data" + JSON.stringify(data));
+            console.log("data is returned");
+            var favorObject = {
+                id: data[0].id,
+                favor_name: data[0].favor_name,
+                favor_desc: data[0].favor_desc,
+                favor_price: data[0].favor_price,
+                favor_datetime: data[0].favor_datetime
+            }
+            console.log(favorObject);
+            res.render("favorsdetail",
+                favorObject
+
+            );
+        } else {
+            // no rows returned 
+            console.log("no rows returned");
+            res.render("favorsdetail", {
+                favorObject
+            });
+        }
+    });
+}
 
 function createNewFavor(req, res) {
     console.log("IM IN CREATE NEW FAVOR");
-    var group_id = 1;
+    // var group_id = 1;
     db.Favor.create({
             favor_name: req.body.favor_name,
             favor_desc: req.body.favor_desc,
@@ -76,7 +179,6 @@ function createNewFavor(req, res) {
         });
     getFavors(res);
 }
-
 
 function updateFavor(req, res) {
     console.log("Im in UpdateFavor now on the server side");
@@ -162,7 +264,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
 }
 
 // Default route for the landing page
-router.get("/", function (req, res) {
+router.get("/landing", function (req, res) {
     ssn = req.session;
     res.render("landing");
 });
@@ -179,6 +281,12 @@ router.get("/favors", function (req, res) {
     getFavors(req, res);
 });
 
+// / Route for the favors detail page
+router.get("/favorsdetail/:id", function (req, res) {
+    ssn = req.session;
+    getFavorsDetail(req, res);
+});
+
 router.post("/api/favor/new", function (req, res) {
     ssn = req.session;
     createNewFavor(req, res);
@@ -192,10 +300,11 @@ router.put("/api/favor/:id", function (req, res) {
 // Route for the profile page
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    res.render("profile", {
-        // Passing the current user from the server to the client (for handlebars model)
-        user: ssn.currentUser
-    });
+    getProfilePendingFavors(req,res)
+    // res.render("profile", {
+    //     // Passing the current user from the server to the client (for handlebars model)
+    //     user: ssn.currentUser
+    // });
 });
 
 // Route that creates new users
@@ -214,10 +323,6 @@ function createNewUser(req, res) {
             fb_user_id: req.body.fb_user_id
         }
     }).then(function (data, err) {
-        // FIXME: When the user table doesn't initially exist, and the first user connects, an error is being thrown because there is no table.
-        // if (err) {
-        //     res.status(500).end();
-        // } 
         // If a row is returned, that fb user id alraedy exists in the db
         if (data[0]) {
             ssn.currentUser = data[0];

@@ -66,9 +66,9 @@ function getPendingRecentFavorGiven() {
 //=================================================
 // On Page Load
 //=================================================
-$(document).ready(function () {
+// $(document).ready(function () {
 
-}
+// }
 
     //========================================================================
 // function createCustomerRow(req, res){
