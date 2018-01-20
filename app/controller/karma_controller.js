@@ -41,7 +41,9 @@ function getFavors(req, res) {
                 }
                 activeFavors.push(favorObject);
             }
+
             res.render("favors", {
+
                 activeFavor: activeFavors
             });
         } else {
@@ -63,7 +65,9 @@ function createNewFavor(req, res) {
             favor_asker_id: req.body.favor_asker_id,
             favor_status: "active",
             favor_price: req.body.favor_price,
+            favor_datetime: req.body.favor_datetime,
             GroupId: group_id
+
         })
         .then(function (data, err) {
             if (err) {
@@ -91,25 +95,9 @@ function updateFavor(req, res) {
         where: {
             id: req.params.id
         }
-    }).then(function (data, err) {
-        console.log("data: ");
-        console.log(data);
-        console.log("err: ");
-        console.log(err);
-        if (err) {
-            // If an error occurred, send a generic server failure
-            console.log(err);
-            return res.status(500).end();
-        } else if (data.changedRows == 0) {
-            console.log(data);
-            // If no rows were changed, then the ID must not exist, so 404
-            console.log("favor row did not get updated");
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
-        }
     });
 }
+
 
 // Default route for the landing page
 router.get("/", function (req, res) {
@@ -201,6 +189,7 @@ function createNewUser(req, res) {
     });
 
 }
+
 
 
 // Export routes for server.js to use.

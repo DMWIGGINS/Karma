@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1,255],  
+                len: [1, 255],
             }
         },
         user_email: {
@@ -22,21 +22,9 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                len: [1,500],  
+                len: [1, 500],
             }
         },
-        // group_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false
-        // },
-        // favors_asked_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: true
-        // },
-        // favors_completed_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: true
-        // },
         user_karma_koins: {
             type: DataTypes.INTEGER,
             allowNull: true
@@ -44,13 +32,17 @@ module.exports = function (sequelize, DataTypes) {
         fb_user_id: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        GroupId: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     });
-    User.associate = function(models) {
+    User.associate = function (models) {
         // Associating User with Favors
         // When a User is deleted, also delete any associated Favors
         User.hasMany(models.Favor, {
-          onDelete: "cascade"
+            onDelete: "cascade"
         });
       };
     // TODO: Should we get rid of this if group functionality isn't MVP?

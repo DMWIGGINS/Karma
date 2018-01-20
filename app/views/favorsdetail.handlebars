@@ -1,3 +1,4 @@
+<h1>Favor 1</h1>
 <nav>
     <div class="nav-wrapper">
         <h1 class="brand-logo right">Karma</h1>
@@ -14,60 +15,36 @@
             <li>
                 <a href="/signedin">Sign In</a>
             </li>
-        </ul>
     </div>
 </nav>
 
 <main>
     <div class="container">
-        <div class="row" id="active-favors">
+        <div class="row" id="favors-detail">
             <div class="col s5">
-                <img id="profilepicture" src="{{user.profile_pic_link}}" width="90%">
+                <img src="assets/images/goodvibes.jpg" width="90%">
             </div>
             <div class="col s6">
-                <div class="row"></div>
-                <form>
-                    <div class="usernameclass"></div>
-                    <h3 id="username">{{user.user_name}}</h3>
-                    <div class="koinsclass"></div>
-                    <h3 id="koins">{{user.user_karma_koins}}</h3>
-                    <div class="favorsaskedclass"></div>
-                    <h3 id="favorsasked">Favors Asked:</h3>
-                </form>
+                <h3>The Favor</h3>
                 <ul>
-                    <lh id="favor">{{#each activeFavor}}
-                        <li class="activeFavors">
+                    <lh id="favor-detail">
+                        <li class="Favor">
                             <p class="label"> {{this.favor_name}} </p>
+                            <p class="label"> {{this.favor_desc}} </p>
                             <p class="label"> {{this.favor_price}} </p>
                             <p class="label"> {{this.favor_datetime}} </p>
+                            <button id="pendingBtn" class="btn" type="submit" name="action">I'll do this
+                                <i class="material-icons right">send</i>
+                            </button>
+                            <button id="completedBtn" class="btn" type="submit" name="action">This favor is completed
+                                <i class="material-icons right">send</i>
+                            </button>
                         </li>
                     </lh>
                     {{/each}}
                 </ul>
             </div>
         </div>
-        <div class="col s1"></div>
-        <div class="row" id="ask-favors">
-            <div class="col s1"></div>
-            <div class="col s10">
-                <h3 style="color:#42A5F5">Recently Asked</h3>
-                <div id="mostrecentaskedfavor"></div>
-                <hr>
-            </div>
-            <div class="col s1"></div>
-        </div>
-        <div class="row" id="ask-favors">
-            <div class="col s1"></div>
-            <div class="col s10">
-                <h3 style="color:#42A5F5">Recently Completed</h3>
-                <div id="mostrecentcompletedfavor"></div>
-                <hr>
-            </div>
-            <div class="col s1"></div>
-        </div>
-
-    </div>
-
     </div>
 </main>
 <footer class="page-footer">
@@ -102,7 +79,4 @@
             <a class="right" href="#!">More Links</a>
         </div>
     </div>
-=======
-
-
 </footer>
