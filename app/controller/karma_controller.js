@@ -53,6 +53,7 @@ function getFavors(req, res) {
     });
 }
 //getting the user pending asked and given favors for the profile page.
+
 function getProfilePendingFavors(req, res) {
     var askedPendingFavors = [];
     var givenPendingFavors = [];
@@ -296,6 +297,7 @@ router.put("/api/favor/:id", function (req, res) {
 // Route for the profile page
 router.get("/profile", function (req, res) {
     ssn = req.session;
+
     getProfilePendingFavors(req, res)
 });
 
