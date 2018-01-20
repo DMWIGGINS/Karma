@@ -122,13 +122,7 @@ router.get("/signedin", function (req, res) {
 });
 
 router.get("/profile", function (req, res) {
-
     res.render("profile");
-});
-
-res.render("profile", {
-user: currentUser
-});
 });
 
 router.post("/api/user/create", function (req, res) {
