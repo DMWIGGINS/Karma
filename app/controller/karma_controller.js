@@ -264,7 +264,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
 }
 
 // Default route for the landing page
-router.get("/landing", function (req, res) {
+router.get("/", function (req, res) {
     ssn = req.session;
     res.render("landing");
 });
