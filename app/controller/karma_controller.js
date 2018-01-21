@@ -60,7 +60,7 @@ function getFavors(req, res) {
 //---------------------------------------------------------------------------------
 // get the favors to populate the /profile page
 //---------------------------------------------------------------------------------
-function getProfilePendingFavors(req, res) {
+function getProfileFavors(req, res) {
     ssn = req.session;
     var askedPendingFavors = [];
     var givenPendingFavors = [];
@@ -85,9 +85,14 @@ function getProfilePendingFavors(req, res) {
             var givenFavorObject = [];
             console.log("data[i].favor_asker_id " + data[0].favor_asker_id);
             console.log("data[i].favor_completer_id " + data[0].favor_completer_id);
-            console.log(ssn); 
+            console.log(ssn);
+            console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+            ssn.currentUser 
             for (let i = 0; i < data.length; i++) {
-                if (data[i].favor_asker_id == ssn) {
+                console.log("im inside the for loop");
+                console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+                if (data[i].favor_asker_id == ssn.currentUser.id) {
+                    console.log("im inside the if inside the for loop");
                     askedFavorObject = {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
@@ -95,7 +100,9 @@ function getProfilePendingFavors(req, res) {
                         favor_status: data[i].favor_status
                     }
                     askedPendingFavors.push(askedFavorObject)
-                } else {
+                } 
+                if (data[i].favor_completer_id == ssn.currentUser.id) {
+                    console.log("im inside the second  if inside the for loop");
                     givenFavorObject = {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
@@ -354,7 +361,8 @@ router.post("/api/user/create", function (req, res) {
 //--------------------------------------
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    getProfilePendingFavors(req, res);
+    console.log("ssn.currentUser " + ssn.currentUser);
+    getProfileFavors(req, res);
 });
 
 
