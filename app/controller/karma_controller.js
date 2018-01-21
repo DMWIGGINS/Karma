@@ -87,7 +87,7 @@ function getProfileFavors(req, res) {
             console.log("data[i].favor_completer_id " + data[0].favor_completer_id);
             console.log(ssn);
             console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
-            ssn.currentUser 
+            ssn.currentUser
             for (let i = 0; i < data.length; i++) {
                 console.log("im inside the for loop");
                 console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
@@ -100,7 +100,7 @@ function getProfileFavors(req, res) {
                         favor_status: data[i].favor_status
                     }
                     askedPendingFavors.push(askedFavorObject)
-                } 
+                }
                 if (data[i].favor_completer_id == ssn.currentUser.id) {
                     console.log("im inside the second  if inside the for loop");
                     givenFavorObject = {
@@ -362,7 +362,6 @@ router.post("/api/user/create", function (req, res) {
 //--------------------------------------
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    console.log("ssn.currentUser " + ssn.currentUser);
     getProfileFavors(req, res);
 });
 
@@ -411,9 +410,19 @@ router.put("/api/favor/:id", function (req, res) {
 //--------------------------------------
 router.get("/about", function (req, res) {
     ssn = req.session;
-    res.render("about");
+    res.render("about", {
+        user: ssn.currentUser
+    });
 });
 
+//--------------------------------------
+// Route for logout functionality
+//--------------------------------------
+router.post("/api/user/logout", function (req, res) {
+    ssn = req.session;
+    ssn.currentUser = null;
+    res.status(200).end();
+});
 
 //--------------------------------------
 // Export routes for server.js to use.

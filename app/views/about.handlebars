@@ -1,6 +1,7 @@
 <nav>
     <div class="nav-wrapper">
         <a href="/" class="brand-logo"><img src="assets/images/karmalogowhite.png" width="8%"></a>
+        {{#if user}}
         <ul class="right">
             <li>
                 <a href="favors">Favors</a>
@@ -12,6 +13,7 @@
                 <a class="btn signout">Sign Out</a>
             </li>
         </ul>
+        {{/if}}
     </div>
 </nav>
 
@@ -63,3 +65,7 @@
         </div>
     </div>
 </footer>
+
+{{#if user}}
+<script src="assets/js/logout.js"></script>
+{{/if}}
