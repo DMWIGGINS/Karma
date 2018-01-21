@@ -10,6 +10,9 @@ ssn.currentUser = null;
 
 // favor_karma_koin_price
 // favor_description
+//---------------------------------------------------------------------------------
+// get the favors to populate the /favors page
+//---------------------------------------------------------------------------------
 function getFavors(req, res) {
     // var group_id = 1;
     var activeFavors = [];
@@ -54,7 +57,11 @@ function getFavors(req, res) {
 }
 //getting the user pending asked and given favors for the profile page.
 
+//---------------------------------------------------------------------------------
+// get the favors to populate the /profile page
+//---------------------------------------------------------------------------------
 function getProfilePendingFavors(req, res) {
+    ssn = req.session;
     var askedPendingFavors = [];
     var givenPendingFavors = [];
     db.Favor.findAll({
@@ -76,6 +83,9 @@ function getProfilePendingFavors(req, res) {
             console.log("data length " + data.length);
             var askedFavorObject = [];
             var givenFavorObject = [];
+            console.log("data[i].favor_asker_id " + data[0].favor_asker_id);
+            console.log("data[i].favor_completer_id " + data[0].favor_completer_id);
+            console.log(ssn); 
             for (let i = 0; i < data.length; i++) {
                 if (data[i].favor_asker_id == ssn) {
                     askedFavorObject = {
@@ -96,6 +106,8 @@ function getProfilePendingFavors(req, res) {
                 }
 
             }
+            console.log("askedPendingFavors= " + JSON.stringify(askedPendingFavors));
+            console.log("givenPendingFavors= " + JSON.stringify(givenPendingFavors));
             res.render("profile", {
                 askedPendingFavors: askedPendingFavors,
                 givenPendingFavors: givenPendingFavors,
@@ -106,13 +118,15 @@ function getProfilePendingFavors(req, res) {
             console.log("no rows returned");
             res.render("profile", {
                 askedPendingFavors: [],
-                givenPendingFavors: [],
-                user: ssn.currentUser
+                givenPendingFavors: []
             });
         }
     });
 }
 
+//---------------------------------------------------------------------------------
+// get the favor detail to populate the /favordetail page
+//---------------------------------------------------------------------------------
 function getFavorsDetail(req, res) {
     console.log("id " + req.params.id);
     db.Favor.findAll({
@@ -152,6 +166,9 @@ function getFavorsDetail(req, res) {
     });
 }
 
+//---------------------------------------------------------------------------------
+// insert a new favor into the database from the /favors page
+//---------------------------------------------------------------------------------
 function createNewFavor(req, res) {
     console.log("IM IN CREATE NEW FAVOR");
     // var group_id = 1;
@@ -177,6 +194,9 @@ function createNewFavor(req, res) {
     getFavors(res);
 }
 
+//---------------------------------------------------------------------------------
+// update a favor on the /favordetail page
+//---------------------------------------------------------------------------------
 function updateFavor(req, res) {
     console.log("Im in UpdateFavor now on the server side");
     console.log(req.params);
@@ -202,6 +222,9 @@ function updateFavor(req, res) {
     });
 }
 
+//------------------------------------------------------------------------------------------------
+// update the karma coins when the favor status is updated to completed on the /favordetail page
+//------------------------------------------------------------------------------------------------
 function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
     db.User.findAll({
         where: {
@@ -260,55 +283,9 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
     });
 }
 
-// Default route for the landing page
-router.get("/", function (req, res) {
-    ssn = req.session;
-    res.render("landing");
-});
-
-// Route for the about section
-router.get("/about", function (req, res) {
-    ssn = req.session;
-    res.render("about");
-});
-
-// Route for the favors page
-router.get("/favors", function (req, res) {
-    ssn = req.session;
-    getFavors(req, res);
-});
-
-// / Route for the favors detail page
-router.get("/favorsdetail/:id", function (req, res) {
-    ssn = req.session;
-    getFavorsDetail(req, res);
-});
-
-router.post("/api/favor/new", function (req, res) {
-    ssn = req.session;
-    createNewFavor(req, res);
-});
-
-router.put("/api/favor/:id", function (req, res) {
-    ssn = req.session;
-    updateFavor(req, res);
-});
-
-// Route for the profile page
-router.get("/profile", function (req, res) {
-    ssn = req.session;
-
-    getProfilePendingFavors(req, res)
-});
-
-// Route that creates new users
-router.post("/api/user/create", function (req, res) {
-    ssn = req.session;
-    // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
-    createNewUser(req, res)
-});
-
-// Function that creates new users
+//------------------------------------------------------------------------------------------------
+// Function that creates new user from the /landing page
+//------------------------------------------------------------------------------------------------
 function createNewUser(req, res) {
     // First, see if the current connected user exists in our DB.
     db.User.findAll({
@@ -344,6 +321,92 @@ function createNewUser(req, res) {
 }
 
 
+//--------------------------------------
+// Default route for the landing page
+//--------------------------------------
+router.get("/", function (req, res) {
+    ssn = req.session;
+    res.render("landing");
+});
 
+
+//--------------------------------------
+// Route for the landing page
+//--------------------------------------
+router.get("/landing", function (req, res) {
+    ssn = req.session;
+    res.render("landing");
+});
+
+//--------------------------------------
+// Route that creates new users from
+// the landing page
+//--------------------------------------
+router.post("/api/user/create", function (req, res) {
+    ssn = req.session;
+    // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
+    createNewUser(req, res)
+});
+
+
+//--------------------------------------
+// Route for the profile page
+//--------------------------------------
+router.get("/profile", function (req, res) {
+    ssn = req.session;
+    getProfilePendingFavors(req, res);
+});
+
+
+//--------------------------------------
+// Route for the favors page
+//--------------------------------------
+router.get("/favors", function (req, res) {
+    ssn = req.session;
+    getFavors(req, res);
+});
+
+
+//--------------------------------------
+// / Route for the favors detail page
+//--------------------------------------
+router.get("/favorsdetail/:id", function (req, res) {
+    ssn = req.session;
+    getFavorsDetail(req, res);
+});
+
+
+//--------------------------------------
+// Route to add a new favor from the
+// favors page
+//--------------------------------------
+router.post("/api/favor/new", function (req, res) {
+    ssn = req.session;
+    createNewFavor(req, res);
+});
+
+
+//--------------------------------------
+// Route to update a favor from the
+// favordetail page
+//--------------------------------------
+router.put("/api/favor/:id", function (req, res) {
+    ssn = req.session;
+    updateFavor(req, res);
+});
+
+
+
+//--------------------------------------
+// Route for the about section
+//--------------------------------------
+router.get("/about", function (req, res) {
+    ssn = req.session;
+    res.render("about");
+});
+
+
+//--------------------------------------
 // Export routes for server.js to use.
+//--------------------------------------
 module.exports = router;
