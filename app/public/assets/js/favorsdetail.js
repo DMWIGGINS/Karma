@@ -1,8 +1,9 @@
 //=================================================
 // Functions
 //================================================
-function updatePendingFavor() {
-    console.log("im in updateFavor");
+// TODO: favorCompleterId is hard coded here
+function updatePendingFavor(favorId) {
+    console.log("im in updatePendingFavor");
     console.log("favorId " + favorId);
     var favorCompleterId = 2;
     var dataObject = {
@@ -24,8 +25,8 @@ function updatePendingFavor() {
 }
 
 
-
-function updateCompletedFavor() {
+// TODO: favorCompleterId is hard coded here
+function updateCompletedFavor(favorId) {
     console.log("im in updateFavor");
     console.log("favorId " + favorId);
     var favorCompleterId = 2;

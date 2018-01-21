@@ -8,8 +8,6 @@ ssn.currentUser = null;
 // Using this variable to track whether the current user is connected via Facebook
 
 
-// favor_karma_koin_price
-// favor_description
 //---------------------------------------------------------------------------------
 // get the favors to populate the /favors page
 //---------------------------------------------------------------------------------
@@ -233,15 +231,16 @@ function updateFavor(req, res) {
 // update the karma coins when the favor status is updated to completed on the /favordetail page
 //------------------------------------------------------------------------------------------------
 function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
+    console.log("im in updateKarmaKoins ")
     db.User.findAll({
         where: {
-
             $or: {
                 id: favorAskerId,
                 id: favorCompleterId
             }
         }
     }).then(function (data, err) {
+        console.log(data);
         if (err) {
             // If an error occurred, send a generic server failure
             console.log("an error occurred");
@@ -251,38 +250,32 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
             var dbObject = {};
         } else if (data[0]) {
             for (i = 0; i < data.length; i++) {
-                if (data[i] == favorAskerId) {
+                if (data[i].id == favorAskerId) {
                     updateKoins = data[i].user_karma_koins - parseInt(favorPrice);
                     dbObject.push({
-                        user_karma_koins: updateKoins
-                    }, {
-                        where: {
-                            id: favorAskerId
-                        }
+                        user_karma_koins: updateKoins,
+                        id: favorAskerId
                     });
                 } else {
                     updateKoins = data[i].user_karma_koins = parseInt(favorPrice);
                     dbObject.push({
-                        user_karma_koins: updateKoins
-                    }, {
-                        where: {
+                        user_karma_koins: updateKoins,
                             id: favorCompleterId
-                        }
                     });
                 }
 
             }
             console.log("dbObject = " + JSON.stringify(dbObject));
-            db.User.update({
+            db.User.update(
                 dbObject
-            }).then(function (data, err) {
+            ).then(function (data, err) {
                 if (err) {
                     // If an error occurred, send a generic server failure
                     console.log("an error occurred");
                     console.log(err);
                     res.status(500).end();
                 } else if (data[0]) {
-                    console.log("favor is updated");
+                    console.log("users are updated");
                     res.status(200).end();
                 }
             });
@@ -376,21 +369,20 @@ router.get("/favors", function (req, res) {
 
 
 //--------------------------------------
-// / Route for the favors detail page
-//--------------------------------------
-router.get("/favorsdetail/:id", function (req, res) {
-    ssn = req.session;
-    getFavorsDetail(req, res);
-});
-
-
-//--------------------------------------
 // Route to add a new favor from the
 // favors page
 //--------------------------------------
 router.post("/api/favor/new", function (req, res) {
     ssn = req.session;
     createNewFavor(req, res);
+});
+
+//--------------------------------------
+// / Route for the favors detail page
+//--------------------------------------
+router.get("/favorsdetail/:id", function (req, res) {
+    ssn = req.session;
+    getFavorsDetail(req, res);
 });
 
 
