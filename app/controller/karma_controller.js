@@ -118,7 +118,8 @@ function getProfilePendingFavors(req, res) {
             console.log("no rows returned");
             res.render("profile", {
                 askedPendingFavors: [],
-                givenPendingFavors: []
+                givenPendingFavors: [],
+                user: ssn.currentUser
             });
         }
     });
