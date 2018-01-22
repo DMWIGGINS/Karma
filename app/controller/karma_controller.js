@@ -415,6 +415,7 @@ router.get("/about", function (req, res) {
     res.render("about", {
         user: ssn.currentUser
     });
+    res.render("about");
 });
 
 //--------------------------------------
