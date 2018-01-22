@@ -243,18 +243,18 @@ function updateFavor(req, res) {
         updateKarmaKoins(req.body.favorAsker, ssn.currentUser.id, req.body.favorPrice)
     }
     db.Favor.update(queryDetails)
-    .then(function (data, err) {
-        console.log(data);
-        if (err) {
-            // If an error occurred, send a generic server failure
-            console.log("an error occurred");
-            console.log(err);
-            res.status(500).end();
-        } else if (data[0]) {
-            console.log("favor is updated");
-            res.status(200).end();
-        }
-    });
+        .then(function (data, err) {
+            console.log(data);
+            if (err) {
+                // If an error occurred, send a generic server failure
+                console.log("an error occurred");
+                console.log(err);
+                res.status(500).end();
+            } else if (data[0]) {
+                console.log("favor is updated");
+                res.status(200).end();
+            }
+        });
 }
 
 //------------------------------------------------------------------------------------------------
@@ -337,7 +337,7 @@ function createNewUser(req, res) {
             res.status(200).end();
         } else {
             // If no rows are returned take the body data from the client, create a new user, and send it to the db
-            ssn.currentUser = db.User.create({
+            db.User.create({
                     user_name: req.body.user_name,
                     user_email: req.body.user_email,
                     profile_pic_link: req.body.fb_user_pic,
@@ -349,6 +349,7 @@ function createNewUser(req, res) {
                         // If an error occurred, send a generic server failure
                         res.status(500).end();
                     } else {
+                        ssn.currentUser = data;
                         res.status(200).end();
                     }
                 });
