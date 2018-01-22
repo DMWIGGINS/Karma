@@ -62,11 +62,16 @@ function getFavors(req, res) {
 //---------------------------------------------------------------------------------
 function getProfileFavors(req, res) {
     ssn = req.session;
+    console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+    console.log(ssn.currentUser.id);
     var askedPendingFavors = [];
     var givenPendingFavors = [];
     db.Favor.findAll({
         where: {
-            // favor_asker_id: ssn,
+            $or: {
+                favor_asker_id: ssn.currentUser.id,
+                favor_completer_id: ssn.currentUser.id,
+            },
             $or: {
                 favor_status: 'active',
                 favor_status: 'pending'
@@ -87,7 +92,7 @@ function getProfileFavors(req, res) {
             console.log("data[i].favor_completer_id " + data[0].favor_completer_id);
             console.log(ssn);
             console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
-            ssn.currentUser
+            console.log(ssn.currentUser.id);
             for (let i = 0; i < data.length; i++) {
                 console.log("im inside the for loop");
                 console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
