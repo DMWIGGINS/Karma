@@ -157,7 +157,7 @@ function getFavorsDetail(req, res) {
             console.log("data" + JSON.stringify(data));
             console.log("data is returned");
             var favorObject = {
-                id: data[0].favor_id,
+                id: data[0].id,
                 favor_name: data[0].favor_name,
                 favor_desc: data[0].favor_desc,
                 favor_price: data[0].favor_price,
