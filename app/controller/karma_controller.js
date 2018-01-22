@@ -265,7 +265,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
                         }
                     });
                 } else {
-                    updateKoins = data[i].user_karma_koins = parseInt(favorPrice);
+                    updateKoins = data[i].user_karma_koins + parseInt(favorPrice);
                     dbObject.push({
                         user_karma_koins: updateKoins
                     }, {

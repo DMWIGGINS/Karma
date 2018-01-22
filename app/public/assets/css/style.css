@@ -1,206 +1,200 @@
-.container {
-    width: 100% !important;
-    max-width: 1920px !important;
-    margin: 0px !important;
-}
+    .container {
+        width: 100% !important;
+        max-width: 1920px !important;
+        margin: 0px !important;
+    }
 
-#landing {
-    height: 400px;
-    width: 100%;
-    text-align: center;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-top: 20%;
-    padding-bottom: 45%;
-    margin-bottom: 0px;
-    background: url(../images/bluredpeople.png);
-    background-attachment: fixed;
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    left: 0;
-    right: 0;
-    display: block;
-}
+    #landing {
+        height: 400px;
+        width: 100%;
+        text-align: center;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-top: 20%;
+        padding-bottom: 45%;
+        margin-bottom: 0px;
+        background: url(../images/bluredpeople.png);
+        background-attachment: fixed;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        left: 0;
+        right: 0;
+        display: block;
+    }
 
-#point-one,
-#point-two,
-#point-three {
-    position: relative;
-    padding-top: 0px;
-    margin: 0px;
-    background-color: #9C27B0;
-}
+    #point-one,
+    #point-two,
+    #point-three {
+        position: relative;
+        padding-top: 0px;
+        margin: 0px;
+        background-color: #9C27B0;
+    }
 
-#orange {
-    background-color: #F57C00;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-}
+    #orange {
+        background-color: #F57C00;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
 
-.nav-wrapper {
-    background-color: #F57C00;
-}
+    .nav-wrapper {
+        background-color: #F57C00;
+    }
 
-a.brand-logo.right {
-    color: #42A5F5;
-}
+    a.brand-logo.right {
+        color: #42A5F5;
+    }
 
-h1 {
-    color: #42A5F5;
-    font-family: 'Sedgwick Ave Display';
-    font-size: 5rem;
-    text-shadow: 2px 2px 4px #000000;
-}
+    h1 {
+        color: #42A5F5;
+        font-family: 'Sedgwick Ave Display';
+        font-size: 5rem;
+        text-shadow: 2px 2px 4px #000000;
+    }
 
-h3 {
-    color: #fff;
-    font-family: 'Oswald';
-    font-size: 1.5rem;
-}
+    h3 {
+        color: #fff;
+        font-family: 'Oswald';
+        font-size: 1.5rem;
+    }
 
-h2,
-h4,
-h5,
-h6,
-p,
-li,
-a {
-    font-family: 'Oswald';
-}
+    h2,
+    h4,
+    h5,
+    h6,
+    p,
+    li,
+    a {
+        font-family: 'Oswald';
+    }
 
-i.medium.material-icons {
-    color: #F57C00;
-    padding-top: 10%;
-}
+    i.medium.material-icons {
+        color: #F57C00;
+        padding-top: 10%;
+    }
 
-.btn {
-    background-color: #9C27B0;
-}
+    .btn {
+        background-color: #9C27B0;
+    }
 
-.btn:hover {
-    background-color: #9C27B0;
-}
+    .btn:hover {
+        background-color: #9C27B0;
+    }
 
-#active-favors {
-    background-color: #9C27B0;
-}
+    #active-favors {
+        background-color: #9C27B0;
+    }
 
-input:not([type]):focus:not([readonly]),
-input[type=text]:not(.browser-default):focus:not([readonly]),
-input[type=password]:not(.browser-default):focus:not([readonly]),
-input[type=email]:not(.browser-default):focus:not([readonly]),
-input[type=url]:not(.browser-default):focus:not([readonly]),
-input[type=time]:not(.browser-default):focus:not([readonly]),
-input[type=date]:not(.browser-default):focus:not([readonly]),
-input[type=datetime]:not(.browser-default):focus:not([readonly]),
-input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
-input[type=tel]:not(.browser-default):focus:not([readonly]),
-input[type=number]:not(.browser-default):focus:not([readonly]),
-input[type=search]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]) {
-    border-bottom: 3px solid #42A5F5 !important;
-    box-shadow: none;
-}
+    input:not([type]):focus:not([readonly]),
+    input[type=text]:not(.browser-default):focus:not([readonly]),
+    input[type=password]:not(.browser-default):focus:not([readonly]),
+    input[type=email]:not(.browser-default):focus:not([readonly]),
+    input[type=url]:not(.browser-default):focus:not([readonly]),
+    input[type=time]:not(.browser-default):focus:not([readonly]),
+    input[type=date]:not(.browser-default):focus:not([readonly]),
+    input[type=datetime]:not(.browser-default):focus:not([readonly]),
+    input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+    input[type=tel]:not(.browser-default):focus:not([readonly]),
+    input[type=number]:not(.browser-default):focus:not([readonly]),
+    input[type=search]:not(.browser-default):focus:not([readonly]),
+    textarea.materialize-textarea:focus:not([readonly]) {
+        border-bottom: 3px solid #42A5F5 !important;
+        box-shadow: none;
+    }
 
-label.label-icon {
-    color: #42A5F5;
-}
+    label.label-icon {
+        color: #42A5F5;
+    }
 
-#profile {
-    background-color: #9C27B0;
-    text-align: center;
-    color: #ffffff;
-    margin: 0px;
-}
+    #profile {
+        background-color: #9C27B0;
+        text-align: center;
+        color: #ffffff;
+        margin: 0px;
+    }
 
-#profilepicture {
-    border-radius: 50%;
-    width:15%;
-    margin-top:20px;
-}
+    #profilepicture {
+        border-radius: 50%;
+        width: 15%;
+        margin-top: 20px;
+    }
 
-#profile-favors {
-    background: url(../images/profilebackground.png);
-    background-attachment: fixed;
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0px;
-    padding: 50px;
-}
+    #profile-favors {
+        background: url(../images/profilebackground.png);
+        background-attachment: fixed;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 0px;
+        padding: 50px;
+    }
 
-#asked-completed,
-#asked-pending {
-    background-color: rgba(66, 165, 245, 0.75);
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
+    #asked-completed,
+    #asked-pending {
+        background-color: rgba(66, 165, 245, 0.75);
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
 
-#returned-completed,
-#returned-pending {
-    background-color: rgba(245, 124, 0, 0.75);
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
+    #returned-completed,
+    #returned-pending {
+        background-color: rgba(245, 124, 0, 0.75);
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
 
-img {
-    padding: none;
-    margin: none;
-    border: none;
-}
+    img {
+        padding: none;
+        margin: none;
+        border: none;
+    }
 
-.form-group {
-    padding-top: 20px;
-}
+    .form-group {
+        padding-top: 20px;
+    }
 
-input:not([type]),
-input[type=text]:not(.browser-default),
-input[type=password]:not(.browser-default),
-input[type=email]:not(.browser-default),
-input[type=url]:not(.browser-default),
-input[type=time]:not(.browser-default),
-input[type=date]:not(.browser-default),
-input[type=datetime]:not(.browser-default),
-input[type=datetime-local]:not(.browser-default),
-input[type=tel]:not(.browser-default),
-input[type=number]:not(.browser-default),
-input[type=search]:not(.browser-default),
-textarea.materialize-textarea {
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
+    input:not([type]),
+    input[type=text]:not(.browser-default),
+    input[type=password]:not(.browser-default),
+    input[type=email]:not(.browser-default),
+    input[type=url]:not(.browser-default),
+    input[type=time]:not(.browser-default),
+    input[type=date]:not(.browser-default),
+    input[type=datetime]:not(.browser-default),
+    input[type=datetime-local]:not(.browser-default),
+    input[type=tel]:not(.browser-default),
+    input[type=number]:not(.browser-default),
+    input[type=search]:not(.browser-default),
+    textarea.materialize-textarea {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 
-.btn {
-    border-radius: 8px;
-    background-color: #9C27B0;
-    margin: 20px;
-}
+    .btn {
+        border-radius: 8px;
+        background-color: #9C27B0;
+        margin: 20px;
+    }
 
-.page-footer {
-    background-color: #42A5F5;
-    color: white;
-    padding: 20px;
-}
+    .page-footer {
+        background-color: #42A5F5;
+        color: white;
+        padding: 20px;
+    }
 
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
 
-main {
-    flex: 1 0 auto;
-}
+    main {
+        flex: 1 0 auto;
+    }
 
-#calendarSection {
-    padding-top: 0;
-}
+   
 
-.flatpickr-time input.flatpickr-hour,
-.flatpickr-time input.flatpickr-minute {
-    padding-top: 0;
-}
-
+    
