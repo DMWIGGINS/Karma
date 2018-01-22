@@ -412,6 +412,9 @@ router.put("/api/favor/:id", function (req, res) {
 //--------------------------------------
 router.get("/about", function (req, res) {
     ssn = req.session;
+    res.render("about", {
+        user: ssn.currentUser
+    });
     res.render("about");
 });
 
