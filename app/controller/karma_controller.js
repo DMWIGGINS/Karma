@@ -28,6 +28,7 @@ function getFavors(req, res) {
             console.log("data" + JSON.stringify(data));
             console.log("name " + data[0].favor_name);
             console.log("koins " + data[0].favor_price);
+            console.log("date and time" + data[0].favor_datetime);
             console.log("data is returned");
             console.log("data length " + data.length);
             var favorObject = [];
@@ -35,7 +36,8 @@ function getFavors(req, res) {
                 favorObject = {
                     id: data[i].id,
                     favor_name: data[i].favor_name,
-                    favor_price: data[i].favor_price
+                    favor_price: data[i].favor_price,
+                    favor_datetime: data[i].favor_datetime
                 }
                 activeFavors.push(favorObject);
             }
@@ -134,7 +136,7 @@ function getFavorsDetail(req, res) {
             console.log("data" + JSON.stringify(data));
             console.log("data is returned");
             var favorObject = {
-                id: data[0].id,
+                id: data[0].favor_id,
                 favor_name: data[0].favor_name,
                 favor_desc: data[0].favor_desc,
                 favor_price: data[0].favor_price,
@@ -300,7 +302,7 @@ router.put("/api/favor/:id", function (req, res) {
 // Route for the profile page
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    getProfilePendingFavors(req,res)
+    getProfilePendingFavors(req, res)
     // res.render("profile", {
     //     // Passing the current user from the server to the client (for handlebars model)
     //     user: ssn.currentUser
