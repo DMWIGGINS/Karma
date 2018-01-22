@@ -10,6 +10,7 @@ ssn.currentUser = null;
 // get the favors to populate the /favors page
 //---------------------------------------------------------------------------------
 function getFavors(req, res) {
+    console.log("im in getFavors");
     // var group_id = 1;
     var activeFavors = [];
     db.Favor.findAll({
@@ -60,6 +61,7 @@ function getFavors(req, res) {
 // get the favors to populate the /profile page
 //---------------------------------------------------------------------------------
 function getProfileFavors(req, res) {
+    console.log("im in getProfileFavors");
     ssn = req.session;
     console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
     console.log(ssn.currentUser.id);
@@ -140,6 +142,7 @@ function getProfileFavors(req, res) {
 // get the favor detail to populate the /favordetail page
 //---------------------------------------------------------------------------------
 function getFavorsDetail(req, res) {
+    console.log("im in getFavorsDetail");
     console.log("id " + req.params.id);
     db.Favor.findAll({
         where: {
@@ -148,20 +151,22 @@ function getFavorsDetail(req, res) {
     }).then(function (data, err) {
         console.log(data);
         console.log(err);
+        var favorObject = {};
         if (err) {
             // If an error occurred, send a generic server failure
             console.log("an error occurred");
             console.log(err);
             res.status(500).end();
-        } else if (data) {
+        } else if (data[0]) {
             console.log("data" + JSON.stringify(data));
             console.log("data is returned");
-            var favorObject = {
+            favorObject = {
                 id: data[0].id,
                 favor_name: data[0].favor_name,
                 favor_desc: data[0].favor_desc,
                 favor_price: data[0].favor_price,
-                favor_datetime: data[0].favor_datetime
+                favor_datetime: data[0].favor_datetime,
+                favor_status: data[0].favor_status
             }
             console.log(favorObject);
             res.render("favorsdetail",
@@ -214,14 +219,32 @@ function updateFavor(req, res) {
     console.log(req.params);
     console.log(req.body);
     console.log("going to do the update now");
-    db.Favor.update({
-        favor_completer_id: req.body.favor_completer_id,
-        favor_status: req.body.favor_status
-    }, {
-        where: {
-            id: req.params.id
+    ssn = req.session;
+    console.log("current User " + ssn.currentUser.id);
+    favorAskerId = req.body.favorAsker
+    var queryDetails = {};
+    if (req.body.favor_status == "pending") {
+        queryDetails = {
+            favor_completer_id: ssn.currentUser.id,
+            favor_status: req.body.favor_status
+        }, {
+            where: {
+                id: req.params.id
+            }
         }
-    }).then(function (data, err) {
+    } else {
+        queryDetails = {
+            favor_status: req.body.favor_status
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }
+        updateKarmaKoins(req.body.favorAsker, ssn.currentUser.id, req.body.favorPrice)
+    }
+    db.Favor.update(queryDetails)
+    .then(function (data, err) {
+        console.log(data);
         if (err) {
             // If an error occurred, send a generic server failure
             console.log("an error occurred");
@@ -238,6 +261,7 @@ function updateFavor(req, res) {
 // update the karma coins when the favor status is updated to completed on the /favordetail page
 //------------------------------------------------------------------------------------------------
 function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
+    console.log("im in updateKarmaKoins");
     db.User.findAll({
         where: {
 
@@ -299,6 +323,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
 // Function that creates new user from the /landing page
 //------------------------------------------------------------------------------------------------
 function createNewUser(req, res) {
+    console.log("im in createNewUser");
     // First, see if the current connected user exists in our DB.
     db.User.findAll({
         // Take the fb user id of the currently connected user and see if it matches a fb user id in our db.
@@ -380,15 +405,6 @@ router.get("/favors", function (req, res) {
 
 
 //--------------------------------------
-// / Route for the favors detail page
-//--------------------------------------
-router.get("/favorsdetail/:id", function (req, res) {
-    ssn = req.session;
-    getFavorsDetail(req, res);
-});
-
-
-//--------------------------------------
 // Route to add a new favor from the
 // favors page
 //--------------------------------------
@@ -398,15 +414,27 @@ router.post("/api/favor/new", function (req, res) {
 });
 
 
+
+//--------------------------------------
+// / Route for the favors detail page
+//--------------------------------------
+router.get("/favorsdetail/:id", function (req, res) {
+    console.log("going to get /favorsdetail/:id");
+    console.log(req);
+    ssn = req.session;
+    getFavorsDetail(req, res);
+});
+
+
+
 //--------------------------------------
 // Route to update a favor from the
 // favordetail page
 //--------------------------------------
-router.put("/api/favor/:id", function (req, res) {
+router.put("/api/favorsdetail/:id", function (req, res) {
     ssn = req.session;
     updateFavor(req, res);
 });
-
 
 
 //--------------------------------------

@@ -1,20 +1,36 @@
-  <nav>
+<nav>
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo"><h3>Karma</h3></a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="favors">Favors</a></li>
-        <li><a href="profile">Profile</a></li>
-        <li><a class="btn signout">Sign Out</a></li>
-      </ul>
-      
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="favors">Favors</a></li>
-        <li><a href="profile">Profile</a></li>
-        <li><a class="btn signout">Sign Out</a></li>
-      </ul>
+        {{!-- <a href="#!" class="brand-logo">
+            <h3>Karma</h3>
+        </a> --}}
+        <a href="#" data-activates="mobile-demo" class="button-collapse">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="favors">Favors</a>
+            </li>
+            <li>
+                <a href="profile">Profile</a>
+            </li>
+            <li>
+                <a class="btn signout">Sign Out</a>
+            </li>
+        </ul>
+
+        {{!-- <ul class="side-nav" id="mobile-demo">
+            <li>
+                <a href="favors">Favors</a>
+            </li>
+            <li>
+                <a href="profile">Profile</a>
+            </li>
+            <li>
+                <a class="btn signout">Sign Out</a>
+            </li>
+        </ul> --}}
     </div>
-  </nav>
+</nav>
 
 <main>
     <div class="container">
@@ -25,12 +41,14 @@
             <div class="col s6">
                 <h3>Favor Details</h3>
                 <ul>
-                    <lh id="favor-detail">
-                        <li class="Favor">
-                            <p class="label"> {{this.favor_name}} </p>
-                            <p class="label"> {{this.favor_desc}} </p>
-                            <p class="label"> {{this.favor_price}} </p>
-                            <p class="label"> {{this.favor_datetime}} </p>
+                    <lh id="favorsdetail">
+                        <li class="favor-detail">
+                            <p class="label">Favor: {{this.favor_name}} </p>
+                            <p class="label">Description: {{this.favor_desc}} </p>
+                            <p class="label">Koins Offered: {{this.favor_price}} </p>
+                            <p class="label">DateTime: {{this.favor_datetime}} </p>
+                            <p class="label">Status: {{this.favor_status}} </p>
+                             <p class="label">Favor Asker: {{this.favor_asker_id}} </p>
                             <button id="pendingBtn" class="btn" type="submit" name="action">I'll do this
                                 <i class="material-icons right">send</i>
                             </button>
@@ -39,19 +57,25 @@
                             </button>
                         </li>
                     </lh>
-                    
+
                 </ul>
             </div>
         </div>
     </div>
 </main>
 <footer class="page-footer">
-        <div class="container">
-            <div class="row valign-wrapper">
-            <div class="left-align col s6"><a href="/about"><h3>About</h3></a></div>
-            <div class="right-align col s6"><img src="../assets/images/thechickslogo.png" width="30%"></br>© 2018 Copyright</div>
+    <div class="container">
+        <div class="row valign-wrapper">
+            <div class="left-align col s6">
+                <a href="/about">
+                    <h3>About</h3>
+                </a>
+            </div>
+            <div class="right-align col s6">
+                <img src="../assets/images/thechickslogo.png" width="30%">
+                </br>© 2018 Copyright</div>
         </div>
-        </div>
+    </div>
 </footer>
 
-<script src="assets/js/logout.js"></script>
+<script src="../assets/js/logout.js"></script>
