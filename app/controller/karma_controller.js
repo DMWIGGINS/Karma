@@ -4,12 +4,8 @@ var router = express.Router();
 var ssn = {};
 ssn.currentUser = null;
 
-
 // Using this variable to track whether the current user is connected via Facebook
 
-
-// favor_karma_koin_price
-// favor_description
 //---------------------------------------------------------------------------------
 // get the favors to populate the /favors page
 //---------------------------------------------------------------------------------
