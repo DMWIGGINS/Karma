@@ -75,9 +75,6 @@ $(document).ready(function () {
         console.log("i changed to complete");
         var favorId = $(this).data("id");
         console.log("favorId " + favorId);
-
         updateCompletedFavor(favorId);
     });
-
-
 });
