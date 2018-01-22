@@ -412,17 +412,9 @@ router.put("/api/favor/:id", function (req, res) {
 //--------------------------------------
 router.get("/about", function (req, res) {
     ssn = req.session;
-<<<<<<< HEAD
-    getProfilePendingFavors(req, res)
-    // res.render("profile", {
-    //     // Passing the current user from the server to the client (for handlebars model)
-    //     user: ssn.currentUser
-    // });
-=======
     res.render("about", {
         user: ssn.currentUser
     });
->>>>>>> 98bf48c77e90b45f07ebee492f15a968a97c3676
 });
 
 //--------------------------------------
