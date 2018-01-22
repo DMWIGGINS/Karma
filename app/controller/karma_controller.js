@@ -1,7 +1,8 @@
 var express = require("express");
 var db = require("../../models");
 var router = express.Router();
-var ssn;
+var ssn = {};
+ssn.currentUser = null;
 
 
 // Using this variable to track whether the current user is connected via Facebook
@@ -9,6 +10,9 @@ var ssn;
 
 // favor_karma_koin_price
 // favor_description
+//---------------------------------------------------------------------------------
+// get the favors to populate the /favors page
+//---------------------------------------------------------------------------------
 function getFavors(req, res) {
     // var group_id = 1;
     var activeFavors = [];
@@ -54,12 +58,14 @@ function getFavors(req, res) {
     });
 }
 //getting the user pending asked and given favors for the profile page.
-function getProfilePendingFavors(req, res, ssn) {
-    console.log("here it comes");
-    console.log(req);
+
+//---------------------------------------------------------------------------------
+// get the favors to populate the /profile page
+//---------------------------------------------------------------------------------
+function getProfileFavors(req, res) {
+    ssn = req.session;
     var askedPendingFavors = [];
     var givenPendingFavors = [];
-    console.log(ssn);
     db.Favor.findAll({
         where: {
             // favor_asker_id: ssn,
@@ -70,12 +76,7 @@ function getProfilePendingFavors(req, res, ssn) {
         },
         order: ['createdAt']
     }).then(function (data, err) {
-        if (err) {
-            // If an error occurred, send a generic server failure
-            console.log("an error occurred");
-            console.log(err);
-            res.status(500).end();
-        } else if (data[0]) {
+        if (data[0]) {
             console.log("about to dump favors");
             console.log("data" + JSON.stringify(data));
             console.log("name " + data[0].favor_name);
@@ -84,8 +85,16 @@ function getProfilePendingFavors(req, res, ssn) {
             console.log("data length " + data.length);
             var askedFavorObject = [];
             var givenFavorObject = [];
+            console.log("data[i].favor_asker_id " + data[0].favor_asker_id);
+            console.log("data[i].favor_completer_id " + data[0].favor_completer_id);
+            console.log(ssn);
+            console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+            ssn.currentUser
             for (let i = 0; i < data.length; i++) {
-                if (data[i].favor_asker_id == ssn) {
+                console.log("im inside the for loop");
+                console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+                if (data[i].favor_asker_id == ssn.currentUser.id) {
+                    console.log("im inside the if inside the for loop");
                     askedFavorObject = {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
@@ -93,7 +102,9 @@ function getProfilePendingFavors(req, res, ssn) {
                         favor_status: data[i].favor_status
                     }
                     askedPendingFavors.push(askedFavorObject)
-                } else {
+                }
+                if (data[i].favor_completer_id == ssn.currentUser.id) {
+                    console.log("im inside the second  if inside the for loop");
                     givenFavorObject = {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
@@ -104,20 +115,28 @@ function getProfilePendingFavors(req, res, ssn) {
                 }
 
             }
+            console.log("askedPendingFavors= " + JSON.stringify(askedPendingFavors));
+            console.log("givenPendingFavors= " + JSON.stringify(givenPendingFavors));
             res.render("profile", {
                 askedPendingFavors: askedPendingFavors,
-                givenPendingFavors: givenPendingFavors
+                givenPendingFavors: givenPendingFavors,
+                user: ssn.currentUser
             });
         } else {
             // no rows returned 
             console.log("no rows returned");
-            res.render("favors", {
-                activeFavor: []
+            res.render("profile", {
+                askedPendingFavors: [],
+                givenPendingFavors: [],
+                user: ssn.currentUser
             });
         }
     });
 }
 
+//---------------------------------------------------------------------------------
+// get the favor detail to populate the /favordetail page
+//---------------------------------------------------------------------------------
 function getFavorsDetail(req, res) {
     console.log("id " + req.params.id);
     db.Favor.findAll({
@@ -157,6 +176,9 @@ function getFavorsDetail(req, res) {
     });
 }
 
+//---------------------------------------------------------------------------------
+// insert a new favor into the database from the /favors page
+//---------------------------------------------------------------------------------
 function createNewFavor(req, res) {
     console.log("IM IN CREATE NEW FAVOR");
     // var group_id = 1;
@@ -182,6 +204,9 @@ function createNewFavor(req, res) {
     getFavors(res);
 }
 
+//---------------------------------------------------------------------------------
+// update a favor on the /favordetail page
+//---------------------------------------------------------------------------------
 function updateFavor(req, res) {
     console.log("Im in UpdateFavor now on the server side");
     console.log(req.params);
@@ -207,6 +232,9 @@ function updateFavor(req, res) {
     });
 }
 
+//------------------------------------------------------------------------------------------------
+// update the karma coins when the favor status is updated to completed on the /favordetail page
+//------------------------------------------------------------------------------------------------
 function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
     db.User.findAll({
         where: {
@@ -265,58 +293,9 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
     });
 }
 
-// Default route for the landing page
-router.get("/", function (req, res) {
-    ssn = req.session;
-    res.render("landing");
-});
-
-// Route for the about section
-router.get("/about", function (req, res) {
-    ssn = req.session;
-    res.render("about");
-});
-
-// Route for the favors page
-router.get("/favors", function (req, res) {
-    ssn = req.session;
-    getFavors(req, res);
-});
-
-// / Route for the favors detail page
-router.get("/favorsdetail/:id", function (req, res) {
-    ssn = req.session;
-    getFavorsDetail(req, res);
-});
-
-router.post("/api/favor/new", function (req, res) {
-    ssn = req.session;
-    createNewFavor(req, res);
-});
-
-router.put("/api/favor/:id", function (req, res) {
-    ssn = req.session;
-    updateFavor(req, res);
-});
-
-// Route for the profile page
-router.get("/profile", function (req, res) {
-    ssn = req.session;
-    getProfilePendingFavors(req, res)
-    // res.render("profile", {
-    //     // Passing the current user from the server to the client (for handlebars model)
-    //     user: ssn.currentUser
-    // });
-});
-
-// Route that creates new users
-router.post("/api/user/create", function (req, res) {
-    ssn = req.session;
-    // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
-    createNewUser(req, res)
-});
-
-// Function that creates new users
+//------------------------------------------------------------------------------------------------
+// Function that creates new user from the /landing page
+//------------------------------------------------------------------------------------------------
 function createNewUser(req, res) {
     // First, see if the current connected user exists in our DB.
     db.User.findAll({
@@ -329,10 +308,6 @@ function createNewUser(req, res) {
         if (data[0]) {
             ssn.currentUser = data[0];
             res.status(200).end();
-            // FIXME: This isn't working... It should redirect the user to the profile page if their user exists in the db.
-            // res.render("profile", {
-            //     user: currentUser
-            // });
         } else {
             // If no rows are returned take the body data from the client, create a new user, and send it to the db
             ssn.currentUser = db.User.create({
@@ -348,10 +323,6 @@ function createNewUser(req, res) {
                         res.status(500).end();
                     } else {
                         res.status(200).end();
-                        // FIXME: This isn't working... It should redirect the user to the profile page if their user exists in the db.
-                        // res.render("profile", {
-                        //     user: currentUser
-                        // });
                     }
                 });
         }
@@ -360,6 +331,100 @@ function createNewUser(req, res) {
 }
 
 
+//--------------------------------------
+// Default route for the landing page
+//--------------------------------------
+router.get("/", function (req, res) {
+    ssn = req.session;
+    res.render("landing");
+});
 
+
+//--------------------------------------
+// Route for the landing page
+//--------------------------------------
+router.get("/landing", function (req, res) {
+    ssn = req.session;
+    res.render("landing");
+});
+
+//--------------------------------------
+// Route that creates new users from
+// the landing page
+//--------------------------------------
+router.post("/api/user/create", function (req, res) {
+    ssn = req.session;
+    // Once the client calls the above route, invoke the createNewUser function passing in the request and the response
+    createNewUser(req, res)
+});
+
+
+//--------------------------------------
+// Route for the profile page
+//--------------------------------------
+router.get("/profile", function (req, res) {
+    ssn = req.session;
+    getProfileFavors(req, res);
+});
+
+
+//--------------------------------------
+// Route for the favors page
+//--------------------------------------
+router.get("/favors", function (req, res) {
+    ssn = req.session;
+    getFavors(req, res);
+});
+
+
+//--------------------------------------
+// / Route for the favors detail page
+//--------------------------------------
+router.get("/favorsdetail/:id", function (req, res) {
+    ssn = req.session;
+    getFavorsDetail(req, res);
+});
+
+
+//--------------------------------------
+// Route to add a new favor from the
+// favors page
+//--------------------------------------
+router.post("/api/favor/new", function (req, res) {
+    ssn = req.session;
+    createNewFavor(req, res);
+});
+
+
+//--------------------------------------
+// Route to update a favor from the
+// favordetail page
+//--------------------------------------
+router.put("/api/favor/:id", function (req, res) {
+    ssn = req.session;
+    updateFavor(req, res);
+});
+
+
+
+//--------------------------------------
+// Route for the about section
+//--------------------------------------
+router.get("/about", function (req, res) {
+    ssn = req.session;
+    res.render("about");
+});
+
+//--------------------------------------
+// Route for logout functionality
+//--------------------------------------
+router.post("/api/user/logout", function (req, res) {
+    ssn = req.session;
+    ssn.currentUser = null;
+    res.status(200).end();
+});
+
+//--------------------------------------
 // Export routes for server.js to use.
+//--------------------------------------
 module.exports = router;
