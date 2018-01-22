@@ -40,6 +40,7 @@ function getFavors(req, res) {
                 favorObject = {
                     id: data[i].id,
                     favor_name: data[i].favor_name,
+                    favor_desc: data[i].favor_desc,
                     favor_price: data[i].favor_price,
                     favor_datetime: data[i].favor_datetime
                 }
