@@ -1,7 +1,7 @@
 //=================================================
 // Functions
 //================================================
-function updatePendingFavor() {
+function updatePendingFavor(favorId) {
     console.log("im in updateFavor");
     console.log("favorId " + favorId);
     var favorCompleterId = 2;
@@ -25,7 +25,7 @@ function updatePendingFavor() {
 
 
 
-function updateCompletedFavor() {
+function updateCompletedFavor(favorId) {
     console.log("im in updateFavor");
     console.log("favorId " + favorId);
     var favorCompleterId = 2;

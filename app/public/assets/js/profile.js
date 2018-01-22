@@ -43,11 +43,38 @@ function getPendingRecentFavorGiven() {
         });
 }
 
+
+
 //Couple of snags that we should think about. We should walk through how to pass in the favors based on the FB ID,
 //that way it will map to where we want it to go. When you add a favor, I'm sure it takes the user ID but how do we flag it?
 
+function getUserFavorRequests() {
+    var allPendingFavorsAsked = {
+        favor_KarmaPrice: $("#pendingFavorAskedPrice").val().trim(),
+        user_id: ProfileId,
+        pendingRecent_FavorRequest: $("#pendingFavorAsk").val().trim(),
+    };
+    console.log("totalProfile: " + JSON.stringify(getPendingFavorRequests));
+    // Send the GET request.
+    $.ajax("/api/favor/mostRecentAsked", {
+        type: "GET",
+        data: getPendingFavorRequests
+    }).then(
+        function () {
+            console.log("this posted to the correct items on the profile page");
+            // Reload the page to get the most recent ask
+            location.reload();
+        });
+}
 
+//=================================================
+// On Page Load
+//=================================================
+$(document).ready(function () {
 
+    getUserFavorRequests();
+
+});
 
 
 
