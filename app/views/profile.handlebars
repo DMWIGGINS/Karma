@@ -1,6 +1,7 @@
 <nav>
     <div class="nav-wrapper">
-        {{!-- <a href="#!" class="brand-logo">
+        {{!--
+        <a href="#!" class="brand-logo">
             <img src="assets/images/karmalogodropshaddow.png" width="5%">
         </a> --}}
         <a href="#" data-activates="mobile-demo" class="button-collapse">
@@ -56,6 +57,7 @@
                         <li class="activeFavors">
                             <p class="label"> {{this.favor_name}} </p>
                             <p class="label"> {{this.favor_price}} </p>
+                            <p class="label"> {{this.favor_datetime}}</p>
                             <p class="label"> {{this.favor_status}} </p>
                             <p>
                                 <a href="/favorsdetail/:{{this.id}}">Link to more Info</a>
@@ -65,23 +67,24 @@
                     {{/each}}
                 </ul>
             </div>
-                <div class="col s2‰"></div>
-                <div class="col s4" id="returned-completed">
-                    <h4>My Favors Returned</h4>
-                    <ul>
-                        <lh id="favor">{{#each givenPendingFavors}}
-                            <li class="activeFavors">
-                                <p class="label"> {{this.favor_name}} </p>
-                                <p class="label"> {{this.favor_price}} </p>
-                                <p class="label"> {{this.favor_status}} </p>
-                                <p>
-                                    <a href="/favorsdetail/:{{this.id}}">Link to more Info</a>
-                                </p>
-                            </li>
-                        </lh>
-                        {{/each}}
-                    </ul>
-                </div>
+            <div class="col s2‰"></div>
+            <div class="col s4" id="returned-completed">
+                <h4>My Favors Returned</h4>
+                <ul>
+                    <lh id="favor">{{#each givenPendingFavors}}
+                        <li class="activeFavors">
+                            <p class="label"> {{this.favor_name}} </p>
+                            <p class="label"> {{this.favor_price}} </p>
+                            <p class="label"> {{this.favor_datetime}}</p>
+                            <p class="label"> {{this.favor_status}} </p>
+                            <p>
+                                <a href="/favorsdetail/:{{this.id}}">Link to more Info</a>
+                            </p>
+                        </li>
+                    </lh>
+                    {{/each}}
+                </ul>
+            </div>
         </div>
     </div>
     </div>

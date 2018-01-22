@@ -1,6 +1,8 @@
-//=================================================
-// Functions
-//================================================
+//=========================================================================================
+// updatePendingFavor changes the status of the favor from active to pending
+// indicating that the button has been clicked because a user has signed up to do the favor
+//=========================================================================================
+
 function updatePendingFavor(favorId) {
     console.log("im in updateFavor");
     console.log("favorId " + favorId);
@@ -23,6 +25,10 @@ function updatePendingFavor(favorId) {
         });
 }
 
+//==================================================================================
+// updateCompletedFavor changes the staus of the favor from pending to complete
+// indicating that the button has been clicked because the favor has been completed
+// =================================================================================
 
 
 function updateCompletedFavor(favorId) {
@@ -75,9 +81,6 @@ $(document).ready(function () {
         console.log("i changed to complete");
         var favorId = $(this).data("id");
         console.log("favorId " + favorId);
-
         updateCompletedFavor(favorId);
     });
-
-
 });

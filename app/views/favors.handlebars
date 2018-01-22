@@ -1,20 +1,37 @@
-  <nav>
+<nav>
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo"><img src="assets/images/karmalogodropshaddow.png" width="5%"></a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="favors">Favors</a></li>
-        <li><a href="profile">Profile</a></li>
-        <li><a class="btn signout">Sign Out</a></li>
-      </ul>
-      
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="favors">Favors</a></li>
-        <li><a href="profile">Profile</a></li>
-        <li><a class="btn signout">Sign Out</a></li>
-      </ul>
+        <a href="#!" class="brand-logo">
+            <img src="assets/images/karmalogodropshaddow.png" width="5%">
+        </a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="favors">Favors</a>
+            </li>
+            <li>
+                <a href="profile">Profile</a>
+            </li>
+            <li>
+                <a href="landing" class="btn">Sign Out</a>
+            </li>
+
+        </ul>
+
+        <ul class="side-nav" id="mobile-demo">
+            <li>
+                <a href="favors">Favors</a>
+            </li>
+            <li>
+                <a href="profile">Profile</a>
+            </li>
+            <li>
+                <a class="btn signout">Sign Out</a>
+            </li>
+        </ul>
     </div>
-  </nav>
+</nav>
 
 <main>
     <div class="container">
@@ -29,8 +46,12 @@
                     <lh id="favor">{{#each activeFavor}}
                         <li class="activeFavors">
                             <p class="label"> {{this.favor_name}} </p>
+                            <p class="label"> {{this.favor_desc}} </p>
                             <p class="label"> {{this.favor_price}} </p>
-                            <p><a href="/favorsdetail/{{this.id}}">Link to more Info</a></p>
+                            <p class="label"> {{this.favor_datetime}}</p>
+                            <p>
+                                <a href="/favorsdetail/{{this.id}}">Link to more Info</a>
+                            </p>
                         </li>
                     </lh>
                     {{/each}}
@@ -90,9 +111,9 @@
                     <form class="create-form">
                         <div class="form-group">
                             <input type="text" id="newFavorName" name="newFavorName" class="textarea_msg" placeholder="Favor Name">
-                            <input type="text" id="newFavorDesc" class="materialize-textarea"  placeholder="Enter Favor Description here">
-                            {{!-- <textarea id="newFavorDesc" name="newFavorDesc" ></textarea> --}}
-                            {{!-- <label for="newFavorDescription">Favor Description</label> --}}
+                            <input type="text" id="newFavorDesc" class="materialize-textarea" placeholder="Enter Favor Description here"> {{!--
+                            <textarea id="newFavorDesc" name="newFavorDesc"></textarea> --}} {{!--
+                            <label for="newFavorDescription">Favor Description</label> --}}
 
                             <input type="text" id="newFavorPrice" name="newFavorPrice" class="textarea_msg" placeholder="Number of Karma Koins offered">
 
@@ -111,12 +132,18 @@
     </div>
 </main>
 <footer class="page-footer">
-        <div class="container">
-            <div class="row valign-wrapper">
-            <div class="left-align col s6"><a href="/about"><h3>About</h3></a></div>
-            <div class="right-align col s6"><img src="assets/images/thechickslogo.png" width="30%"></br>© 2018 Copyright</div>
+    <div class="container">
+        <div class="row valign-wrapper">
+            <div class="left-align col s6">
+                <a href="/about">
+                    <h3>About</h3>
+                </a>
+            </div>
+            <div class="right-align col s6">
+                <img src="assets/images/thechickslogo.png" width="30%">
+                </br>© 2018 Copyright</div>
         </div>
-        </div>
+    </div>
 </footer>
 
 <script src="assets/js/logout.js"></script>
