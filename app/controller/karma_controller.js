@@ -69,14 +69,7 @@ function getProfileFavors(req, res) {
     var givenPendingFavors = [];
     db.Favor.findAll({
         where: {
-            $or: {
-                favor_asker_id: ssn.currentUser.id,
-                favor_completer_id: ssn.currentUser.id,
-            },
-            $or: {
-                favor_status: 'active',
-                favor_status: 'pending'
-            },
+                favor_status: {$ne: 'complete'}
         },
         order: ['createdAt']
     }).then(function (data, err) {
@@ -193,10 +186,12 @@ function createNewFavor(req, res) {
     db.Favor.create({
             favor_name: req.body.favor_name,
             favor_desc: req.body.favor_desc,
-            favor_asker_id: req.body.favor_asker_id,
+            favor_asker_id: req.session.currentUser.id,
             favor_status: "active",
             favor_price: req.body.favor_price,
-            favor_datetime: req.body.favor_datetime
+            favor_datetime: req.body.favor_datetime,
+            favor_asker_name: req.session.currentUser.name,
+            favor_asker_name: null
 
         })
         .then(function (data, err) {
