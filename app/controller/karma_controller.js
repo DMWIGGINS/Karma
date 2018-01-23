@@ -63,15 +63,15 @@ function getFavors(req, res) {
 function getProfileFavors(req, res) {
     console.log("im in getProfileFavors");
     ssn = req.session;
-    console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
-    console.log(ssn.currentUser.id);
+    // console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+    // console.log(ssn.currentUser.id);
     var askedPendingFavors = [];
     var givenPendingFavors = [];
     db.Favor.findAll({
         where: {
             $or: {
                 favor_asker_id: ssn.currentUser.id,
-                favor_completer_id: ssn.currentUser.id,
+                favor_completer_id: ssn.currentUser.id
             },
             $or: {
                 favor_status: 'active',
@@ -96,7 +96,7 @@ function getProfileFavors(req, res) {
             console.log(ssn.currentUser.id);
             for (let i = 0; i < data.length; i++) {
                 console.log("im inside the for loop");
-                console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+                // console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
                 if (data[i].favor_asker_id == ssn.currentUser.id) {
                     console.log("im inside the if inside the for loop");
                     askedFavorObject = {
@@ -149,7 +149,7 @@ function getFavorsDetail(req, res) {
             id: req.params.id
         },
     }).then(function (data, err) {
-        console.log(data);
+        // console.log(data);
         console.log(err);
         var favorObject = {};
         if (err) {
@@ -158,7 +158,7 @@ function getFavorsDetail(req, res) {
             console.log(err);
             res.status(500).end();
         } else if (data[0]) {
-            console.log("data" + JSON.stringify(data));
+            // console.log("data" + JSON.stringify(data));
             console.log("data is returned");
             favorObject = {
                 id: data[0].id,
