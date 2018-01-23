@@ -1,8 +1,8 @@
 <nav>
     <div class="nav-wrapper">
-        {{!-- <a href="#!" class="brand-logo">
-            <h3>Karma</h3>
-        </a> --}}
+        <a href="#!" class="brand-logo">
+            <img src="assets/images/karmalogodropshaddow.png" width="5%">
+        </a>
         <a href="#" data-activates="mobile-demo" class="button-collapse">
             <i class="material-icons">menu</i>
         </a>
@@ -14,11 +14,12 @@
                 <a href="profile">Profile</a>
             </li>
             <li>
-                <a class="btn signout">Sign Out</a>
+                <a href="landing" class="btn">Sign Out</a>
             </li>
+
         </ul>
 
-        {{!-- <ul class="side-nav" id="mobile-demo">
+        <ul class="side-nav" id="mobile-demo">
             <li>
                 <a href="favors">Favors</a>
             </li>
@@ -28,7 +29,7 @@
             <li>
                 <a class="btn signout">Sign Out</a>
             </li>
-        </ul> --}}
+        </ul>
     </div>
 </nav>
 
@@ -36,7 +37,7 @@
     <div class="container">
         <div class="row" id="favors-detail">
             <div class="col s5">
-                <img src="../assets/images/goodvibes.jpg" width="90%">
+                <img src="assets/images/goodvibes.jpg" width="90%">
             </div>
             <div class="col s6">
                 <h3>Favor Details</h3>
@@ -49,6 +50,8 @@
                             <p class="label">DateTime: {{this.favor_datetime}} </p>
                             <p class="label">Status: {{this.favor_status}} </p>
                              <p class="label">Favor Asker: {{this.favor_asker_id}} </p>
+                            <p class="label">Favor Asker: {{this.favor_asker_name}} </p>
+                            <p class="label">Favor Completer: {{this.favor_completer_name}} </p>
                             <button id="pendingBtn" class="btn" type="submit" name="action">I'll do this
                                 <i class="material-icons right">send</i>
                             </button>
@@ -72,10 +75,10 @@
                 </a>
             </div>
             <div class="right-align col s6">
-                <img src="../assets/images/thechickslogo.png" width="30%">
+                <img src="assets/images/thechickslogo.png" width="30%">
                 </br>© 2018 Copyright</div>
         </div>
     </div>
 </footer>
 
-<script src="../assets/js/logout.js"></script>
+<script src="assets/js/logout.js"></script>
