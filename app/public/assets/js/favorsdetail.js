@@ -104,9 +104,12 @@ $(document).ready(function () {
         console.log("im in the favorsdetail page");
         event.preventDefault();
         console.log("i clicked the pending button");
-        var favorId = $("#favorid").attr('value');
-        var favorAsker = $("#favoraskerid").attr('value');
-        var favorPrice = $("#favorprice").attr('value');
+        // var favorId = $("#favorid").attr('value');
+        // var favorAsker = $("#favoraskerid").attr('value');
+        // var favorPrice = $("#favorprice").attr('value');
+        var favorId = $(this).data("id");
+        var favorAsker = $(this).data("asker-id");
+        var favorPrice = $(this).data("favor-price");
         console.log("favorId " + favorId);
         console.log("favorAsker " + favorAsker);
         console.log("favorPrice " + favorPrice);
@@ -122,10 +125,14 @@ $(document).ready(function () {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
         console.log("i clicked the complete button!!");
-        var favorId = $("#favorid").attr('value');
-        var favorAsker = $("#favoraskerid").attr('value');
-        var favorPrice = $("#favorprice").attr('value');
-        var favorCompleter = $("#favorcompleterid").attr('value');
+        // var favorId = $("#favorid").attr('value');
+        // var favorAsker = $("#favoraskerid").attr('value');
+        // var favorPrice = $("#favorprice").attr('value');
+        // var favorCompleter = $(this).data("completerId");
+        var favorId = $(this).data("id");
+        var favorAsker = $(this).data("asker-id");
+        var favorCompleter = $(this).data("completer-id");
+        var favorPrice = $(this).data("favor-price");
         console.log("favorId " + favorId);
         console.log("favorAsker " + favorAsker);
         console.log("favorPrice " + favorPrice);
