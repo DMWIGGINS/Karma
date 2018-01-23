@@ -194,11 +194,11 @@ function createNewFavor(req, res) {
     db.Favor.create({
             favor_name: req.body.favor_name,
             favor_desc: req.body.favor_desc,
-            favor_asker_id: req.body.favor_asker_id,
+            favor_asker_id: req.session.currentUser.id,
             favor_status: "active",
             favor_price: req.body.favor_price,
             favor_datetime: req.body.favor_datetime,
-            favor_asker_name: req.session.currentUser.id,
+            favor_asker_name: req.session.currentUser.name,
             favor_asker_name: null
 
         })
