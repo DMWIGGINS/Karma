@@ -200,7 +200,7 @@ function createNewFavor(req, res) {
             favor_status: "active",
             favor_price: req.body.favor_price,
             favor_datetime: req.body.favor_datetime,
-            favor_asker_name: req.session.currentUser.name,
+            favor_asker_name: req.session.currentUser.user_name,
             favor_completer_name: null
 
         })
