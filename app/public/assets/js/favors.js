@@ -2,11 +2,9 @@
 // Functions
 //=================================================
 function addFavor() {
-    var favorAskerId = 1;
     var newFavor = {
         favor_name: $("#newFavorName").val().trim(),
         favor_desc: $("#newFavorDesc").val().trim(),
-        favor_asker_id: favorAskerId,
         favor_price: $("#newFavorPrice").val().trim(),
         favor_datetime: $("#calendarSection").val().trim()
     };

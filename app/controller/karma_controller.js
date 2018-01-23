@@ -3,6 +3,8 @@ var db = require("../../models");
 var router = express.Router();
 var ssn = {};
 ssn.currentUser = null;
+var askerObject = {};
+var completerObject = {};
 
 // Using this variable to track whether the current user is connected via Facebook
 
@@ -39,7 +41,8 @@ function getFavors(req, res) {
                     favor_name: data[i].favor_name,
                     favor_desc: data[i].favor_desc,
                     favor_price: data[i].favor_price,
-                    favor_datetime: data[i].favor_datetime
+                    favor_datetime: data[i].favor_datetime,
+                    favor_asker_name: data[i].favor_asker_name
                 }
                 activeFavors.push(favorObject);
             }
@@ -69,7 +72,9 @@ function getProfileFavors(req, res) {
     var givenPendingFavors = [];
     db.Favor.findAll({
         where: {
-                favor_status: {$ne: 'complete'}
+            favor_status: {
+                $ne: 'complete'
+            }
         },
         order: ['createdAt']
     }).then(function (data, err) {
@@ -96,7 +101,8 @@ function getProfileFavors(req, res) {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
-                        favor_status: data[i].favor_status
+                        favor_status: data[i].favor_status,
+                        favor_asker: data[i].favor_completer_name
                     }
                     askedPendingFavors.push(askedFavorObject)
                 }
@@ -106,7 +112,8 @@ function getProfileFavors(req, res) {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
-                        favor_status: data[i].favor_status
+                        favor_status: data[i].favor_status,
+                        favor_asker_name: data[i].favor_asker_name
                     }
                     givenPendingFavors.push(givenFavorObject);
                 }
@@ -160,7 +167,10 @@ function getFavorsDetail(req, res) {
                 favor_price: data[0].favor_price,
                 favor_datetime: data[0].favor_datetime,
                 favor_status: data[0].favor_status,
-                favor_asker_id: data[0].favor_asker_id
+                favor_asker_id: data[0].favor_asker_id,
+                favor_asker_name: data[0].favor_asker_name,
+                favor_completer_id: data[0].favor_completer_id,
+                favor_completer_name: data[0].favor_completer_name
             }
             console.log(favorObject);
             res.render("favorsdetail",
@@ -191,7 +201,7 @@ function createNewFavor(req, res) {
             favor_price: req.body.favor_price,
             favor_datetime: req.body.favor_datetime,
             favor_asker_name: req.session.currentUser.name,
-            favor_asker_name: null
+            favor_completer_name: null
 
         })
         .then(function (data, err) {
@@ -212,34 +222,50 @@ function createNewFavor(req, res) {
 //---------------------------------------------------------------------------------
 function updateFavor(req, res) {
     console.log("Im in UpdateFavor now on the server side");
-    console.log(req.params);
+    // console.log(req.params);
     console.log(req.body);
+    // console.log(req);
+    // console.log(ssn);
     console.log("going to do the update now");
     ssn = req.session;
     console.log("current User " + ssn.currentUser.id);
-    favorAskerId = req.body.favorAsker
-    var queryDetails = {};
+    var favorId = req.body.id;
+    var favorAskerId = req.body.favor_asker_id;
+    var favorCompleterId = req.body.favor_completer_id;
+    var favorPrice = req.body.favor_price;
+    // var queryDetails = " ";
+    console.log("favorId " + favorId);
+    //when the pending button is clicked, update the favor status to pending
+    //and add the favor completer id and name
+    //else then complete button was clicked, and youjust update the sttus to complete
+    //and update the users' karma koins
+    //updating the karma koins on the user table can happen asyncronously from updating the favors table
     if (req.body.favor_status == "pending") {
-        queryDetails = {
+        console.log("in the pending if");
+        // queryDetails = {
+        //         favor_completer_id: ssn.currentUser.id,
+        //         favor_completer_name: ssn.currentUser.name,
+        //         favor_status: req.body.favor_status
+        //     },
+        //     {
+        //         where: {
+        //             id: {
+        //                 $eq: req.body.id
+        //             }
+        //         }
+        //     }
+        console.log("ssn.currentUser.name " + ssn.currentUser.User_name);
+        db.Favor.update({
             favor_completer_id: ssn.currentUser.id,
+            favor_completer_name: ssn.currentUser.user_name,
             favor_status: req.body.favor_status
         }, {
             where: {
-                id: req.params.id
+                id: {
+                    $eq: req.body.id
+                }
             }
-        }
-    } else {
-        queryDetails = {
-            favor_status: req.body.favor_status
-        }, {
-            where: {
-                id: req.params.id
-            }
-        }
-        updateKarmaKoins(req.body.favorAsker, ssn.currentUser.id, req.body.favorPrice)
-    }
-    db.Favor.update(queryDetails)
-        .then(function (data, err) {
+        }).then(function (data, err) {
             console.log(data);
             if (err) {
                 // If an error occurred, send a generic server failure
@@ -251,7 +277,63 @@ function updateFavor(req, res) {
                 res.status(200).end();
             }
         });
-    getFavorsDetail(res);
+
+    } else {
+        console.log("in the complete if");
+        // queryDetails = [{
+        //         favor_status: req.body.favor_status
+        //     }, 
+        //     {
+        //         where: {
+        //             id: {
+        //                 $eq: req.body.id
+        //             }
+        //         }
+        //     }]
+        db.Favor.update({
+            favor_status: req.body.favor_status
+        }, {
+            where: {
+                id: {
+                    $eq: req.body.id
+                }
+            }
+        }).then(function (data, err) {
+            console.log(data);
+            if (err) {
+                // If an error occurred, send a generic server failure
+                console.log("an error occurred");
+                console.log(err);
+                res.status(500).end();
+            } else if (data[0]) {
+                console.log("favor is updated");
+                console.log("about to call updateKarmaKoins");
+                console.log("req.body.favorCompleter " + favorCompleterId);
+                updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice);
+                res.status(200).end();
+            }
+        });
+
+    }
+    // console.log("queryDetails " + JSON.stringify(queryDetails));
+    // var queryDetailsString = queryDetails.join();
+    // console.log("queryDetailsString " + queryDetailsString);
+    // db.Favor.update({
+    //         queryDetailsString
+    //     })
+    //     .then(function (data, err) {
+    //         console.log(data);
+    //         if (err) {
+    //             // If an error occurred, send a generic server failure
+    //             console.log("an error occurred");
+    //             console.log(err);
+    //             res.status(500).end();
+    //         } else if (data[0]) {
+    //             console.log("favor is updated");
+    //             res.status(200).end();
+    //         }
+    //     });
+    // getFavorsDetail(res);
 }
 
 //------------------------------------------------------------------------------------------------
@@ -259,13 +341,17 @@ function updateFavor(req, res) {
 //------------------------------------------------------------------------------------------------
 function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
     console.log("im in updateKarmaKoins");
+    var asker = parseInt(favorAskerId);
+    var completer = parseInt(favorCompleterId);
     db.User.findAll({
         where: {
-
-            $or: {
-                id: favorAskerId,
-                id: favorCompleterId
-            }
+            $or: [{
+                    id: asker
+                },
+                {
+                    id: completer
+                }
+            ]
         }
     }).then(function (data, err) {
         if (err) {
@@ -273,34 +359,43 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
             console.log("an error occurred");
             console.log(err);
             res.status(500).end();
-            var updateKoins = '';
-            var dbObject = {};
+            var updateKoins = 0;  
         } else if (data[0]) {
+            console.log("i got data returned");
+            // console.log(data);
             for (i = 0; i < data.length; i++) {
-                if (data[i] == favorAskerId) {
+                console.log("asker" + asker);
+                console.log("COMPLETER" + completer);
+                if (data[i].id == asker) {
                     updateKoins = data[i].user_karma_koins - parseInt(favorPrice);
-                    dbObject.push({
-                        user_karma_koins: updateKoins
-                    }, {
-                        where: {
-                            id: favorAskerId
-                        }
-                    });
+                    console.log("asker " + asker);
+                    console.log(updateKoins);
+                    askerObject = {
+                        "user_karma_koins": updateKoins,
+                        "id": asker
+                    };
+                    console.log("askerObject " + JSON.stringify(askerObject));
                 } else {
                     updateKoins = data[i].user_karma_koins + parseInt(favorPrice);
-                    dbObject.push({
-                        user_karma_koins: updateKoins
-                    }, {
-                        where: {
-                            id: favorCompleterId
-                        }
-                    });
+                    console.log("completer " + completer);
+                    console.log(updateKoins);
+                    completerObject = {
+                        "user_karma_koins": updateKoins,
+                        "id": completer
+                    };
+                    console.log("completerObject " + JSON.stringify(completerObject));
                 }
 
             }
-            console.log("dbObject = " + JSON.stringify(dbObject));
+            console.log("im out of the for loop");
+            console.log("asker koins " + askerObject.updateKoins);
+            console.log("askerObject " + JSON.stringify(askerObject));
             db.User.update({
-                dbObject
+                user_karma_koins: askerObject.user_karma_koins
+            }, {
+                where: {
+                    id: askerObject.id
+                }
             }).then(function (data, err) {
                 if (err) {
                     // If an error occurred, send a generic server failure
@@ -308,8 +403,23 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
                     console.log(err);
                     res.status(500).end();
                 } else if (data[0]) {
-                    console.log("favor is updated");
-                    res.status(200).end();
+                    console.log("asker user is updated");
+                    console.log("completer koins " + completerObject.updateKoins);
+                    db.User.update({
+                        user_karma_koins: completerObject.user_karma_koins
+                    }, {
+                        where: {
+                            id: completerObject.id
+                        }
+                    }).then(function (data, err) {
+                        if (err) {
+                            // If an error occurred, send a generic server failure
+                            console.log("an error occurred");
+                            console.log(err);
+                        } else if (data[0]) {
+                            console.log("completer user is updated");
+                        }
+                    });
                 }
             });
         }
@@ -430,7 +540,7 @@ router.get("/favorsdetail/:id", function (req, res) {
 // Route to update a favor from the
 // favordetail page
 //--------------------------------------
-router.put("/api/favorsdetail/:id", function (req, res) {
+router.put("/api/favorsdetail/", function (req, res) {
     ssn = req.session;
     updateFavor(req, res);
 });
