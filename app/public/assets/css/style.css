@@ -196,5 +196,26 @@
     }
 
    
-
+    /* // Disable hamburger -- mobile styles disabled and headerNav < 768px on desktop */
+    @media only screen and (max-width: 768px) {
+          #header #headerNav {
+            display: inline-block !important;
+            z-index: 9999;
+      }
+    }
+    
+    .mobile-nav-toggle-label {
+        display: none !important;
+    }
+    
+    @media only screen and (min-width: 769px) {
+          html:not(.touch-styles) body:not(.always-use-overlay-nav) {
+            .mobile-nav-toggle-label {
+                  display: none;
+            }
+        #overlayNav {
+              display: none;
+        }
+      }
+    }
     

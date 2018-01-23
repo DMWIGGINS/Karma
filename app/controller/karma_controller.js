@@ -169,6 +169,7 @@ function getFavorsDetail(req, res) {
                 favor_asker_id: data[0].favor_asker_id,
                 favor_asker_name: data[0].favor_asker_name,
                 favor_completer_name: data[0].favor_completer_name
+
             }
             console.log(favorObject);
             res.render("favorsdetail",
@@ -342,7 +343,7 @@ function createNewUser(req, res) {
             res.status(200).end();
         } else {
             // If no rows are returned take the body data from the client, create a new user, and send it to the db
-            ssn.currentUser = db.User.create({
+            db.User.create({
                     user_name: req.body.user_name,
                     user_email: req.body.user_email,
                     profile_pic_link: req.body.fb_user_pic,
@@ -354,6 +355,7 @@ function createNewUser(req, res) {
                         // If an error occurred, send a generic server failure
                         res.status(500).end();
                     } else {
+                        ssn.currentUser = data;
                         res.status(200).end();
                     }
                 });
@@ -450,7 +452,6 @@ router.get("/about", function (req, res) {
     res.render("about", {
         user: ssn.currentUser
     });
-    res.render("about");
 });
 
 //--------------------------------------
