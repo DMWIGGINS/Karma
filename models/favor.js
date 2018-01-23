@@ -33,6 +33,14 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
+        favor_asker_name: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        favor_completer_name: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         favor_status: {
             type: DataTypes.STRING,
             allowNull: false
