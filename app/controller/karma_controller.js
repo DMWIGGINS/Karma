@@ -39,7 +39,8 @@ function getFavors(req, res) {
                     favor_name: data[i].favor_name,
                     favor_desc: data[i].favor_desc,
                     favor_price: data[i].favor_price,
-                    favor_datetime: data[i].favor_datetime
+                    favor_datetime: data[i].favor_datetime,
+                    favor_asker_name: data[i].favor_asker_name
                 }
                 activeFavors.push(favorObject);
             }
@@ -62,21 +63,18 @@ function getFavors(req, res) {
 //---------------------------------------------------------------------------------
 function getProfileFavors(req, res) {
     console.log("im in getProfileFavors");
-    ssn = req.session;
-    console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
-    console.log(ssn.currentUser.id);
+    // ssn = req.session;
+    console.log(req);
+    // console.log("REQ " + JSON.stringify(res));
+    // console.log(req.session.currentUser.id);
     var askedPendingFavors = [];
     var givenPendingFavors = [];
+
     db.Favor.findAll({
         where: {
-            $or: {
-                favor_asker_id: ssn.currentUser.id,
-                favor_completer_id: ssn.currentUser.id,
-            },
-            $or: {
-                favor_status: 'active',
-                favor_status: 'pending'
-            },
+            favor_status: {
+                $ne: 'complete'
+            }
         },
         order: ['createdAt']
     }).then(function (data, err) {
@@ -113,7 +111,8 @@ function getProfileFavors(req, res) {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
-                        favor_status: data[i].favor_status
+                        favor_status: data[i].favor_status,
+                        favor_completer_name: data[i].favor_completer_name
                     }
                     givenPendingFavors.push(givenFavorObject);
                 }
@@ -167,7 +166,10 @@ function getFavorsDetail(req, res) {
                 favor_price: data[0].favor_price,
                 favor_datetime: data[0].favor_datetime,
                 favor_status: data[0].favor_status,
-                favor_asker_id: data[0].favor_asker_id
+                favor_asker_id: data[0].favor_asker_id,
+                favor_asker_name: data[0].favor_asker_name,
+                favor_completer_name: data[0].favor_completer_name
+
             }
             console.log(favorObject);
             res.render("favorsdetail",
@@ -196,7 +198,9 @@ function createNewFavor(req, res) {
             favor_asker_id: req.body.favor_asker_id,
             favor_status: "active",
             favor_price: req.body.favor_price,
-            favor_datetime: req.body.favor_datetime
+            favor_datetime: req.body.favor_datetime,
+            favor_asker_name: req.session.currentUser.id,
+            favor_asker_name: null
 
         })
         .then(function (data, err) {
@@ -227,7 +231,8 @@ function updateFavor(req, res) {
     if (req.body.favor_status == "pending") {
         queryDetails = {
             favor_completer_id: ssn.currentUser.id,
-            favor_status: req.body.favor_status
+            favor_status: req.body.favor_status,
+            favor_completer_name: ssn.currentUser.user_name
         }, {
             where: {
                 id: req.params.id
