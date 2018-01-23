@@ -32,20 +32,29 @@
                 <ul>
                     <lh id="favorsdetail">
                         <li class="favor-detail">
-                            <p id="favorid" value={{this.id}} class="label">Favor Id: {{this.id}} </p>
+                            {{!-- <p id="favorid" value={{this.id}} class="label">Favor Id: {{this.id}} </p> --}}
                             <p id="favorname" value={{this.favor_name}} class="label">Favor: {{this.favor_name}} </p>
                             <p id="favordesc" value={{this.favor_desc}} class="label">Description: {{this.favor_desc}} </p>
                             <p id="favorprice" value={{this.favor_price}} class="label">Koins Offered: {{this.favor_price}} </p>
                             <p id="favordatetime" value={{this.favor_datetime}} class="label">DateTime: {{this.favor_datetime}} </p>
                             <p id="favorstatus" value={{this.favor_status}} class="label">Status: {{this.favor_status}} </p>
-                            <p id="favoraskerid" value={{this.favor_asker_id}} class="label">Favor Asker: {{this.favor_asker_id}} </p>
+                            {{!-- <p id="favoraskerid" value={{this.favor_asker_id}} class="label">Favor Asker: {{this.favor_asker_id}} </p> --}}
                             <p id="favoraskername" value={{this.favor_asker_name}} class="label">Favor Asker: {{this.favor_asker_name}} </p>
                             <p id="favorcompleterid" value={{this.favor_completer_id}} class="label">Favor Completer: {{this.favor_completer_id}} </p>
                             <p id="favorcompletername" value={{this.favor_completer_name}} class="label">Favor Completer: {{this.favor_completer_name}} </p>
-                            <button id="pendingBtn" class="btn" type="submit" name="action">I'll do this
+                            <button id="pendingBtn" class="btn" type="submit" name="action"
+                                 data-id={{this.id}} 
+                                data-asker-id={{this.favor_asker_id}}
+                                data-favor-price={{this.favor_price}}
+                                >I'll do this
                                 <i class="material-icons right">send</i>
                             </button>
-                            <button id="completedBtn" class="btn" type="submit" name="action">This favor is completed
+                            <button id="completedBtn" class="btn" type="submit" name="action"
+                             data-id={{this.id}} 
+                                data-asker-id={{this.favor_asker_id}}
+                                 data-completer-id={{this.favor_completer_id}}
+                                data-favor-price={{this.favor_price}}
+                            >This favor is completed
                                 <i class="material-icons right">send</i>
                             </button>
                         </li>
