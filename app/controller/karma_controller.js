@@ -430,6 +430,7 @@ router.get("/favorsdetail/:id", function (req, res) {
 
 
 
+
 //--------------------------------------
 // Route to update a favor from the
 // favordetail page
