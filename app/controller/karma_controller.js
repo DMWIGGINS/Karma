@@ -73,7 +73,7 @@ function getProfileFavors(req, res) {
     db.Favor.findAll({
         where: {
             favor_status: {
-                $ne: 'complete'
+                $ne: 'completed'
             }
         },
         order: ['createdAt']
@@ -231,9 +231,15 @@ function updateFavor(req, res) {
     console.log("current User " + ssn.currentUser.id);
     var favorId = req.body.id;
     var favorAskerId = req.body.favor_asker_id;
-    var favorCompleterId = req.body.favor_completer_id;
+
+    // if (req.body.favor_completer_id === '') {
+    //     var favorCompleterId = ssn.currentUser.id;
+    //     var favorCompleterName = ssn.currentUser.user_name;
+    // } else {
+        var favorCompleterId = req.body.favor_completer_id;
+        var favorCompleterName = req.body.favor_completer_name;
+    // }
     var favorPrice = req.body.favor_price;
-    // var queryDetails = " ";
     console.log("favorId " + favorId);
     //when the pending button is clicked, update the favor status to pending
     //and add the favor completer id and name
@@ -242,19 +248,8 @@ function updateFavor(req, res) {
     //updating the karma koins on the user table can happen asyncronously from updating the favors table
     if (req.body.favor_status == "pending") {
         console.log("in the pending if");
-        // queryDetails = {
-        //         favor_completer_id: ssn.currentUser.id,
-        //         favor_completer_name: ssn.currentUser.name,
-        //         favor_status: req.body.favor_status
-        //     },
-        //     {
-        //         where: {
-        //             id: {
-        //                 $eq: req.body.id
-        //             }
-        //         }
-        //     }
-        console.log("ssn.currentUser.name " + ssn.currentUser.User_name);
+        console.log("ssn.currentUser.user_name " + ssn.currentUser.user_name);
+        console.log(req.body);
         db.Favor.update({
             favor_completer_id: ssn.currentUser.id,
             favor_completer_name: ssn.currentUser.user_name,
@@ -274,22 +269,13 @@ function updateFavor(req, res) {
                 res.status(500).end();
             } else if (data[0]) {
                 console.log("favor is updated");
-                res.status(200).end();
+                getFavorsDetail(req, res);
+                // res.status(200).end();
             }
         });
 
     } else {
         console.log("in the complete if");
-        // queryDetails = [{
-        //         favor_status: req.body.favor_status
-        //     }, 
-        //     {
-        //         where: {
-        //             id: {
-        //                 $eq: req.body.id
-        //             }
-        //         }
-        //     }]
         db.Favor.update({
             favor_status: req.body.favor_status
         }, {
@@ -310,10 +296,11 @@ function updateFavor(req, res) {
                 console.log("about to call updateKarmaKoins");
                 console.log("req.body.favorCompleter " + favorCompleterId);
                 updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice);
-                res.status(200).end();
+                getFavorsDetail(req, res);
+                // res.status(200).end();
             }
         });
-
+        // getFavorsDetail(req, res);
     }
     // console.log("queryDetails " + JSON.stringify(queryDetails));
     // var queryDetailsString = queryDetails.join();
@@ -359,7 +346,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
             console.log("an error occurred");
             console.log(err);
             res.status(500).end();
-            var updateKoins = 0;  
+            var updateKoins = 0;
         } else if (data[0]) {
             console.log("i got data returned");
             // console.log(data);
