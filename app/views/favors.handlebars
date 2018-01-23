@@ -1,25 +1,9 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">
-            <img src="assets/images/karmalogodropshaddow.png" width="5%">
+        <a href="/">
+            <img src="assets/images/karmalogowhite.png" width="5%">
         </a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse">
-            <i class="material-icons">menu</i>
-        </a>
-        <ul class="right hide-on-med-and-down">
-            <li>
-                <a href="favors">Favors</a>
-            </li>
-            <li>
-                <a href="profile">Profile</a>
-            </li>
-            <li>
-                <a href="landing" class="btn">Sign Out</a>
-            </li>
-
-        </ul>
-
-        <ul class="side-nav" id="mobile-demo">
+        <ul class="right">
             <li>
                 <a href="favors">Favors</a>
             </li>
@@ -49,6 +33,7 @@
                             <p class="label"> {{this.favor_desc}} </p>
                             <p class="label"> {{this.favor_price}} </p>
                             <p class="label"> {{this.favor_datetime}}</p>
+                            <p class="label"> {{this.favor_asker_name}} </p>
                             <p>
                                 <a href="/favorsdetail/{{this.id}}">Link to more Info</a>
                             </p>

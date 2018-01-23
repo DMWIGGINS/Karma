@@ -1,15 +1,3 @@
-// Facebook black magic
-window.fbAsyncInit = function () {
-    FB.init({
-        appId: '840301142808607',
-        cookie: true,
-        xfbml: true,
-        version: 'v2.11'
-    });
-
-    FB.AppEvents.logPageView();
-};
-
 window.addEventListener("load", function () {
 
     // Allows us to determine if a user is logged in to Facebook and has authenticated our app.
