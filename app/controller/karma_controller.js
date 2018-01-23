@@ -166,7 +166,8 @@ function getFavorsDetail(req, res) {
                 favor_desc: data[0].favor_desc,
                 favor_price: data[0].favor_price,
                 favor_datetime: data[0].favor_datetime,
-                favor_status: data[0].favor_status
+                favor_status: data[0].favor_status,
+                favor_asker_id: data[0].favor_asker_id
             }
             console.log(favorObject);
             res.render("favorsdetail",
