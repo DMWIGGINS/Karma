@@ -39,8 +39,7 @@ function getFavors(req, res) {
                     favor_name: data[i].favor_name,
                     favor_desc: data[i].favor_desc,
                     favor_price: data[i].favor_price,
-                    favor_datetime: data[i].favor_datetime,
-                    favor_asker_name: data[i].favor_asker_name
+                    favor_datetime: data[i].favor_datetime
                 }
                 activeFavors.push(favorObject);
             }
@@ -63,18 +62,14 @@ function getFavors(req, res) {
 //---------------------------------------------------------------------------------
 function getProfileFavors(req, res) {
     console.log("im in getProfileFavors");
-    // ssn = req.session;
-    console.log(req);
-    // console.log("REQ " + JSON.stringify(res));
-    // console.log(req.session.currentUser.id);
+    ssn = req.session;
+    // console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+    // console.log(ssn.currentUser.id);
     var askedPendingFavors = [];
     var givenPendingFavors = [];
-
     db.Favor.findAll({
         where: {
-            favor_status: {
-                $ne: 'complete'
-            }
+                favor_status: {$ne: 'complete'}
         },
         order: ['createdAt']
     }).then(function (data, err) {
@@ -94,7 +89,7 @@ function getProfileFavors(req, res) {
             console.log(ssn.currentUser.id);
             for (let i = 0; i < data.length; i++) {
                 console.log("im inside the for loop");
-                console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
+                // console.log("ssn.currentUser " + JSON.stringify(ssn.currentUser));
                 if (data[i].favor_asker_id == ssn.currentUser.id) {
                     console.log("im inside the if inside the for loop");
                     askedFavorObject = {
@@ -111,8 +106,7 @@ function getProfileFavors(req, res) {
                         id: data[i].id,
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
-                        favor_status: data[i].favor_status,
-                        favor_completer_name: data[i].favor_completer_name
+                        favor_status: data[i].favor_status
                     }
                     givenPendingFavors.push(givenFavorObject);
                 }
@@ -148,7 +142,7 @@ function getFavorsDetail(req, res) {
             id: req.params.id
         },
     }).then(function (data, err) {
-        console.log(data);
+        // console.log(data);
         console.log(err);
         var favorObject = {};
         if (err) {
@@ -157,7 +151,7 @@ function getFavorsDetail(req, res) {
             console.log(err);
             res.status(500).end();
         } else if (data[0]) {
-            console.log("data" + JSON.stringify(data));
+            // console.log("data" + JSON.stringify(data));
             console.log("data is returned");
             favorObject = {
                 id: data[0].id,
@@ -166,9 +160,7 @@ function getFavorsDetail(req, res) {
                 favor_price: data[0].favor_price,
                 favor_datetime: data[0].favor_datetime,
                 favor_status: data[0].favor_status,
-                favor_asker_id: data[0].favor_asker_id,
-                favor_asker_name: data[0].favor_asker_name,
-                favor_completer_name: data[0].favor_completer_name
+                favor_asker_id: data[0].favor_asker_id
             }
             console.log(favorObject);
             res.render("favorsdetail",
@@ -230,8 +222,7 @@ function updateFavor(req, res) {
     if (req.body.favor_status == "pending") {
         queryDetails = {
             favor_completer_id: ssn.currentUser.id,
-            favor_status: req.body.favor_status,
-            favor_completer_name: ssn.currentUser.user_name
+            favor_status: req.body.favor_status
         }, {
             where: {
                 id: req.params.id
@@ -260,6 +251,7 @@ function updateFavor(req, res) {
                 res.status(200).end();
             }
         });
+    getFavorsDetail(res);
 }
 
 //------------------------------------------------------------------------------------------------
@@ -342,7 +334,7 @@ function createNewUser(req, res) {
             res.status(200).end();
         } else {
             // If no rows are returned take the body data from the client, create a new user, and send it to the db
-            ssn.currentUser = db.User.create({
+            db.User.create({
                     user_name: req.body.user_name,
                     user_email: req.body.user_email,
                     profile_pic_link: req.body.fb_user_pic,
@@ -354,6 +346,7 @@ function createNewUser(req, res) {
                         // If an error occurred, send a generic server failure
                         res.status(500).end();
                     } else {
+                        ssn.currentUser = data;
                         res.status(200).end();
                     }
                 });
@@ -432,6 +425,7 @@ router.get("/favorsdetail/:id", function (req, res) {
 
 
 
+
 //--------------------------------------
 // Route to update a favor from the
 // favordetail page
@@ -450,7 +444,6 @@ router.get("/about", function (req, res) {
     res.render("about", {
         user: ssn.currentUser
     });
-    res.render("about");
 });
 
 //--------------------------------------
