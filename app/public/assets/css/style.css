@@ -83,8 +83,8 @@
         background-color: #9C27B0;
     }
 
-    .btn.signout {
-        margin-top:5%;
+    a.btn.signout {
+        margin-top:10%;
     }
 
     .btn:hover {
