@@ -134,6 +134,18 @@
         font-size: 1.2rem;
     }
 
+    #favordesc {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
+    }
+
+    #favorcompletername {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
+    }
+
     #profile {
         background-color: #9C27B0;
         text-align: center;
