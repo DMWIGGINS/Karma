@@ -102,9 +102,11 @@ function getProfileFavors(req, res) {
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
                         favor_status: data[i].favor_status,
-                        favor_asker: data[i].favor_completer_name
+                        favor_datetime: data[i].favor_datetime,
+                        favor_completer: data[i].favor_completer_name
                     }
                     askedPendingFavors.push(askedFavorObject)
+                    console.log("askedPendingFavors " + askedPendingFavors);
                 }
                 if (data[i].favor_completer_id == ssn.currentUser.id) {
                     console.log("im inside the second  if inside the for loop");
@@ -113,9 +115,11 @@ function getProfileFavors(req, res) {
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
                         favor_status: data[i].favor_status,
+                        favor_datetime: data[i].favor_datetime,
                         favor_asker_name: data[i].favor_asker_name
                     }
                     givenPendingFavors.push(givenFavorObject);
+                    console.log("givenPendingFavors " + givenPendingFavors);
                 }
 
             }
@@ -236,8 +240,8 @@ function updateFavor(req, res) {
     //     var favorCompleterId = ssn.currentUser.id;
     //     var favorCompleterName = ssn.currentUser.user_name;
     // } else {
-        var favorCompleterId = req.body.favor_completer_id;
-        var favorCompleterName = req.body.favor_completer_name;
+    var favorCompleterId = req.body.favor_completer_id;
+    var favorCompleterName = req.body.favor_completer_name;
     // }
     var favorPrice = req.body.favor_price;
     console.log("favorId " + favorId);
@@ -452,6 +456,19 @@ function createNewUser(req, res) {
 
 }
 
+function updateCurrentUser(req, res) {
+    db.User.findAll({
+        where: {
+            id: ssn.currentUser.id
+        }
+    }).then(function (data, err) {
+        if (data[0]) {
+            ssn.currentUser = data[0];
+            getProfileFavors(req, res);
+        }
+    });
+}
+
 
 //--------------------------------------
 // Default route for the landing page
@@ -486,7 +503,7 @@ router.post("/api/user/create", function (req, res) {
 //--------------------------------------
 router.get("/profile", function (req, res) {
     ssn = req.session;
-    getProfileFavors(req, res);
+    updateCurrentUser(req, res);
 });
 
 
