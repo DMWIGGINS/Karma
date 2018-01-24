@@ -116,6 +116,12 @@
         color: #42A5F5;
     }
 
+    .label {
+        color:white;
+        font-family: 'Oswald';
+        font-size: 1.5rem;
+    }
+
     #profile {
         background-color: #9C27B0;
         text-align: center;
