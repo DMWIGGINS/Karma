@@ -61,6 +61,12 @@
         font-size: 1.5rem;
     }
 
+    .favordeet {
+            color: #42A5F5;
+            font-family: 'Oswald';
+            font-size: 1.5rem;
+    }
+
     h2,
     h4,
     h5,
@@ -119,7 +125,13 @@
     .label {
         color:white;
         font-family: 'Oswald';
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+    }
+
+    .label2 {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
     }
 
     #profile {
