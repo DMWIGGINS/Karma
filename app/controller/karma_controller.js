@@ -102,9 +102,11 @@ function getProfileFavors(req, res) {
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
                         favor_status: data[i].favor_status,
-                        favor_asker: data[i].favor_completer_name
+                        favor_datetime: data[i].favor_datetime,
+                        favor_completer: data[i].favor_completer_name
                     }
                     askedPendingFavors.push(askedFavorObject)
+                    console.log("askedPendingFavors " + askedPendingFavors);
                 }
                 if (data[i].favor_completer_id == ssn.currentUser.id) {
                     console.log("im inside the second  if inside the for loop");
@@ -113,9 +115,11 @@ function getProfileFavors(req, res) {
                         favor_name: data[i].favor_name,
                         favor_price: data[i].favor_price,
                         favor_status: data[i].favor_status,
+                        favor_datetime: data[i].favor_datetime,
                         favor_asker_name: data[i].favor_asker_name
                     }
                     givenPendingFavors.push(givenFavorObject);
+                    console.log("givenPendingFavors " + givenPendingFavors);
                 }
 
             }
