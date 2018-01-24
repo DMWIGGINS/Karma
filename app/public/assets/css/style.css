@@ -216,6 +216,10 @@
         margin: 20px;
     }
 
+    .btn:focus, .btn-large:focus, .btn-floating:focus {
+        background-color: #42A5F5;
+    }
+
     .page-footer {
         background-color: #42A5F5;
         color: white;
