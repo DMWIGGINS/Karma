@@ -24,16 +24,16 @@
                 <img src="assets/images/goodvibes.jpg" width="90%">
             </div>
             <div class="col s6">
-                <h3>Active Favors</h3>
+                <h2>Active Favors</h2>
 
                 <ul>
                     <lh id="favor">{{#each activeFavor}}
                         <li class="activeFavors">
-                            <p class="label"> Favor: {{this.favor_name}} </p>
-                            <p class="label"> Description: {{this.favor_desc}} </p>
-                            <p class="label"> Karma Koins Offered: {{this.favor_price}} </p>
-                            <p class="label"> Date and Time: {{this.favor_datetime}}</p>
-                            <p class="label"> Favor Asker: {{this.favor_asker_name}} </p>
+                            <p class="label"><h3>Favor:</h3> {{this.favor_name}} </p>
+                            <p class="label"> <h3>Description:</h3> {{this.favor_desc}} </p>
+                            <p class="label"> <h3>Karma Koins Offered:</h3> {{this.favor_price}} </p>
+                            <p class="label"> <h3>Date and Time:</h3> {{this.favor_datetime}}</p>
+                            <p class="label"> <h3>Favor Asker:</h3> {{this.favor_asker_name}} </p>
                             <p>
                                 <a href="/favorsdetail/{{this.id}}">Link to more Info</a>
                             </p>
