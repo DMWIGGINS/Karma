@@ -101,6 +101,10 @@
         background-color: #9C27B0;
     }
 
+    #aboutchicks {
+        background-color: #9C27B0;
+    }
+
     input:not([type]):focus:not([readonly]),
     input[type=text]:not(.browser-default):focus:not([readonly]),
     input[type=password]:not(.browser-default):focus:not([readonly]),
