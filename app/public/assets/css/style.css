@@ -71,6 +71,10 @@
         font-family: 'Oswald';
     }
 
+    a {
+        color:white;
+    }
+    
     i.medium.material-icons {
         color: #F57C00;
         padding-top: 10%;
@@ -196,26 +200,3 @@
     }
 
    
-    /* // Disable hamburger -- mobile styles disabled and headerNav < 768px on desktop */
-    @media only screen and (max-width: 768px) {
-          #header #headerNav {
-            display: inline-block !important;
-            z-index: 9999;
-      }
-    }
-    
-    .mobile-nav-toggle-label {
-        display: none !important;
-    }
-    
-    @media only screen and (min-width: 769px) {
-          html:not(.touch-styles) body:not(.always-use-overlay-nav) {
-            .mobile-nav-toggle-label {
-                  display: none;
-            }
-        #overlayNav {
-              display: none;
-        }
-      }
-    }
-    
