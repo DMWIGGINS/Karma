@@ -74,14 +74,14 @@
     a {
         color:white;
     }
-    
+
     i.medium.material-icons {
         color: #F57C00;
-        padding-top: 10%;
     }
 
     .btn {
         background-color: #9C27B0;
+        padding-top:10%;
     }
 
     .btn:hover {
