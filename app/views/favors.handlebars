@@ -25,18 +25,18 @@
             </div>
             <div class="col s6">
                 <h2>Active Favors</h2>
-
+                <hr>
                 <ul>
                     <lh id="favor">{{#each activeFavor}}
                         <li class="activeFavors">
-                            <p class="label"><h3>Favor:</h3> {{this.favor_name}} </p>
-                            <p class="label"> <h3>Description:</h3> {{this.favor_desc}} </p>
-                            <p class="label"> <h3>Karma Koins Offered:</h3> {{this.favor_price}} </p>
-                            <p class="label"> <h3>Date and Time:</h3> {{this.favor_datetime}}</p>
-                            <p class="label"> <h3>Favor Asker:</h3> {{this.favor_asker_name}} </p>
-                            <p>
+                            <h3>Favor: <p class="label">{{this.favor_name}}</p></h3> 
+                            <h3>Description: <p class="label">  {{this.favor_desc}} </p></h3>
+                            <h3>Karma Koins Offered: <p class="label"> {{this.favor_price}} </p></h3> 
+                            <h3>Date and Time: <p class="label"> {{this.favor_datetime}}</p></h3> 
+                            <h3>Favor Asker: <p class="label"> {{this.favor_asker_name}} </p></h3> 
+                            <h4>
                                 <a href="/favorsdetail/{{this.id}}">Link to more Info</a>
-                            </p>
+                            </h4>
                         </li>
                     </lh>
                     {{/each}}
