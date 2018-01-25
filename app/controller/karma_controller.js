@@ -474,7 +474,7 @@ router.get("/favorsdetail/:id", function (req, res) {
 // Route to update a favor from the
 // favordetail page
 //--------------------------------------
-router.put("/api/favorsdetail", function (req, res) {
+router.put("/api/favorsdetail/:id", function (req, res) {
     ssn = req.session;
     updateFavor(req, res);
 });
