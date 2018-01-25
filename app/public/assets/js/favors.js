@@ -1,14 +1,17 @@
 //=================================================
 // Functions
 //=================================================
+
+// adds new favor to the list
+
 function addFavor() {
     var newFavor = {
         favor_name: $("#newFavorName").val().trim(),
         favor_desc: $("#newFavorDesc").val().trim(),
         favor_price: $("#newFavorPrice").val().trim(),
         favor_datetime: $("#calendarSection").val().trim()
-    };
-  
+    }
+
     // Send the POST request.
     $.ajax("/api/favor/new", {
         type: "POST",

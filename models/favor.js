@@ -8,21 +8,21 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1,255],  
+                len: [1, 255],
             }
         },
         favor_desc: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1,1000],  
+                len: [1, 1000],
             }
         },
         favor_datetime: {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                len: [1,50],  
+                len: [1, 50],
             }
         },
         favor_asker_id: {
