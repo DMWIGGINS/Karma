@@ -1,7 +1,7 @@
 // Facebook black magic
 window.fbAsyncInit = function () {
     FB.init({
-        appId: '840301142808607',
+        appId: '454481624954762',
         cookie: true,
         xfbml: true,
         version: 'v2.11'
