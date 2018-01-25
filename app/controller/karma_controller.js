@@ -11,7 +11,7 @@ var completerObject = {};
 //---------------------------------------------------------------------------------
 // get the favors to populate the /favors page
 //---------------------------------------------------------------------------------
-function getFavors(req, res) {
+function getFavors() {
     console.log("im in getFavors");
     // var group_id = 1;
     var activeFavors = [];
@@ -512,7 +512,7 @@ router.get("/profile", function (req, res) {
 //--------------------------------------
 router.get("/favors", function (req, res) {
     ssn = req.session;
-    getFavors(req, res);
+    getFavors();
 });
 
 
