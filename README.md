@@ -1,68 +1,55 @@
-# Karma
+# Karma Koins
 
-Steps to get your server up and running:
+## We all need help sometimes. Karma Koins makes it easy!
 
-1) create your dev database locally:
+Asking for help is never an easy task. It can leave you feeling embarrassed, stressed and frankly at times like a loser that you needed to raise your hand. And yet, we have entered such a time where giving back and returning favors has never been so in vogue… From business ventures like TOMs to companies matching monthly charity donations as employment perks, we haven’t seen a time where doing good for others has been so trendy.
 
-In SQL WOrkbench:
-create database karma_db;
+Karma joins works to bridge those two concepts. We have developed a full stack app where users can both ask and return favors – in exchange for karma koins. Need a friend to help you move? Got stuck in a work meeting late and need someone to take Frodo the dog out for a walk? Post your request to Karma and watch your friends line up to help. Feeling particularly supportive today? Or maybe you’re bored and want something to do other than binge the latest Netflix original Series? Open up Karma and see what your friends need help with.
 
-2) Run your installs.  Navigate to /Karma directory in your terminal and run the following:
+# Starting/Stopping the app
+In the package.json file, you'll see a list of dependencies. Once you’ve cloned the Karma repo down, run ‘npm install’ to install the npm packages needed to run Karma Koinds. Once you’ve installed your dependencies, run ‘node server.js’ to start the app.
 
-npm install
+# Routes
+- /landing
+- /api/user/create
+- /profile
+- /favors
+- /api/favor/new
+- /favorsdetail/:id
+- /api/favorsdetail/
+- /about
+- /api/user/logout
 
-3) in Karma/config/config.json enter your local mysql password in the dev section
+# SQL Schema
+## You don’t need to build the tables! Just open ‘karma_db.sql’ and create the db. The following tables will be created automatically using sequelize:
 
-4) on the terminal command line, start the server
+favor
+------
+- favor_name: string
+- favor_desc: string
+- favor_datetime: string
+- favor_asker_id: integer
+- favor_completer_id: integer
+- favor_asker_name: integer
+- favor_completer_name: string
+- favor_status: string
+- favor_price: integer
 
-nodemon server.js or node server.js
+users
+------
+- user_name: string
+- user_email: string
+- profile_pic_link: string
+- user_karma_koins: integer
+- fb_user_id: string
 
-![functionaldiag](https://github.com/DMWIGGINS/Karma/blob/master/app/public/assets/images/karma_functional_diagram.png)
+group
+------
+- group_name: string
+- group_leader: string
+  
+# Database Setup
+Ensure that your ‘config.json’ file has the correct root password listed.
 
-
-Here is some test data to insert into your dev database if you want:
-
-drop database if exists karma_db;
-create database karma_db;
-
-use karma_db;
-
-select * from Groups;
-select * from Users;
-select * from Favors;
-
-
-insert into Groups (group_name, group_leader, createdAt, updatedAt) 
-values ("Test Group", 1,
-current_timestamp, current_timestamp);
-
-
-insert into Users 
-(user_name, user_email, profile_pic_link, user_karma_koins,createdAt, updatedAt, fb_user_id, GroupId) 
-values ("Test User1", "TestUser1@gmail.com", 
-'https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/20992971_863919577094100_2869333698020713514_n.jpg?oh=a395c5a818832b77dd754b2cc4ece0e0&oe=5AE9A32A(4 kB)',
-100, current_timestamp, current_timestamp,'fbuserid',1);
-
-insert into Users 
-(user_name, user_email, profile_pic_link, user_karma_koins, createdAt, updatedAt, fb_user_id, GroupId) 
-values ("Test User2", "TestUser2@gmail.com", 
-'https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/20992971_863919577094100_2869333698020713514_n.jpg?oh=a395c5a818832b77dd754b2cc4ece0e0&oe=5AE9A32A(4 kB)',
-100, current_timestamp, current_timestamp,'fbuserid',1);
-
-
-insert into Favors
-(favor_name, favor_desc, favor_datetime,  favor_asker_id, favor_completer_id, favor_status, favor_price, createdAt, updatedAt, GroupId)
-values ( "walk my dog", "Walk my doggie ",current_timestamp, 1, null,"active",10,current_timestamp, current_timestamp, 1);
-
-insert into Favors
-(favor_name, favor_desc,favor_datetime,  favor_asker_id, favor_completer_id, favor_status,favor_price, createdAt, updatedAt, GroupId)
-values ( "walk my cat", "walk my kitty",current_timestamp,  2, 1,"complete",15,current_timestamp, current_timestamp, 1);
-
-insert into Favors
-(favor_name, favor_desc, favor_datetime,  favor_asker_id, favor_completer_id, favor_status, favor_price, createdAt, updatedAt, GroupId)
-values ( "Eat ice cream with me", "I want some company", current_timestamp,  2, null,"active",12,current_timestamp, current_timestamp, 1);
-
-select * from Groups;
-select * from Users;
-select * from Favors;
-
+# Tech Stack Diagram
+![functionaldiag](https://github.com/DMWIGGINS/Karma/blob/master/app/public/assets/images/karma_tech_stack.png)

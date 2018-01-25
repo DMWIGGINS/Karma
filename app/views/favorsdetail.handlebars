@@ -14,9 +14,8 @@
                 <a href="../profile">Profile</a>
             </li>
             <li>
-                <a class="btn signout">Sign Out</a>
+                <a href="../" class="btn signout">Sign Out</a>
             </li>
-
         </ul>
     </div>
 </nav>
@@ -28,23 +27,24 @@
                 <img src="/assets/images/goodvibes.jpg" width="90%">
             </div>
             <div class="col s6">
-                <h3>Favor Details</h3>
+                <h3 class="favordeet">Favor Details</h3>
                 <ul>
                     <lh id="favorsdetail">
                         <li class="favor-detail">
-                            <p id="favorname" value={{this.favor_name}} class="label">Favor: {{this.favor_name}} </p>
-                            <p id="favordesc" value={{this.favor_desc}} class="label">Description: {{this.favor_desc}} </p>
-                            <p id="favorprice" value={{this.favor_price}} class="label">Koins Offered: {{this.favor_price}} </p>
-                            <p id="favordatetime" value={{this.favor_datetime}} class="label">DateTime: {{this.favor_datetime}} </p>
-                            <p id="favorstatus" value={{this.favor_status}} class="label">Status: {{this.favor_status}} </p>
-                            <p id="favoraskername" value={{this.favor_asker_name}} class="label">Favor Asker: {{this.favor_asker_name}} </p>
-                            <p id="favorcompletername" value={{this.favor_completer_name}} class="label">Favor Completer: {{this.favor_completer_name}} </p>
+                           
+                            <p><span id="favorname" value={{this.favor_name}} class="label2">Favor: </span><span>{{this.favor_name}}</span></p>
+                            <p><span id="favordesc" value={{this.favor_desc}} class="label2">Description: </span><span>{{this.favor_desc}}</span></p>
+                            <p><span id="favorprice" value={{this.favor_price}} class="label2">Koins Offered: </span><span>{{this.favor_price}}</span></p>
+                            <p><span id="favordatetime" value={{this.favor_datetime}} class="label2">DateTime: </span><span>{{this.favor_datetime}}</span></p>
+                            <p><span id="favorstatus" value={{this.favor_status}} class="label2">Status: </span><span>{{this.favor_status}}</span></p>
+                            <p><span id="favoraskername" value={{this.favor_asker_name}} class="label2">Favor Asker: </span><span>{{this.favor_asker_name}}</span></p>
+                            <p><span id="favorcompletername" value={{this.favor_completer_name}} class="label2">Favor Completer: </span><span>{{this.favor_completer_name}}</span></p>
                             <button id="pendingBtn" class="btn" type="submit" name="action"
                                  data-id={{this.id}} 
                                 data-asker-id={{this.favor_asker_id}}
                                 data-favor-price={{this.favor_price}}
                                 >I'll do this
-                                <i class="material-icons right">send</i>
+                                <i class="material-icons right">pan_tool</i>
                             </button>
                             <button id="completedBtn" class="btn" type="submit" name="action"
                              data-id={{this.id}} 
@@ -52,9 +52,10 @@
                                  data-completer-id={{this.favor_completer_id}}
                                 data-favor-price={{this.favor_price}}
                             >This favor is completed
-                                <i class="material-icons right">send</i>
+                                <i class="material-icons right">check</i>
                             </button>
                         </li>
+                        <br>
                     </lh>
                 </ul>
             </div>
