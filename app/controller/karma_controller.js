@@ -210,7 +210,7 @@ function updateFavor(req, res) {
 
     var favorCompleterId = req.body.favor_completer_id;
     var favorCompleterName = req.body.favor_completer_name;
-    // }
+    
     var favorPrice = req.body.favor_price;
 
     //when the pending button is clicked, update the favor status to pending
@@ -474,7 +474,7 @@ router.get("/favorsdetail/:id", function (req, res) {
 // Route to update a favor from the
 // favordetail page
 //--------------------------------------
-router.put("/api/favorsdetail/:id", function (req, res) {
+router.put("/api/favorsdetail/", function (req, res) {
     ssn = req.session;
     updateFavor(req, res);
 });
