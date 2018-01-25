@@ -10,43 +10,43 @@ Karma joins works to bridge those two concepts. We have developed a full stack a
 In the package.json file, you'll see a list of dependencies. Once you’ve cloned the Karma repo down, run ‘npm install’ to install the npm packages needed to run Karma Koinds. Once you’ve installed your dependencies, run ‘node server.js’ to start the app.
 
 # Routes
-/landing
-/api/user/create
-/profile
-/favors
-/api/favor/new
-/favorsdetail/:id
-/api/favorsdetail/
-/about
-/api/user/logout
+- /landing
+- /api/user/create
+- /profile
+- /favors
+- /api/favor/new
+- /favorsdetail/:id
+- /api/favorsdetail/
+- /about
+- /api/user/logout
 
 # SQL Schema
 ## You don’t need to build the tables! Just open ‘karma_db.sql’ and create the db. The following tables will be created automatically using sequelize:
 
 favor
 ------
-favor_name: string
-favor_desc: string
-favor_datetime: string
-favor_asker_id: integer
-favor_completer_id: integer
-favor_asker_name: integer
-favor_completer_name: string
-favor_status: string
-favor_price: integer
+- favor_name: string
+- favor_desc: string
+- favor_datetime: string
+- favor_asker_id: integer
+- favor_completer_id: integer
+- favor_asker_name: integer
+- favor_completer_name: string
+- favor_status: string
+- favor_price: integer
 
 users
 ------
-user_name: string
-user_email: string
-profile_pic_link: string
-user_karma_koins: integer
-fb_user_id: string
+- user_name: string
+- user_email: string
+- profile_pic_link: string
+- user_karma_koins: integer
+- fb_user_id: string
 
 group
 ------
-group_name: string
-group_leader: string
+- group_name: string
+- group_leader: string
   
 # Database Setup
 Ensure that your ‘config.json’ file has the correct root password listed.
