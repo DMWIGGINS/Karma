@@ -9,20 +9,20 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1,255],  
+                len: [1, 255],
             }
         },
         group_leader: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1,255],  
+                len: [1, 255],
             }
         }
     });
     // Group.associate = function(models) {
-        // Associating Group with Users
-        // When a Group is deleted, also delete any associated Users
+    // Associating Group with Users
+    // When a Group is deleted, also delete any associated Users
     //     Group.hasMany(models.User, {
     //       onDelete: "cascade"
     //     });

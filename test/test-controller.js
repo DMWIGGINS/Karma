@@ -45,6 +45,7 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
         console.log("COMPLETER" + completer);
         if (data[i].id == asker) {
           updateKoins = data[i].user_karma_koins - parseInt(favorPrice);
+<<<<<<< HEAD
           console.log("asker " + asker);
           console.log(updateKoins);
           askerObject = {
@@ -95,13 +96,49 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
               console.log(err);
             } else if (data[0]) {
               console.log("completer user is updated");
+=======
+          var dbObject = [];
+          dbObject.push({
+            user_karma_koins: updateKoins
+          }, {
+            where: {
+              id: favorAskerId
+            }
+          })
+
+        } else {
+          updateKoins = data[i].user_karma_koins + parseInt(favorPrice);
+          var dbObject = [];
+          dbObject.push({
+            user_karma_koins: updateKoins
+          }, {
+            where: {
+              id: favorCompleterId
+>>>>>>> 87639f8fb267aa3bf530cdb04769c9d0f8bcd969
             }
           });
         }
-      });
+        console.log("dbObject = " + JSON.stringify(dbObject));
+        db.User.update({
+          dbObject
+        }).then(function (data, err) {
+          if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+          } else if (data[0]) {
+            console.log("favor is updated");
+            res.status(200).end();
+          }
+        });
+      }
     }
   });
+<<<<<<< HEAD
   return completerObject;
+=======
+>>>>>>> 87639f8fb267aa3bf530cdb04769c9d0f8bcd969
 }
 
 describe("updateKarmaKoins", function () {

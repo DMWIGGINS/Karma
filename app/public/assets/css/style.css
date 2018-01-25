@@ -64,7 +64,7 @@
     .favordeet {
             color: #42A5F5;
             font-family: 'Oswald';
-            font-size: 1.5rem;
+            font-size: 1.8rem;
     }
 
     h2,
@@ -101,6 +101,10 @@
         background-color: #9C27B0;
     }
 
+    #aboutchicks {
+        background-color: #9C27B0;
+    }
+
     input:not([type]):focus:not([readonly]),
     input[type=text]:not(.browser-default):focus:not([readonly]),
     input[type=password]:not(.browser-default):focus:not([readonly]),
@@ -129,6 +133,18 @@
     }
 
     .label2 {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
+    }
+
+    #favordesc {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
+    }
+
+    #favorcompletername {
         color:#42A5F5;
         font-family: 'Oswald';
         font-size: 1.2rem;
@@ -202,6 +218,10 @@
         border-radius: 8px;
         background-color: #9C27B0;
         margin: 20px;
+    }
+
+    .btn:focus, .btn-large:focus, .btn-floating:focus {
+        background-color: #42A5F5;
     }
 
     .page-footer {

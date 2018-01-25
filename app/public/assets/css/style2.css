@@ -1,3 +1,4 @@
+/* formatting for flatpickr-needs to be after style.css and flatpickr material_themes.css */
 .flatpickr-time input.flatpickr-hour,
 .flatpickr-time input.flatpickr-minute {
     padding-top: 0;

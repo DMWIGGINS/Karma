@@ -1,21 +1,23 @@
 //=================================================
 // Functions
 //=================================================
+
+// adds new favor to the list
+
 function addFavor() {
     var newFavor = {
         favor_name: $("#newFavorName").val().trim(),
         favor_desc: $("#newFavorDesc").val().trim(),
         favor_price: $("#newFavorPrice").val().trim(),
         favor_datetime: $("#calendarSection").val().trim()
-    };
-    console.log("newFavor: " + JSON.stringify(newFavor));
+    }
+
     // Send the POST request.
     $.ajax("/api/favor/new", {
         type: "POST",
         data: newFavor
     }).then(
         function () {
-            console.log("created the new favor");
             // Reload the page to get the updated list
             location.reload();
         });
@@ -41,7 +43,6 @@ $(document).ready(function () {
     $(document).on('click', '#submitBtn', function (event) {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
-        console.log("i clicked submit");
         addFavor();
     });
 });

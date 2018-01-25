@@ -1,7 +1,7 @@
 {
   "name": "karma",
   "version": "1.0.0",
-  "description": "group app to ask for and give help for tasks",
+  "description": "group app to ask for and give help for tasks/favors",
   "main": "server.js",
   "scripts": {
     "test": "mocha",
@@ -14,7 +14,8 @@
   "keywords": [
     "karma",
     "help",
-    "tasks"
+    "tasks",
+    "favor"
   ],
   "author": "Doreen Wiggins, Lauren Moore, Helen Pitt, Katie DeAngelis, Janet Cushing",
   "license": "ISC",
@@ -38,5 +39,9 @@
     "path": "^0.12.7",
     "router": "^1.3.2",
     "sequelize": "^4.31.2"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "chai-http": "^1.0.0"
   }
 }
