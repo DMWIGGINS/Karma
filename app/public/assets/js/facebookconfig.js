@@ -3,7 +3,8 @@
 //heroku api key:  840301142808607
 window.fbAsyncInit = function () {
     FB.init({
-        appId: '454481624954762',
+        // appId: '454481624954762',
+        appId: '840301142808607',
         cookie: true,
         xfbml: true,
         version: 'v2.11'

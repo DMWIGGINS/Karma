@@ -240,4 +240,7 @@
         flex: 1 0 auto;
     }
 
-   
+    .hideText{
+        display: none;
+       }
+       
