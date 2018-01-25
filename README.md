@@ -17,7 +17,7 @@ npm install
 
 nodemon server.js or node server.js
 
-![functionaldiag](https://github.com/DMWIGGINS/Karma/blob/master/app/public/assets/images/karma_functional_diagram.png)
+![functionaldiag](https://github.com/DMWIGGINS/Karma/blob/master/app/public/assets/images/karma_tech_stack.png)
 
 
 Here is some test data to insert into your dev database if you want:
