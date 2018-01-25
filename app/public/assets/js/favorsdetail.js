@@ -1,19 +1,21 @@
+// Updates favor status from "active" to "pending" or from "pending" to "complete"
+
 function updateFavor(favorId, favorAsker, favorPrice, status) {
-   
+
     var dataObject = {
         id: favorId,
         favor_status: status,
         favor_asker_id: favorAsker,
         favor_price: favorPrice
-    }
-    
-    // Send the POST request.
+    };
+
+    // Send the PUT request.
     $.ajax("/api/favorsdetail/" + favorId, {
         type: "PUT",
         data: dataObject
     }).then(
         function () {
-            
+
             // Reload the page to get the updated list
             location.reload();
         });
@@ -25,9 +27,9 @@ function updateFavor(favorId, favorAsker, favorPrice, status) {
 $(document).ready(function () {
 
 
-// ========================================================================================
-// When the pending button is clicked, update the row in the database to show pending status
-// ========================================================================================
+    // ========================================================================================
+    // When the pending button is clicked, update the row in the database to show pending status
+    // ========================================================================================
     $(document).on('click', '#pendingBtn', function (event) {
         event.preventDefault();
         var favorId = $(this).data("id");
@@ -36,9 +38,9 @@ $(document).ready(function () {
         updateFavor(favorId, favorAsker, favorPrice, 'pending');
     });
 
-// ============================================================================================
-// When the complete button is clicked, update the row in the database to show completed status
-// ============================================================================================
+    // ============================================================================================
+    // When the complete button is clicked, update the row in the database to show completed status
+    // ============================================================================================
     $(document).on('click', '#completedBtn', function (event) {
         event.preventDefault();
         var favorId = $(this).data("id");
@@ -47,4 +49,3 @@ $(document).ready(function () {
         updateFavor(favorId, favorAsker, favorPrice, 'completed');
     });
 });
-

@@ -37,33 +37,42 @@ function updateKarmaKoins(favorAskerId, favorCompleterId, favorPrice) {
         if (data[i] == favorAskerId) {
           updateKoins = data[i].user_karma_koins - parseInt(favorPrice);
           var dbObject = [];
-          dbObject.push(
-            {user_karma_koins: updateKoins}, 
-            {where: {id: favorAskerId}})
-          
+          dbObject.push({
+            user_karma_koins: updateKoins
+          }, {
+            where: {
+              id: favorAskerId
+            }
+          })
+
         } else {
           updateKoins = data[i].user_karma_koins + parseInt(favorPrice);
           var dbObject = [];
-          dbObject.push({user_karma_koins: updateKoins}, 
-            {where: {id: favorCompleterId}});
+          dbObject.push({
+            user_karma_koins: updateKoins
+          }, {
+            where: {
+              id: favorCompleterId
+            }
+          });
         }
-      console.log("dbObject = " + JSON.stringify(dbObject));
-      db.User.update({
-        dbObject
-      }).then(function (data, err) {
-        if (err) {
-          // If an error occurred, send a generic server failure
-          console.log("an error occurred");
-          console.log(err);
-          res.status(500).end();
-        } else if (data[0]) {
-          console.log("favor is updated");
-          res.status(200).end();
-        }
-      });
+        console.log("dbObject = " + JSON.stringify(dbObject));
+        db.User.update({
+          dbObject
+        }).then(function (data, err) {
+          if (err) {
+            // If an error occurred, send a generic server failure
+            console.log("an error occurred");
+            console.log(err);
+            res.status(500).end();
+          } else if (data[0]) {
+            console.log("favor is updated");
+            res.status(200).end();
+          }
+        });
+      }
     }
-  }
-});
+  });
 }
 
 

@@ -38,8 +38,7 @@ function getFavors(req, res) {
                     favor_asker_name: data[i].favor_asker_name
                 }
                 activeFavors.push(favorObject);
-                console.log(res);
-                console.log(res.body);
+                
             }
             res.render("favors", {
                 activeFavor: activeFavors
@@ -53,7 +52,7 @@ function getFavors(req, res) {
         }
     });
 }
-//getting the user pending asked and given favors for the profile page.
+
 
 //---------------------------------------------------------------------------------
 // get the favors to populate the /profile page
@@ -123,7 +122,7 @@ function getProfileFavors(req, res) {
 }
 
 //---------------------------------------------------------------------------------
-// get the favor detail to populate the /favordetail page
+// get the favor detail to populate the /favorsdetail page
 //---------------------------------------------------------------------------------
 function getFavorsDetail(req, res) {
 
@@ -198,7 +197,7 @@ function createNewFavor(req, res) {
 }
 
 //---------------------------------------------------------------------------------
-// update a favor on the /favordetail page
+// update a favor on the /favorsdetail page
 //---------------------------------------------------------------------------------
 function updateFavor(req, res) {
 

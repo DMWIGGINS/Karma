@@ -22,7 +22,7 @@ function getPendingFavorRequests() {
         });
 }
 //where they are they said that they will complete, but it's still pending.
-//favor_completerid
+
 function getPendingRecentFavorGiven() {
     var ProfileId = "";
     var allPendingFavorAssigned = {
@@ -31,7 +31,7 @@ function getPendingRecentFavorGiven() {
         mostRecent_FavorRequest: $("#pendingFavorGive").val().trim(),
     };
 
-    // Send the POST request.
+    // Send the GET request.
     $.ajax("/api/favor/mostRecentGiven", {
         type: "GET",
         data: MostRecentFavorGiven
@@ -43,9 +43,6 @@ function getPendingRecentFavorGiven() {
         });
 }
 
-
-
-/
 
 function getUserFavorRequests() {
     var allPendingFavorsAsked = {
