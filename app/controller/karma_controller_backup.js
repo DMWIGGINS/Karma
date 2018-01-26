@@ -11,15 +11,9 @@ var completerObject = {};
 //---------------------------------------------------------------------------------
 // get the favors to populate the /favors page
 //---------------------------------------------------------------------------------
-<<<<<<< HEAD
-function getFavors() {
-    console.log("im in getFavors");
-    // var group_id = 1;
-=======
 function getFavors(req, res) {
 
 
->>>>>>> 87639f8fb267aa3bf530cdb04769c9d0f8bcd969
     var activeFavors = [];
     db.Favor.findAll({
         where: {
