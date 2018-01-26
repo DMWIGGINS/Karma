@@ -1,5 +1,7 @@
 # Karma Koins
 
+[Watch A Demo!](https://www.screencast.com/t/OtD4uzcT)
+
 ## We all need help sometimes. Karma Koins makes it easy!
 
 Suppose you needed a hand with something. Maybe you have a closet that needs to be sorted through and you can't get motivated to do it. Perhaps you need a friend to watch your kid for an hour so you can run some errands. Going away on vacation?...Who is going to feed your cat? Karma to the rescue! Karma is an app where a group of friends can ask for and give help. Each group member will be assigned Karma Koins when they join. They will have the option to ask for assistance by entering the task they need help with, the date, and how many Karma Koins it "pays". Following in the true inspiration of Karma, the biggest appeal of the app is the ability to give back. Users will be able to see the list of tasks that friends need done and can select which ones they will help with. You can only ask for help if you have Karma Koins, so the spirit is really about doing more than you take :)
