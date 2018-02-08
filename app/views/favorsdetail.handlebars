@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css">
 
 <nav>
     <div class="nav-wrapper">
@@ -8,15 +8,14 @@
         </a>
         <ul class="right">
             <li>
-                <a href="/favors">Favors</a>
+                <a href="../favors">Favors</a>
             </li>
             <li>
-                <a href="/profile">Profile</a>
+                <a href="../profile">Profile</a>
             </li>
             <li>
-                <a href="landing" class="btn">Sign Out</a>
+                <a href="../" class="btn signout">Sign Out</a>
             </li>
-
         </ul>
     </div>
 </nav>
@@ -25,34 +24,67 @@
     <div class="container">
         <div class="row" id="favors-detail">
             <div class="col s5">
-                <img src="assets/images/goodvibes.jpg" width="90%">
+                <img src="/assets/images/goodvibes.jpg" width="90%">
             </div>
             <div class="col s6">
-                <h3>Favor Details</h3>
+                <h3 class="favordeet">Favor Details</h3>
                 <ul>
                     <lh id="favorsdetail">
                         <li class="favor-detail">
-                            <p class="label">Favor: {{this.favor_name}} </p>
-                            <p class="label">Description: {{this.favor_desc}} </p>
-                            <p class="label">Koins Offered: {{this.favor_price}} </p>
-                            <p class="label">DateTime: {{this.favor_datetime}} </p>
-                            <p class="label">Status: {{this.favor_status}} </p>
-                             <p class="label">Favor Asker: {{this.favor_asker_id}} </p>
-                            <p class="label">Favor Asker: {{this.favor_asker_name}} </p>
-                            <p class="label">Favor Completer: {{this.favor_completer_name}} </p>
-                            <button id="pendingBtn" class="btn" type="submit" name="action">I'll do this
+
+                            <span>
+                                <p id="favorname" value={{this.favor_name}} class="label2">Favor: </p>
+                                <p>{{this.favor_name}}</p>
+                            </span>
+                            <span>
+                                <p id="favordesc" value={{this.favor_desc}} class="label2">Description: </p>
+                                <p>{{this.favor_desc}}</p>
+                            </span>
+                            <span>
+                                <p id="favorprice" value={{this.favor_price}} class="label2">Koins Offered: </p>
+                                <p>{{this.favor_price}}</p>
+                            </span>
+                            <span>
+                                <p id="favordatetime" value={{this.favor_datetime}} class="label2">DateTime: </p>
+                                <p>{{this.favor_datetime}}</p>
+                            </span>
+                            <span>
+                                <p id="favorstatus" value={{this.favor_status}} class="label2">Status: </p>
+                                <p>{{this.favor_status}}</p>
+                            </span>
+
+                            <span>
+                                <p id="favoraskername" value={{this.favor_asker_name}} class="label2">Favor Asker: </p>
+                                <p>{{this.favor_asker_name}}</p>
+                            </span>
+                            <span>
+                                <p id="favorcompletername" value={{this.favor_completer_name}} class="label2">Favor Completer: </p>
+                                <p>{{this.favor_completer_name}}</p>
+                            </span>
+                            <p class="hideText">
+                                <span id="favorid" value={{this.id}} class="label2">Favor Id: </span>
+                                <span>{{this.id}}</span>
+                            </p>
+                            <p class="hideText">
+                                <span id="favorcompleterid" value={{this.favor_completer_id}} class="label2">Favor Completer Id: </span>
+                                <span>{{this.favor_completer_id}}</span>
+                            </p>
+                            <button id="pendingBtn" class="btn" type="submit" name="action" data-id={{this.id}} data-asker-id={{this.favor_asker_id}}
+                                data-favor-price={{this.favor_price}}>I'll do this
                                 <i class="material-icons right">send</i>
                             </button>
-                            <button id="completedBtn" class="btn" type="submit" name="action">This favor is completed
-                                <i class="material-icons right">send</i>
+                            <button id="completedBtn" class="btn" type="submit" name="action" data-id={{this.id}} data-asker-id={{this.favor_asker_id}}
+                                data-completer-id={{this.favor_completer_id}} data-favor-price={{this.favor_price}}>This favor is completed
+                                <i class="material-icons right">check</i>
                             </button>
                         </li>
+                        <br>
                     </lh>
-
                 </ul>
             </div>
         </div>
     </div>
+
 </main>
 <footer class="page-footer">
     <div class="container">
@@ -63,7 +95,7 @@
                 </a>
             </div>
             <div class="right-align col s6">
-                <img src="assets/images/thechickslogo.png" width="30%">
+                <img src="/assets/images/thechickslogo.png" width="30%">
                 </br>© 2018 Copyright</div>
         </div>
     </div>

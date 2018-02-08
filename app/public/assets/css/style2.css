@@ -1,18 +1,7 @@
+/* formatting for flatpickr-needs to be after style.css and flatpickr material_themes.css */
 .flatpickr-time input.flatpickr-hour,
 .flatpickr-time input.flatpickr-minute {
     padding-top: 0;
     font-weight: bold;
-}
-
-/* 
-.flatpickr-input {
-    border-bottom-style: solid;
-}
-.form-control {
-    border-bottom-style: solid;
-    
-}
-.input {
-    border-bottom-style: solid;
 }
 

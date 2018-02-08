@@ -16,7 +16,9 @@ const flatpickr = require("flatpickr");
 var app = express();
 app.use(express.static("./app/public"));
 
-app.use(session({secret:'XASDASDA'}));
+app.use(session({
+  secret: 'XASDASDA'
+}));
 
 var method = methodOverride();
 
@@ -32,7 +34,7 @@ app.use(bodyParser.json());
 var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({
   defaultLayout: "main",
-  layoutsDir   : path.join(__dirname, "app/views/layouts")
+  layoutsDir: path.join(__dirname, "app/views/layouts")
 }));
 app.set("view engine", "handlebars");
 app.set('views', path.join(__dirname, "app/views"));
@@ -59,7 +61,3 @@ db.sequelize.sync().then(function () {
     console.log("App listening on PORT: " + PORT);
   });
 });
-
-
-
-

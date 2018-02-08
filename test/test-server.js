@@ -1,4 +1,4 @@
-// test-server.js
+test-server.js
 
 var server = require('../server');
 var assert = require('assert');

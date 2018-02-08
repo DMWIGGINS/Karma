@@ -61,6 +61,12 @@
         font-size: 1.5rem;
     }
 
+    .favordeet {
+            color: #42A5F5;
+            font-family: 'Oswald';
+            font-size: 1.8rem;
+    }
+
     h2,
     h4,
     h5,
@@ -71,13 +77,20 @@
         font-family: 'Oswald';
     }
 
+    a {
+        color:white;
+    }
+
     i.medium.material-icons {
         color: #F57C00;
-        padding-top: 10%;
     }
 
     .btn {
         background-color: #9C27B0;
+    }
+
+    a.btn.signout {
+        margin-top:10%;
     }
 
     .btn:hover {
@@ -85,6 +98,10 @@
     }
 
     #active-favors {
+        background-color: #9C27B0;
+    }
+
+    #aboutchicks {
         background-color: #9C27B0;
     }
 
@@ -107,6 +124,30 @@
 
     label.label-icon {
         color: #42A5F5;
+    }
+
+    .label {
+        color:white;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
+    }
+
+    .label2 {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
+    }
+
+    #favordesc {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
+    }
+
+    #favorcompletername {
+        color:#42A5F5;
+        font-family: 'Oswald';
+        font-size: 1.2rem;
     }
 
     #profile {
@@ -179,6 +220,10 @@
         margin: 20px;
     }
 
+    .btn:focus, .btn-large:focus, .btn-floating:focus {
+        background-color: #42A5F5;
+    }
+
     .page-footer {
         background-color: #42A5F5;
         color: white;
@@ -195,27 +240,7 @@
         flex: 1 0 auto;
     }
 
-   
-    /* // Disable hamburger -- mobile styles disabled and headerNav < 768px on desktop */
-    @media only screen and (max-width: 768px) {
-          #header #headerNav {
-            display: inline-block !important;
-            z-index: 9999;
-      }
-    }
-    
-    .mobile-nav-toggle-label {
-        display: none !important;
-    }
-    
-    @media only screen and (min-width: 769px) {
-          html:not(.touch-styles) body:not(.always-use-overlay-nav) {
-            .mobile-nav-toggle-label {
-                  display: none;
-            }
-        #overlayNav {
-              display: none;
-        }
-      }
-    }
-    
+    .hideText{
+        display: none;
+       }
+       
